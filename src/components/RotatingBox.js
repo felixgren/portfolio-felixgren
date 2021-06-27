@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import './App.css';
+import React, { useState, useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { useSpring, animated } from '@react-spring/three';
 
 function RotatingBox() {
-  const myMesh = React.useRef();
+  const myMesh = useRef();
   const [active, setActive] = useState(false);
   const [hovering, setHover] = useState(false);
+
+  const { scale } = useSpring({
+    scale: active ? 2 : 1,
+    config: { mass: 1, tension: 500, friction: 20 },
+  });
 
   useFrame(({ clock }) => {
     const a = clock.getElapsedTime();
@@ -13,8 +18,8 @@ function RotatingBox() {
   });
 
   return (
-    <mesh
-      scale={active ? 1.5 : 1}
+    <animated.mesh
+      scale={scale}
       onClick={() => {
         setActive(!active);
         console.log('click!');
@@ -25,20 +30,8 @@ function RotatingBox() {
     >
       <boxBufferGeometry />
       <meshPhongMaterial color={hovering ? 'red' : 'royalblue'} />
-    </mesh>
+    </animated.mesh>
   );
 }
 
-function App() {
-  return (
-    <div id="App">
-      <Canvas>
-        <RotatingBox />
-        <ambientLight intensity={0.1} />
-        <directionalLight color="red" position={[0, 0, 5]} />
-      </Canvas>
-    </div>
-  );
-}
-
-export default App;
+export default RotatingBox;
