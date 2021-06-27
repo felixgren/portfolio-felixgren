@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 
-function RotatingBox() {
+function RotatingBox(props) {
   const myMesh = useRef();
   const [active, setActive] = useState(false);
   const [hovering, setHover] = useState(false);
@@ -19,6 +19,7 @@ function RotatingBox() {
 
   return (
     <animated.mesh
+      {...props}
       scale={scale}
       onClick={() => {
         setActive(!active);
@@ -28,7 +29,7 @@ function RotatingBox() {
       onPointerOut={() => setHover(false)}
       ref={myMesh}
     >
-      <boxBufferGeometry />
+      <boxBufferGeometry args={[1, 1, 1]} />
       <meshPhongMaterial color={hovering ? 'red' : 'royalblue'} />
     </animated.mesh>
   );
