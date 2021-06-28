@@ -1,17 +1,49 @@
-import React from 'react';
-import { Canvas } from '@react-three/fiber';
+import * as THREE from 'three';
+import React, { useRef, useState } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars, Plane } from '@react-three/drei';
 import './App.css';
 
 import RotatingBox from './RotatingBox';
 
+function ScrollContainer({ scroll, children }) {
+  const { viewport } = useThree();
+  const group = useRef();
+  const vector = new THREE.Vector3();
+  useFrame(() =>
+    group.current.position.lerp(
+      vector.set(0, viewport.height * scroll.current, 0),
+      0.1
+    )
+  );
+  return <group ref={group}>{children}</group>;
+}
+
+function ScrollScene() {
+  const viewport = useThree((state) => state.viewport);
+  return (
+    <>
+      <RotatingBox position={[0, -2, 0]} />
+      <RotatingBox position={[0, -viewport.height / 2, 0]} />
+    </>
+  );
+}
+
 function App() {
+  const scrollRef = useRef();
+  const scroll = useRef(0);
+  const doScroll = (e) =>
+    (scroll.current = e.target.scrollTop / e.target.scrollHeight);
   return (
     <div id="App">
-      <Canvas>
+      <Canvas onCreated={(state) => state.events.connect(scrollRef.current)}>
         <RotatingBox position={[-2, 0, 0]} />
-        <RotatingBox position={[0, 0, 0]} />
         <RotatingBox position={[2, 0, 0]} />
+
+        <ScrollContainer scroll={scroll}>
+          <ScrollScene />
+        </ScrollContainer>
+
         <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
           <meshBasicMaterial color="white" wireframe attach="material" />
         </Plane>
@@ -26,6 +58,9 @@ function App() {
         <ambientLight intensity={0.1} />
         <directionalLight color="red" position={[0, 0, 5]} />
       </Canvas>
+      <div ref={scrollRef} onScroll={doScroll} className="scroll">
+        <div style={{ height: `200vh`, pointerEvents: 'none' }}></div>
+      </div>
     </div>
   );
 }
