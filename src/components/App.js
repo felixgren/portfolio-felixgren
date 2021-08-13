@@ -1,33 +1,14 @@
+// eslint-disable-next-line
 import * as THREE from 'three';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
+// eslint-disable-next-line
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Stars, Plane } from '@react-three/drei';
+import { Stars, Plane, Text } from '@react-three/drei';
 import './App.css';
 
 import RotatingBox from './RotatingBox';
-
-function ScrollContainer({ scroll, children }) {
-  const { viewport } = useThree();
-  const group = useRef();
-  const vector = new THREE.Vector3();
-  useFrame(() =>
-    group.current.position.lerp(
-      vector.set(0, viewport.height * scroll.current, 0),
-      0.1
-    )
-  );
-  return <group ref={group}>{children}</group>;
-}
-
-function ScrollScene() {
-  const viewport = useThree((state) => state.viewport);
-  return (
-    <>
-      <RotatingBox position={[0, -2, 0]} />
-      <RotatingBox position={[0, -viewport.height / 2, 0]} />
-    </>
-  );
-}
+import ScrollBoxes from './ScrollBoxes';
+import ScrollContainer from './ScrollContainer';
 
 function App() {
   const scrollRef = useRef();
@@ -37,16 +18,28 @@ function App() {
   return (
     <div id="App">
       <Canvas onCreated={(state) => state.events.connect(scrollRef.current)}>
-        <RotatingBox position={[-2, 0, 0]} />
-        <RotatingBox position={[2, 0, 0]} />
-
         <ScrollContainer scroll={scroll}>
-          <ScrollScene />
+          <ScrollBoxes />
+          <Text
+            color={'#FFFFFF'}
+            fontSize={12}
+            maxWidth={200}
+            lineHeight={1}
+            letterSpacing={0.02}
+            font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+            anchorX="center"
+            anchorY="middle"
+            position={[0, 10, -20]}
+          >
+            Felix Gren
+          </Text>
         </ScrollContainer>
 
         <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
           <meshBasicMaterial color="white" wireframe attach="material" />
         </Plane>
+        <RotatingBox position={[-2, 0, 0]} />
+        <RotatingBox position={[2, 0, 0]} />
         <Stars
           radius={100} // Radius of the inner sphere (default=100)
           depth={10} // Depth of area where stars should fit (default=50)
