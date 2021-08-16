@@ -17,7 +17,10 @@ function App() {
     (scroll.current = e.target.scrollTop / e.target.scrollHeight);
   return (
     <div id="App">
-      <Canvas onCreated={(state) => state.events.connect(scrollRef.current)}>
+      <Canvas
+        onCreated={(state) => state.events.connect(scrollRef.current)}
+        camera={{ position: [0, 0, 20], fov: 50, near: 17, far: 40 }}
+      >
         <ScrollContainer scroll={scroll}>
           <ScrollBoxes />
           <Text
@@ -32,6 +35,20 @@ function App() {
             position={[0, 10, -20]}
           >
             Felix Gren
+          </Text>
+
+          <Text
+            color={'#FFFFFF'}
+            fontSize={12}
+            maxWidth={200}
+            lineHeight={1}
+            letterSpacing={0.02}
+            font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+            anchorX="center"
+            anchorY="middle"
+            position={[40, -20, -50]}
+          >
+            heyayaya!
           </Text>
         </ScrollContainer>
 
