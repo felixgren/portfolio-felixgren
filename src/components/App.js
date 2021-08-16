@@ -1,14 +1,15 @@
 // eslint-disable-next-line
 import * as THREE from 'three';
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
 // eslint-disable-next-line
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Stars, Plane, Text } from '@react-three/drei';
+import { Stars, Plane } from '@react-three/drei';
 import './App.css';
 
 import RotatingBox from './RotatingBox';
-import ScrollBoxes from './ScrollBoxes';
+import ScrollContent from './ScrollBoxes';
 import ScrollContainer from './ScrollContainer';
+import Model from './Model';
 
 function App() {
   const scrollRef = useRef();
@@ -19,37 +20,20 @@ function App() {
     <div id="App">
       <Canvas
         onCreated={(state) => state.events.connect(scrollRef.current)}
-        camera={{ position: [0, 0, 20], fov: 50, near: 17, far: 40 }}
+        // camera={{ position: [0, 0, 20], fov: 50, near: 17, far: 40 }}
+        raycaster={{
+          computeOffsets: ({ clientX, clientY }) => ({
+            offsetX: clientX,
+            offsetY: clientY,
+          }),
+        }}
       >
-        <ScrollContainer scroll={scroll}>
-          <ScrollBoxes />
-          <Text
-            color={'#FFFFFF'}
-            fontSize={12}
-            maxWidth={200}
-            lineHeight={1}
-            letterSpacing={0.02}
-            font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
-            anchorX="center"
-            anchorY="middle"
-            position={[0, 10, -20]}
-          >
-            Felix Gren
-          </Text>
+        <Suspense fallback={null}>
+          <Model scroll={scroll} />
+        </Suspense>
 
-          <Text
-            color={'#FFFFFF'}
-            fontSize={12}
-            maxWidth={200}
-            lineHeight={1}
-            letterSpacing={0.02}
-            font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
-            anchorX="center"
-            anchorY="middle"
-            position={[40, -20, -50]}
-          >
-            heyayaya!
-          </Text>
+        <ScrollContainer scroll={scroll}>
+          <ScrollContent />
         </ScrollContainer>
 
         <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
@@ -68,8 +52,10 @@ function App() {
         <ambientLight intensity={0.1} />
         <directionalLight color="red" position={[0, 0, 5]} />
       </Canvas>
-      <div ref={scrollRef} onScroll={doScroll} className="scroll">
-        <div style={{ height: `200vh`, pointerEvents: 'none' }}></div>
+      <div ref={scrollRef} onScroll={doScroll} id="TEST" className="scroll">
+        {/* <div style={{ height: `200vh`, pointerEvents: 'none' }}></div> */}
+        <div style={{ height: `125vh`, color: 'white' }}>HEEEEEEEJ</div>
+        {/* <div style={{ height: `200vh`, color: 'white' }}>HEEEEEEEJ</div> */}
       </div>
     </div>
   );
