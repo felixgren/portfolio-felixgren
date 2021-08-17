@@ -14,8 +14,10 @@ import Model from './Model';
 function App() {
   const scrollRef = useRef();
   const scroll = useRef(0);
-  const doScroll = (e) =>
-    (scroll.current = e.target.scrollTop / e.target.scrollHeight);
+  const doScroll = (e) => {
+    scroll.current =
+      e.target.scrollTop / (e.target.scrollHeight - window.innerHeight);
+  };
   return (
     <div id="App">
       <Canvas
@@ -28,13 +30,13 @@ function App() {
           }),
         }}
       >
-        <Suspense fallback={null}>
-          <Model scroll={scroll} />
-        </Suspense>
-
         <ScrollContainer scroll={scroll}>
           <ScrollContent />
         </ScrollContainer>
+
+        <Suspense fallback={null}>
+          <Model scroll={scroll} />
+        </Suspense>
 
         <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
           <meshBasicMaterial color="white" wireframe attach="material" />
@@ -53,9 +55,9 @@ function App() {
         <directionalLight color="red" position={[0, 0, 5]} />
       </Canvas>
       <div ref={scrollRef} onScroll={doScroll} id="TEST" className="scroll">
-        {/* <div style={{ height: `200vh`, pointerEvents: 'none' }}></div> */}
-        <div style={{ height: `125vh`, color: 'white' }}>HEEEEEEEJ</div>
-        {/* <div style={{ height: `200vh`, color: 'white' }}>HEEEEEEEJ</div> */}
+        <div style={{ height: `200vh`, color: 'white' }}>hej1</div>
+        <div style={{ height: `200vh`, color: 'white' }}>hej2</div>
+        <div style={{ height: `100vh`, color: 'white' }}>hej3</div>
       </div>
     </div>
   );

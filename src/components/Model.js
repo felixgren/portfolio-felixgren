@@ -27,17 +27,28 @@ export default function Model({ scroll, ...props }) {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
   }, [hovered]);
   useFrame((state) => {
-    mixer.setTime(
-      (t.current = THREE.MathUtils.lerp(
-        t.current,
-        actions['CameraAction.005']._clip.duration * scroll.current,
-        0.05
-      ))
-    );
+    if (scroll.current > 0.2) {
+      mixer.setTime(
+        (t.current = THREE.MathUtils.lerp(
+          t.current,
+          // Calculate scroll between 0.2 and 1.0
+          THREE.MathUtils.mapLinear(
+            scroll.current,
+            0.2,
+            1.0,
+            0,
+            actions['CameraAction.005']._clip.duration
+          ),
+          0.05
+        ))
+      );
+    } else {
+      mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 0, 0.05)));
+    }
     group.current.children[0].children.forEach((child, index) => {
       child.material.color.lerp(
         color
-          .set(hovered === child.name ? 'tomato' : '#202020')
+          .set(hovered === child.name ? 'blue' : '#202020')
           .convertSRGBToLinear(),
         hovered ? 0.1 : 0.05
       );
