@@ -10,3 +10,8 @@ const doScroll2 = (e) => {
   // console.log(scroll2.current);
   // const viewScrollDecimal = e.target.scrollTop / (refHeight - viewHeight);
 };
+
+rotationMatrix.lookAt(state.camera.position, [0, 0, 0], [0, 0, 1]);
+targetQuaternion.setFromRotationMatrix(rotationMatrix);
+state.camera.quaternion.rotateTowards(targetQuaternion, 0.01);
+state.camera.quaternion.slerp(targetQuaternion, 0.01);

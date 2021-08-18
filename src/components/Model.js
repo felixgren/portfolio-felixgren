@@ -11,13 +11,18 @@ const color = new THREE.Color();
 
 export default function Model({ scroll, ...props }) {
   const t = useRef(0);
+  let timer = 0;
   const group = useRef();
   const vec = new THREE.Vector3();
+  const vec2 = new THREE.Vector3();
+  const targetQuaternion = new THREE.Quaternion();
+  const rotationMatrix = new THREE.Matrix4();
   const cameraRef = useRef();
   const { nodes, materials, animations } = useGLTF('/model.glb');
   const { actions, clips, mixer } = useAnimations(animations, group);
   const [hovered, set] = useState();
   const [toggle, setToggle] = useState(true);
+  const [onlyOnce, triggerOnlyOnce] = useState(true);
   const extras = {
     receiveShadow: true,
     castShadow: true,
@@ -30,22 +35,39 @@ export default function Model({ scroll, ...props }) {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
   }, [hovered]);
   useFrame((state) => {
-    if (scroll.current > 0.1 && scroll.current < 0.2 && cameraRef) {
-      // cameraRef.current.lookAt(-10, -10, -90);
-    }
+    // if (scroll.current < 0.1) {
+    //   state.camera.quaternion.setFromEuler(
+    //     new THREE.Euler(-Math.PI / 2 - 0.3, 2, -0.3)
+    //     );
+    //   cameraRef.current.lookAt(-10, -10, -90);
+    // }
+    // if (onlyOnce && scroll.current > 0.05) {
+    //   triggerOnlyOnce(false);
+    //   console.log(onlyOnce);
+    //   console.log(state.camera.getWorldPosition());
+    // }
+    // if (scroll.current > 0.1 && scroll.current < 0.2 && cameraRef) {
+    //   state.camera.quaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
+    // }
+
+    // console.log(state.camera.getWorldPosition());
+    // console.log(state.camera.getWorldDirection());
+    // console.log(state.camera.quaternion);
 
     const step = 0.05;
     state.camera.fov = THREE.MathUtils.lerp(
       state.camera.fov,
-      toggle ? 90 : 28,
+      toggle ? 90 : 90,
       step
     );
     state.camera.updateProjectionMatrix();
     state.camera.position.lerp(
-      vec.set(toggle ? 10 : 0, toggle ? 0 : 0, toggle ? 0 : 0),
+      vec.set(toggle ? 0 : -10, toggle ? 0 : -6, toggle ? 0 : 2.3),
       step
     );
-    // state.camera.lookAt(0, 0, 0);
+    state.camera.lookAt(0, 0, -100);
+    // state.camera.quaternion.set(0, 0, 0, 1);
+    // state.camera.
     // state.camera.updateProjectionMatrix();
     // light.current.position.lerp(
     //   vec.set(toggle ? 4 : 0, toggle ? 3 : 8, toggle ? 3 : 5),
@@ -69,6 +91,10 @@ export default function Model({ scroll, ...props }) {
       );
     } else {
       mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 0, 0.05)));
+      // then pause the animation
+      // mixer.stopAllAction();
+      //disconnect the camera from mixer
+      // mixer.uncacheRoot(cameraRef.current);
     }
     group.current.children[0].children.forEach((child, index) => {
       child.material.color.lerp(
@@ -142,8 +168,8 @@ export default function Model({ scroll, ...props }) {
       </group>
       <group
         name="Camera"
-        position={[-1.78, 2.04, 23.58]}
-        rotation={[1.62, 0.01, 0.11]}
+        // position={[-1.78, 2.04, 23.58]}
+        // rotation={[1.62, 0.01, 0.11]}
       >
         <PerspectiveCamera
           makeDefault
