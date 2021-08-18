@@ -12,9 +12,12 @@ const color = new THREE.Color();
 export default function Model({ scroll, ...props }) {
   const t = useRef(0);
   const group = useRef();
+  const vec = new THREE.Vector3();
+  const cameraRef = useRef();
   const { nodes, materials, animations } = useGLTF('/model.glb');
   const { actions, clips, mixer } = useAnimations(animations, group);
   const [hovered, set] = useState();
+  const [toggle, setToggle] = useState(true);
   const extras = {
     receiveShadow: true,
     castShadow: true,
@@ -27,6 +30,43 @@ export default function Model({ scroll, ...props }) {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
   }, [hovered]);
   useFrame((state) => {
+    // cameraRef.current.position.set(0, 0, 0);
+    // console.log(cameraRef.current.getWorldDirection());
+    // console.log(cameraRef.current.rotation);
+    if (scroll.current > 0.1 && scroll.current < 0.2 && cameraRef) {
+      // cameraRef.current.lookAt(-10, -10, -90);
+      // cameraRef.current.lookAt(
+      //   0.7872834918568576,
+      //   0.5597800820304795,
+      //   0.25851685285803494
+      // );
+      // console.log(toggle);
+    }
+
+    // console log camera orientation
+    // console.log(cameraRef.current.getWorldQuaternion());
+    // console.log(cameraRef.current.getWorldDirection());
+    // console.log(cameraRef.current.matrixWorld);
+    // console.log(cameraRef.current.projectionMatrix);
+
+    const step = 0.05;
+    state.camera.fov = THREE.MathUtils.lerp(
+      state.camera.fov,
+      toggle ? 90 : 28,
+      step
+    );
+    state.camera.updateProjectionMatrix();
+    state.camera.position.lerp(
+      vec.set(toggle ? 10 : 0, toggle ? 0 : 0, toggle ? 0 : 0),
+      step
+    );
+    // state.camera.lookAt(0, 0, 0);
+    // state.camera.updateProjectionMatrix();
+    // light.current.position.lerp(
+    //   vec.set(toggle ? 4 : 0, toggle ? 3 : 8, toggle ? 3 : 5),
+    //   step
+    // );
+
     if (scroll.current > 0.2) {
       mixer.setTime(
         (t.current = THREE.MathUtils.lerp(
@@ -66,6 +106,7 @@ export default function Model({ scroll, ...props }) {
         onPointerOver={(e) => (e.stopPropagation(), set(e.object.name))}
         onPointerOut={(e) => (e.stopPropagation(), set(null))}
         onClick={(e) => {
+          setToggle(!toggle);
           console.log(`click model! ${e.object.name}`);
         }}
         position={[0.06, 4.04, 0.35]}
@@ -121,9 +162,11 @@ export default function Model({ scroll, ...props }) {
       >
         <PerspectiveCamera
           makeDefault
+          ref={cameraRef}
           far={100}
           near={0.1}
-          fov={28}
+          // should be between 28 and 90
+          fov={90}
           rotation={[-Math.PI / 2, 0, 0]}
         >
           <directionalLight

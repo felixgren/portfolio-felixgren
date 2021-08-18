@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import React, { useRef, Suspense } from 'react';
 // eslint-disable-next-line
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Stars, Plane } from '@react-three/drei';
+import { Stars, Plane, PerspectiveCamera } from '@react-three/drei';
 import './App.css';
 
 import RotatingBox from './RotatingBox';
@@ -30,6 +30,28 @@ function App() {
           }),
         }}
       >
+        {/* <PerspectiveCamera
+          makeDefault
+          position={[0, 0, 20]}
+          far={100}
+          near={0.1}
+          fov={50}
+          // rotation={[-Math.PI / 2, 0, 0]}
+        >
+          <directionalLight
+            castShadow
+            position={[10, 20, 15]}
+            shadow-camera-right={8}
+            shadow-camera-top={8}
+            shadow-camera-left={-8}
+            shadow-camera-bottom={-8}
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+            intensity={2}
+            shadow-bias={-0.0001}
+          />
+        </PerspectiveCamera> */}
+
         <ScrollContainer scroll={scroll}>
           <ScrollContent />
         </ScrollContainer>
@@ -41,8 +63,8 @@ function App() {
         <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
           <meshBasicMaterial color="white" wireframe attach="material" />
         </Plane>
-        <RotatingBox position={[-2, 0, 0]} />
-        <RotatingBox position={[2, 0, 0]} />
+        <RotatingBox position={[-2, 0, -20]} />
+        <RotatingBox position={[2, 0, -20]} />
         <Stars
           radius={100} // Radius of the inner sphere (default=100)
           depth={10} // Depth of area where stars should fit (default=50)

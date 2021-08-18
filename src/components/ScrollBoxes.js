@@ -10,8 +10,8 @@ function ScrollScene() {
   const viewport = useThree((state) => state.viewport);
   return (
     <>
-      <RotatingBox position={[0, -2, 0]} />
-      <RotatingBox position={[0, -viewport.height / 2, 0]} />
+      <RotatingBox position={[0, -2, -20]} />
+      <RotatingBox position={[0, -viewport.height / 2, -20]} />
       <Text
         color={'#FFFFFF'}
         fontSize={12}
