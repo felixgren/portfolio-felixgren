@@ -14,8 +14,11 @@ export default function Model({ scroll, ...props }) {
   let timer = 0;
   const group = useRef();
   const vec = new THREE.Vector3();
-  const vec2 = new THREE.Vector3();
+  const vec2 = new THREE.Vector3(-100, 10, 0);
+  const vec3 = new THREE.Vector3(0, -0.8, -1);
+  const vec4 = new THREE.Vector2(0, 0, 0);
   const targetQuaternion = new THREE.Quaternion();
+  const animationQuaternion = new THREE.Quaternion();
   const rotationMatrix = new THREE.Matrix4();
   const cameraRef = useRef();
   const { nodes, materials, animations } = useGLTF('/model.glb');
@@ -35,46 +38,40 @@ export default function Model({ scroll, ...props }) {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
   }, [hovered]);
   useFrame((state) => {
-    // if (scroll.current < 0.1) {
-    //   state.camera.quaternion.setFromEuler(
-    //     new THREE.Euler(-Math.PI / 2 - 0.3, 2, -0.3)
-    //     );
-    //   cameraRef.current.lookAt(-10, -10, -90);
-    // }
-    // if (onlyOnce && scroll.current > 0.05) {
-    //   triggerOnlyOnce(false);
-    //   console.log(onlyOnce);
-    //   console.log(state.camera.getWorldPosition());
-    // }
-    // if (scroll.current > 0.1 && scroll.current < 0.2 && cameraRef) {
-    //   state.camera.quaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
-    // }
-
-    // console.log(state.camera.getWorldPosition());
-    // console.log(state.camera.getWorldDirection());
-    // console.log(state.camera.quaternion);
+    if (scroll.current > 0.1 && scroll.current < 0.2 && cameraRef) {
+      // state.camera.quaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
+      state.camera.quaternion.slerp(
+        animationQuaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0)),
+        0.05
+      );
+    }
 
     const step = 0.05;
     state.camera.fov = THREE.MathUtils.lerp(
       state.camera.fov,
-      toggle ? 90 : 90,
+      toggle ? 90 : 28,
       step
     );
     state.camera.updateProjectionMatrix();
     state.camera.position.lerp(
-      vec.set(toggle ? 0 : -10, toggle ? 0 : -6, toggle ? 0 : 2.3),
+      // vec.set(toggle ? 0 : -10, toggle ? 0 : -6, toggle ? 0 : 2.3),
+      vec.set(toggle ? 0 : 0, toggle ? 0 : 0, toggle ? 0 : 0),
       step
     );
-    state.camera.lookAt(0, 0, -100);
-    // state.camera.quaternion.set(0, 0, 0, 1);
-    // state.camera.
-    // state.camera.updateProjectionMatrix();
-    // light.current.position.lerp(
-    //   vec.set(toggle ? 4 : 0, toggle ? 3 : 8, toggle ? 3 : 5),
-    //   step
-    // );
+    if (scroll.current < 0.1) {
+      // state.camera.lookAt(0, 0, -100);
+      // mixer.stopAllAction();
+      rotationMatrix.lookAt(state.camera.position, vec2, vec3);
+      targetQuaternion.setFromRotationMatrix(rotationMatrix);
+      state.camera.quaternion.slerp(targetQuaternion, 0.05);
+      // state.camera.quaternion.rotateTowards(targetQuaternion, 0.01);
+
+      // pause camera action
+      // actions['CameraAction.005'].stop();
+    }
 
     if (scroll.current > 0.2) {
+      // actions['CameraAction.005'].play();
       mixer.setTime(
         (t.current = THREE.MathUtils.lerp(
           t.current,
@@ -168,8 +165,8 @@ export default function Model({ scroll, ...props }) {
       </group>
       <group
         name="Camera"
-        // position={[-1.78, 2.04, 23.58]}
-        // rotation={[1.62, 0.01, 0.11]}
+        position={[-1.78, 2.04, 23.58]}
+        rotation={[1.62, 0.01, 0.11]}
       >
         <PerspectiveCamera
           makeDefault
