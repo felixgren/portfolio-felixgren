@@ -11,16 +11,21 @@ const color = new THREE.Color();
 
 export default function Model({ scroll, ...props }) {
   const t = useRef(0);
-  let timer = 0;
   const group = useRef();
-  const vec = new THREE.Vector3();
-  const vec2 = new THREE.Vector3(-100, 10, 0);
-  const vec3 = new THREE.Vector3(0, -0.8, -1);
-  const vec4 = new THREE.Vector2(0, 0, 0);
+  const localCamPosVec = new THREE.Vector3();
+  const eyeTarget = new THREE.Vector3(0, -100, 0);
+  const eyeUp = new THREE.Vector3(0, 0, -1);
+  const worldCameraPosition = new THREE.Vector3();
+  const worldCameraDirection = new THREE.Vector3();
+  const worldCameraQuaternion = new THREE.Quaternion();
+  const animStartQuaternion = new THREE.Quaternion(0.17, -0.77, 0.24, 0.56);
+  const animStartPosition = new THREE.Vector3(-10.7, -6, 2.3);
+  const worldCameraToLocal = new THREE.Vector3();
   const targetQuaternion = new THREE.Quaternion();
   const animationQuaternion = new THREE.Quaternion();
   const rotationMatrix = new THREE.Matrix4();
   const cameraRef = useRef();
+  const groupCameraRef = useRef();
   const { nodes, materials, animations } = useGLTF('/model.glb');
   const { actions, clips, mixer } = useAnimations(animations, group);
   const [hovered, set] = useState();
@@ -38,40 +43,68 @@ export default function Model({ scroll, ...props }) {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
   }, [hovered]);
   useFrame((state) => {
-    if (scroll.current > 0.1 && scroll.current < 0.2 && cameraRef) {
-      // state.camera.quaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
-      state.camera.quaternion.slerp(
-        animationQuaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0)),
-        0.05
-      );
-    }
-
     const step = 0.05;
     state.camera.fov = THREE.MathUtils.lerp(
       state.camera.fov,
       toggle ? 90 : 28,
       step
     );
-    state.camera.updateProjectionMatrix();
     state.camera.position.lerp(
-      // vec.set(toggle ? 0 : -10, toggle ? 0 : -6, toggle ? 0 : 2.3),
-      vec.set(toggle ? 0 : 0, toggle ? 0 : 0, toggle ? 0 : 0),
+      localCamPosVec.set(toggle ? 0 : 0, toggle ? 0 : 0, toggle ? 0 : 0),
       step
+      // vec.set(toggle ? 0 : -10, toggle ? 0 : -6, toggle ? 0 : 2.3),
     );
+    state.camera.updateProjectionMatrix();
+
+    state.camera.getWorldPosition(worldCameraPosition);
+    state.camera.getWorldDirection(worldCameraDirection);
+    state.camera.getWorldQuaternion(worldCameraQuaternion);
+    console.log(worldCameraPosition);
+    // console.log(worldCameraDirection);
+    // console.log(worldCameraQuaternion);
+
+    // state.camera.worldToLocal(worldCameraToLocal);
+    // console.log(worldCameraToLocal);
+    // worldCameraToLocal.set(0, 0, 0);
+
+    // console.log(
+    //   `X: ${worldCameraPosition.x} Y:${worldCameraPosition.y} Z:${worldCameraPosition.z}`
+    // );
+
     if (scroll.current < 0.1) {
+      // rotationMatrix.lookAt(state.camera.position, eyeTarget, eyeUp);
+      // targetQuaternion.setFromRotationMatrix(rotationMatrix);
+      // state.camera.quaternion.slerp(targetQuaternion, 0.05);
+
       // state.camera.lookAt(0, 0, -100);
-      // mixer.stopAllAction();
-      rotationMatrix.lookAt(state.camera.position, vec2, vec3);
-      targetQuaternion.setFromRotationMatrix(rotationMatrix);
-      state.camera.quaternion.slerp(targetQuaternion, 0.05);
-      // state.camera.quaternion.rotateTowards(targetQuaternion, 0.01);
+      // groupCameraRef.current.position.set(0, 0, 0);
+      // groupCameraRef.current.position.set(-10.7, -6, 2.3);
+      groupCameraRef.current.position.copy(animStartPosition);
+      cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);
+      // groupCameraRef.current.rotation.set(0, 0, 0);
+      // cameraRef.current.lookAt(0, 0, -100);
+      // state.camera.quaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
+      // groupCameraRef.current.position.set(-10.7, -6, 2.3);
+      // groupCameraRef.current.rotation.set(0.78, 0.56, 0.26);
+
+      // groupCameraRef.current.position.set(-1.78, 2.04, 23.58);
+      // groupCameraRef.current.rotation.set(1.62, 0.01, 0.11);
 
       // pause camera action
-      // actions['CameraAction.005'].stop();
+      actions['CameraAction.005'].stop();
     }
 
+    if (scroll.current > 0.1 && scroll.current < 0.2 && cameraRef) {
+      // cameraRef.current.rotation.set(-Math.PI / 2, 0, 0);
+      // state.camera.quaternion.slerp(
+      //   animationQuaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0)),
+      //   0.05
+      // );
+      // state.camera.quaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
+    }
     if (scroll.current > 0.2) {
-      // actions['CameraAction.005'].play();
+      cameraRef.current.rotation.set(-Math.PI / 2, 0, 0);
+      actions['CameraAction.005'].play();
       mixer.setTime(
         (t.current = THREE.MathUtils.lerp(
           t.current,
@@ -90,8 +123,6 @@ export default function Model({ scroll, ...props }) {
       mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 0, 0.05)));
       // then pause the animation
       // mixer.stopAllAction();
-      //disconnect the camera from mixer
-      // mixer.uncacheRoot(cameraRef.current);
     }
     group.current.children[0].children.forEach((child, index) => {
       child.material.color.lerp(
@@ -165,17 +196,18 @@ export default function Model({ scroll, ...props }) {
       </group>
       <group
         name="Camera"
-        position={[-1.78, 2.04, 23.58]}
-        rotation={[1.62, 0.01, 0.11]}
+        ref={groupCameraRef}
+        // position={[-1.78, 2.04, 23.58]}
+        // rotation={[1.62, 0.01, 0.11]}
       >
         <PerspectiveCamera
           makeDefault
           ref={cameraRef}
-          far={100}
+          far={1000}
           near={0.1}
           // should be between 28 and 90
           fov={90}
-          rotation={[-Math.PI / 2, 0, 0]}
+          // rotation={[-Math.PI / 2, 0, 0]}
         >
           <directionalLight
             castShadow
