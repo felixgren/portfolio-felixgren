@@ -7,9 +7,10 @@ function ScrollContainer({ scroll, children }) {
   const { viewport } = useThree();
   const group = useRef();
   const vector = new THREE.Vector3();
+  const multiplier = 5;
   useFrame(() =>
     group.current.position.lerp(
-      vector.set(0, viewport.height * scroll.current, 0),
+      vector.set(0, viewport.height * scroll.current * multiplier, 0),
       0.1
     )
   );

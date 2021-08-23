@@ -13,17 +13,25 @@ export default function Model({ scroll, ...props }) {
   const t = useRef(0);
   const group = useRef();
   const localCamPosVec = new THREE.Vector3();
+  const dummy = new THREE.Vector3();
+  const dummyQuart = new THREE.Quaternion();
   const eyeTarget = new THREE.Vector3(0, -100, 0);
   const eyeUp = new THREE.Vector3(0, 0, -1);
   const worldCameraPosition = new THREE.Vector3();
   const worldCameraDirection = new THREE.Vector3();
   const worldCameraQuaternion = new THREE.Quaternion();
-  const animStartQuaternion = new THREE.Quaternion(0.17, -0.77, 0.24, 0.56);
-  const animStartPosition = new THREE.Vector3(-10.7, -6, 2.3);
+  const animStartQuaternion = new THREE.Quaternion(
+    0.17168,
+    -0.77445,
+    0.23707,
+    0.56084
+  );
+  const animStartPosition = new THREE.Vector3(-10.722, -5.981, 2.297);
   const worldCameraToLocal = new THREE.Vector3();
   const targetQuaternion = new THREE.Quaternion();
   const animationQuaternion = new THREE.Quaternion();
   const rotationMatrix = new THREE.Matrix4();
+  const scrollBar = document.querySelector('.scroll');
   const cameraRef = useRef();
   const groupCameraRef = useRef();
   const { nodes, materials, animations } = useGLTF('/model.glb');
@@ -31,6 +39,7 @@ export default function Model({ scroll, ...props }) {
   const [hovered, set] = useState();
   const [toggle, setToggle] = useState(true);
   const [onlyOnce, triggerOnlyOnce] = useState(true);
+  const [cameraReady, setCameraReady] = useState(false);
   const extras = {
     receiveShadow: true,
     castShadow: true,
@@ -59,50 +68,49 @@ export default function Model({ scroll, ...props }) {
     state.camera.getWorldPosition(worldCameraPosition);
     state.camera.getWorldDirection(worldCameraDirection);
     state.camera.getWorldQuaternion(worldCameraQuaternion);
-    console.log(worldCameraPosition);
+    // console.log(worldCameraPosition);
     // console.log(worldCameraDirection);
     // console.log(worldCameraQuaternion);
 
-    // state.camera.worldToLocal(worldCameraToLocal);
-    // console.log(worldCameraToLocal);
-    // worldCameraToLocal.set(0, 0, 0);
+    // console.log(t.current);
 
-    // console.log(
-    //   `X: ${worldCameraPosition.x} Y:${worldCameraPosition.y} Z:${worldCameraPosition.z}`
-    // );
+    // Console log if animation is playing
+    // if (actions['CameraAction.005'].isRunning()) {
+    //   console.log(
+    //     `CameraAction.005 is playing ${actions['CameraAction.005'].time}`
+    //   );
+    // } else {
+    //   console.log(
+    //     `CameraAction.005 is not playing ${actions['CameraAction.005'].time}`
+    //   );
+    // }
 
-    if (scroll.current < 0.1) {
-      // rotationMatrix.lookAt(state.camera.position, eyeTarget, eyeUp);
-      // targetQuaternion.setFromRotationMatrix(rotationMatrix);
-      // state.camera.quaternion.slerp(targetQuaternion, 0.05);
-
-      // state.camera.lookAt(0, 0, -100);
+    if (scroll.current < 0.4 && !actions['CameraAction.005'].isRunning()) {
       // groupCameraRef.current.position.set(0, 0, 0);
-      // groupCameraRef.current.position.set(-10.7, -6, 2.3);
-      groupCameraRef.current.position.copy(animStartPosition);
-      cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);
-      // groupCameraRef.current.rotation.set(0, 0, 0);
-      // cameraRef.current.lookAt(0, 0, -100);
-      // state.camera.quaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
-      // groupCameraRef.current.position.set(-10.7, -6, 2.3);
-      // groupCameraRef.current.rotation.set(0.78, 0.56, 0.26);
+      // cameraRef.current.rotation.set(0, 0, 0);
 
-      // groupCameraRef.current.position.set(-1.78, 2.04, 23.58);
-      // groupCameraRef.current.rotation.set(1.62, 0.01, 0.11);
+      groupCameraRef.current.position.lerp(dummy.set(0, 0, 0), 0.02);
 
-      // pause camera action
-      actions['CameraAction.005'].stop();
+      state.camera.quaternion.slerp(
+        dummyQuart.setFromEuler(new THREE.Euler(0, 0, 0)),
+        0.05
+      );
+
+      // groupCameraRef.current.position.copy(animStartPosition);
+      // cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);
     }
 
-    if (scroll.current > 0.1 && scroll.current < 0.2 && cameraRef) {
-      // cameraRef.current.rotation.set(-Math.PI / 2, 0, 0);
-      // state.camera.quaternion.slerp(
-      //   animationQuaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0)),
-      //   0.05
-      // );
-      // state.camera.quaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
+    if (
+      !actions['CameraAction.005'].isRunning() &&
+      scroll.current > 0.4 &&
+      scroll.current < 0.5
+    ) {
+      setCameraReady(false);
+      groupCameraRef.current.position.lerp(animStartPosition, 0.02);
+      state.camera.quaternion.slerp(animStartQuaternion, 0.05);
     }
-    if (scroll.current > 0.2) {
+
+    if (scroll.current > 0.5 && cameraReady) {
       cameraRef.current.rotation.set(-Math.PI / 2, 0, 0);
       actions['CameraAction.005'].play();
       mixer.setTime(
@@ -111,7 +119,7 @@ export default function Model({ scroll, ...props }) {
           // Calculate scroll between 0.2 and 1.0
           THREE.MathUtils.mapLinear(
             scroll.current,
-            0.2,
+            0.5,
             1.0,
             0,
             actions['CameraAction.005']._clip.duration
@@ -119,10 +127,26 @@ export default function Model({ scroll, ...props }) {
           0.05
         ))
       );
+    } else if (scroll.current > 0.5 && !cameraReady) {
+      groupCameraRef.current.position.lerp(animStartPosition, 0.05);
+      state.camera.quaternion.slerp(animStartQuaternion, 0.1);
+      if (
+        !cameraReady &&
+        Math.abs(
+          groupCameraRef.current.position.distanceTo(animStartPosition)
+        ) < 0.1
+      ) {
+        setCameraReady(true);
+        console.log('is true!!');
+      }
     } else {
       mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 0, 0.05)));
-      // then pause the animation
-      // mixer.stopAllAction();
+
+      if (t.current < 0.02 && actions['CameraAction.005'].isRunning()) {
+        actions['CameraAction.005'].stop();
+        groupCameraRef.current.position.copy(animStartPosition);
+        cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);
+      }
     }
     group.current.children[0].children.forEach((child, index) => {
       child.material.color.lerp(
