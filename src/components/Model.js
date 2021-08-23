@@ -12,46 +12,53 @@ const color = new THREE.Color();
 export default function Model({ scroll, ...props }) {
   const t = useRef(0);
   const group = useRef();
+  const cameraRef = useRef();
+  const groupCameraRef = useRef();
+  const defaultPos = new THREE.Vector3(0, 0, 0);
+  const defaultQuart = new THREE.Quaternion(0, 0, 0, 1);
   const localCamPosVec = new THREE.Vector3();
-  const dummy = new THREE.Vector3();
-  const dummyQuart = new THREE.Quaternion();
-  const eyeTarget = new THREE.Vector3(0, -100, 0);
-  const eyeUp = new THREE.Vector3(0, 0, -1);
-  const worldCameraPosition = new THREE.Vector3();
-  const worldCameraDirection = new THREE.Vector3();
-  const worldCameraQuaternion = new THREE.Quaternion();
+  const animStartPosition = new THREE.Vector3(-10.722, -5.981, 2.297);
   const animStartQuaternion = new THREE.Quaternion(
     0.17168,
     -0.77445,
     0.23707,
     0.56084
   );
-  const animStartPosition = new THREE.Vector3(-10.722, -5.981, 2.297);
-  const worldCameraToLocal = new THREE.Vector3();
-  const targetQuaternion = new THREE.Quaternion();
-  const animationQuaternion = new THREE.Quaternion();
-  const rotationMatrix = new THREE.Matrix4();
-  const scrollBar = document.querySelector('.scroll');
-  const cameraRef = useRef();
-  const groupCameraRef = useRef();
+  const worldCameraPosition = new THREE.Vector3();
+  const worldCameraDirection = new THREE.Vector3();
+  const worldCameraQuaternion = new THREE.Quaternion();
   const { nodes, materials, animations } = useGLTF('/model.glb');
   const { actions, clips, mixer } = useAnimations(animations, group);
-  const [hovered, set] = useState();
-  const [toggle, setToggle] = useState(true);
-  const [onlyOnce, triggerOnlyOnce] = useState(true);
   const [cameraReady, setCameraReady] = useState(false);
+  const [toggle, setToggle] = useState(true);
+  const [hovered, set] = useState();
   const extras = {
     receiveShadow: true,
     castShadow: true,
     'material-envMapIntensity': 0.2,
   };
+  const scrollStart = 0;
+  const transitionPhase = 0.4;
+  const secondPhase = 0.5;
+  const scrollEnd = 1;
+  // const [isAnimating, setIsAnimating] = useState(false);
+
   useEffect(() => void actions['CameraAction.005'].play(), []);
+
   useEffect(() => {
     if (hovered)
       group.current.getObjectByName(hovered).material.color.set('white');
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
   }, [hovered]);
+
   useFrame((state) => {
+    state.camera.getWorldPosition(worldCameraPosition);
+    state.camera.getWorldDirection(worldCameraDirection);
+    state.camera.getWorldQuaternion(worldCameraQuaternion);
+    // console.log(worldCameraPosition);
+    // console.log(worldCameraDirection);
+    // console.log(worldCameraQuaternion);
+
     const step = 0.05;
     state.camera.fov = THREE.MathUtils.lerp(
       state.camera.fov,
@@ -61,73 +68,45 @@ export default function Model({ scroll, ...props }) {
     state.camera.position.lerp(
       localCamPosVec.set(toggle ? 0 : 0, toggle ? 0 : 0, toggle ? 0 : 0),
       step
-      // vec.set(toggle ? 0 : -10, toggle ? 0 : -6, toggle ? 0 : 2.3),
     );
     state.camera.updateProjectionMatrix();
 
-    state.camera.getWorldPosition(worldCameraPosition);
-    state.camera.getWorldDirection(worldCameraDirection);
-    state.camera.getWorldQuaternion(worldCameraQuaternion);
-    // console.log(worldCameraPosition);
-    // console.log(worldCameraDirection);
-    // console.log(worldCameraQuaternion);
-
-    // console.log(t.current);
-
-    // Console log if animation is playing
-    // if (actions['CameraAction.005'].isRunning()) {
-    //   console.log(
-    //     `CameraAction.005 is playing ${actions['CameraAction.005'].time}`
-    //   );
-    // } else {
-    //   console.log(
-    //     `CameraAction.005 is not playing ${actions['CameraAction.005'].time}`
-    //   );
-    // }
-
-    if (scroll.current < 0.4 && !actions['CameraAction.005'].isRunning()) {
-      // groupCameraRef.current.position.set(0, 0, 0);
-      // cameraRef.current.rotation.set(0, 0, 0);
-
-      groupCameraRef.current.position.lerp(dummy.set(0, 0, 0), 0.02);
-
-      state.camera.quaternion.slerp(
-        dummyQuart.setFromEuler(new THREE.Euler(0, 0, 0)),
-        0.05
-      );
-
-      // groupCameraRef.current.position.copy(animStartPosition);
-      // cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);
+    if (
+      scroll.current < transitionPhase &&
+      !actions['CameraAction.005'].isRunning()
+    ) {
+      groupCameraRef.current.position.lerp(defaultPos, 0.02);
+      state.camera.quaternion.slerp(defaultQuart, 0.05);
     }
 
     if (
       !actions['CameraAction.005'].isRunning() &&
-      scroll.current > 0.4 &&
-      scroll.current < 0.5
+      scroll.current > transitionPhase &&
+      scroll.current < secondPhase
     ) {
       setCameraReady(false);
       groupCameraRef.current.position.lerp(animStartPosition, 0.02);
       state.camera.quaternion.slerp(animStartQuaternion, 0.05);
     }
 
-    if (scroll.current > 0.5 && cameraReady) {
+    if (scroll.current > secondPhase && cameraReady) {
       cameraRef.current.rotation.set(-Math.PI / 2, 0, 0);
       actions['CameraAction.005'].play();
       mixer.setTime(
         (t.current = THREE.MathUtils.lerp(
           t.current,
-          // Calculate scroll between 0.2 and 1.0
+          // Calculate scroll between 0.5 and 1.0
           THREE.MathUtils.mapLinear(
             scroll.current,
-            0.5,
-            1.0,
-            0,
+            secondPhase,
+            scrollEnd,
+            scrollStart,
             actions['CameraAction.005']._clip.duration
           ),
           0.05
         ))
       );
-    } else if (scroll.current > 0.5 && !cameraReady) {
+    } else if (scroll.current > secondPhase && !cameraReady) {
       groupCameraRef.current.position.lerp(animStartPosition, 0.05);
       state.camera.quaternion.slerp(animStartQuaternion, 0.1);
       if (
@@ -137,10 +116,12 @@ export default function Model({ scroll, ...props }) {
         ) < 0.1
       ) {
         setCameraReady(true);
-        console.log('is true!!');
+        console.log('Camera is ready to switch!');
       }
     } else {
-      mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 0, 0.05)));
+      mixer.setTime(
+        (t.current = THREE.MathUtils.lerp(t.current, scrollStart, 0.05))
+      );
 
       if (t.current < 0.02 && actions['CameraAction.005'].isRunning()) {
         actions['CameraAction.005'].stop();
@@ -148,6 +129,7 @@ export default function Model({ scroll, ...props }) {
         cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);
       }
     }
+
     group.current.children[0].children.forEach((child, index) => {
       child.material.color.lerp(
         color
@@ -218,20 +200,13 @@ export default function Model({ scroll, ...props }) {
           v
         />
       </group>
-      <group
-        name="Camera"
-        ref={groupCameraRef}
-        // position={[-1.78, 2.04, 23.58]}
-        // rotation={[1.62, 0.01, 0.11]}
-      >
+      <group name="Camera" ref={groupCameraRef}>
         <PerspectiveCamera
           makeDefault
           ref={cameraRef}
           far={1000}
           near={0.1}
-          // should be between 28 and 90
           fov={90}
-          // rotation={[-Math.PI / 2, 0, 0]}
         >
           <directionalLight
             castShadow
