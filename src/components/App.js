@@ -55,9 +55,12 @@ function App() {
         <directionalLight color="red" position={[0, 0, 5]} />
       </Canvas>
       <div ref={scrollRef} onScroll={doScroll} id="TEST" className="scroll">
-        <div style={{ height: `3000vh`, color: 'white' }}>hej1</div>
-        <div style={{ height: `200vh`, color: 'white' }}>hej2</div>
-        <div style={{ height: `100vh`, color: 'white' }}>hej3</div>
+        <div style={{ height: `3000vh`, color: 'white' }}>div1</div>
+        <div style={{ height: `200vh`, color: 'white' }}>div2</div>
+        <div style={{ height: `100vh`, color: 'white' }}>div3</div>
+        <div style={{ height: `100vh`, color: 'white' }}>div4</div>
+        <div style={{ height: `100vh`, color: 'white' }}>div5</div>
+        <div style={{ height: `100vh`, color: 'white' }}>div6</div>
       </div>
     </div>
   );

@@ -48,8 +48,6 @@ export default function Model({ scroll, ...props }) {
   const thirdPhase = 0.75;
   const thirdPhaseEnd = 1;
 
-  // const [isAnimating, setIsAnimating] = useState(false);
-
   useEffect(() => void actions['CameraAction.005'].play(), []);
 
   useEffect(() => {
@@ -77,6 +75,20 @@ export default function Model({ scroll, ...props }) {
       step
     );
     state.camera.updateProjectionMatrix();
+
+    group.current.children[0].children.forEach((child, index) => {
+      child.material.color.lerp(
+        color
+          .set(hovered === child.name ? 'blue' : '#202020')
+          .convertSRGBToLinear(),
+        hovered ? 0.1 : 0.05
+      );
+      const et = state.clock.elapsedTime;
+      child.position.y = Math.sin((et + index * 2000) / 2) * 1;
+      child.rotation.x = Math.sin((et + index * 2000) / 3) / 10;
+      child.rotation.y = Math.cos((et + index * 2000) / 2) / 10;
+      child.rotation.z = Math.sin((et + index * 2000) / 3) / 10;
+    });
 
     // There are 3 phases.
     // 1. Scrolling flat plane (intro/hero)
@@ -130,8 +142,9 @@ export default function Model({ scroll, ...props }) {
           0.05
         ))
       );
-      // Go to phase 2 start position and set camera to READY when in position
-    } else if (scroll.current > secondPhase && !cameraReady) {
+    }
+    // Go to phase 2 start position and set camera to READY when in position
+    else if (scroll.current > secondPhase && !cameraReady) {
       groupCameraRef.current.position.lerp(animStartPosition, 0.05);
       state.camera.quaternion.slerp(animStartQuaternion, 0.1);
       if (
@@ -143,21 +156,22 @@ export default function Model({ scroll, ...props }) {
         setCameraReady(true);
         console.log('Camera is ready to switch!');
       }
-      // Go to phase 2 end, enter phase 3 when in position
-    } else if (
+    }
+    // Go to phase 2 end, enter phase 3 when in position
+    else if (
       scroll.current > secondPhaseEnd &&
       actions['CameraAction.005'].isRunning() &&
-      !isThirdPhase // is this required?
+      !isThirdPhase
     ) {
       mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 5.8, 0.05)));
       if (t.current >= 5.75) {
         mixer.stopAllAction();
         state.camera.quaternion.copy(animEndQuaternion);
         groupCameraRef.current.position.copy(animEndPosition);
-        // setIsThirdPhase(false); // is this required?
       }
-      // Prep for phase 2 -> phase 1
-    } else if (actions['CameraAction.005'].isRunning()) {
+    }
+    // Prep for phase 2 -> phase 1
+    else if (actions['CameraAction.005'].isRunning()) {
       mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 0, 0.05)));
 
       // Switch to phase 1 when camera in position
@@ -166,9 +180,8 @@ export default function Model({ scroll, ...props }) {
         groupCameraRef.current.position.copy(animStartPosition);
         cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);
       }
-
-      // THIS IS WHERE THE WORK GOES
-    } // Prep for phase 3 -> phase 2
+    }
+    // Prep for phase 3 -> phase 2
     else if (
       !actions['CameraAction.005'].isRunning() &&
       scroll.current < thirdPhase &&
@@ -197,7 +210,6 @@ export default function Model({ scroll, ...props }) {
     ) {
       state.camera.quaternion.slerp(thirdPhaseQuart, 0.1);
       if (
-        // check if state.camera.quaternion roughly equals thirdPhaseQuart
         Math.abs(state.camera.quaternion.x - thirdPhaseQuart.x) < 0.01 &&
         Math.abs(state.camera.quaternion.y - thirdPhaseQuart.y) < 0.01 &&
         Math.abs(state.camera.quaternion.z - thirdPhaseQuart.z) < 0.01 &&
@@ -207,20 +219,6 @@ export default function Model({ scroll, ...props }) {
         setIsThirdPhase(true);
       }
     }
-
-    group.current.children[0].children.forEach((child, index) => {
-      child.material.color.lerp(
-        color
-          .set(hovered === child.name ? 'blue' : '#202020')
-          .convertSRGBToLinear(),
-        hovered ? 0.1 : 0.05
-      );
-      const et = state.clock.elapsedTime;
-      child.position.y = Math.sin((et + index * 2000) / 2) * 1;
-      child.rotation.x = Math.sin((et + index * 2000) / 3) / 10;
-      child.rotation.y = Math.cos((et + index * 2000) / 2) / 10;
-      child.rotation.z = Math.sin((et + index * 2000) / 3) / 10;
-    });
   });
 
   return (
