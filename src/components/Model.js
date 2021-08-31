@@ -24,12 +24,16 @@ export default function Model({ scroll, ...props }) {
     0.23707,
     0.56084
   );
+  const animEndPosition = new THREE.Vector3(-18.193, 14.412, 14.28);
+  const animEndQuaternion = new THREE.Quaternion(0.0928, -0.3936, 0.04, 0.9136);
+  const thirdPhaseQuart = new THREE.Quaternion(0, 0.7, 0, 0.7122);
   const worldCameraPosition = new THREE.Vector3();
   const worldCameraDirection = new THREE.Vector3();
   const worldCameraQuaternion = new THREE.Quaternion();
   const { nodes, materials, animations } = useGLTF('/model.glb');
   const { actions, clips, mixer } = useAnimations(animations, group);
   const [cameraReady, setCameraReady] = useState(false);
+  const [isThirdPhase, setIsThirdPhase] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [hovered, set] = useState();
   const extras = {
@@ -38,9 +42,12 @@ export default function Model({ scroll, ...props }) {
     'material-envMapIntensity': 0.2,
   };
   const scrollStart = 0;
-  const transitionPhase = 0.4;
-  const secondPhase = 0.5;
-  const scrollEnd = 1;
+  const transitionPhase = 0.25;
+  const secondPhase = 0.3;
+  const secondPhaseEnd = 0.7;
+  const thirdPhase = 0.75;
+  const thirdPhaseEnd = 1;
+
   // const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => void actions['CameraAction.005'].play(), []);
@@ -71,6 +78,16 @@ export default function Model({ scroll, ...props }) {
     );
     state.camera.updateProjectionMatrix();
 
+    // There are 3 phases.
+    // 1. Scrolling flat plane (intro/hero)
+    // 2. Camera rotating around models (project showcase)
+    // 3. Scrolling flat plane (about me)
+
+    // The camera is taken over by an animation path in the second stage.
+    // We ensure a seamless looking transition by setting camera to the anim start position before starting the phase 2.
+    // We ensure a seamless transition out of phase 2 by waiting for camera to reach the anim end position before starting phase 3.
+
+    // Camera goes to first phase
     if (
       scroll.current < transitionPhase &&
       !actions['CameraAction.005'].isRunning()
@@ -79,6 +96,7 @@ export default function Model({ scroll, ...props }) {
       state.camera.quaternion.slerp(defaultQuart, 0.05);
     }
 
+    // Camera prep for second phase
     if (
       !actions['CameraAction.005'].isRunning() &&
       scroll.current > transitionPhase &&
@@ -89,23 +107,30 @@ export default function Model({ scroll, ...props }) {
       state.camera.quaternion.slerp(animStartQuaternion, 0.05);
     }
 
-    if (scroll.current > secondPhase && cameraReady) {
+    // Camera enter second phase when camera is READY
+    if (
+      scroll.current > secondPhase &&
+      scroll.current < secondPhaseEnd &&
+      cameraReady &&
+      !isThirdPhase
+    ) {
       cameraRef.current.rotation.set(-Math.PI / 2, 0, 0);
       actions['CameraAction.005'].play();
       mixer.setTime(
         (t.current = THREE.MathUtils.lerp(
           t.current,
-          // Calculate scroll between 0.5 and 1.0
+          // Calculate scroll between scrollStart (0.5) and scrollEnd (1)
           THREE.MathUtils.mapLinear(
             scroll.current,
             secondPhase,
-            scrollEnd,
+            secondPhaseEnd,
             scrollStart,
             actions['CameraAction.005']._clip.duration
           ),
           0.05
         ))
       );
+      // Go to phase 2 start position and set camera to READY when in position
     } else if (scroll.current > secondPhase && !cameraReady) {
       groupCameraRef.current.position.lerp(animStartPosition, 0.05);
       state.camera.quaternion.slerp(animStartQuaternion, 0.1);
@@ -118,15 +143,68 @@ export default function Model({ scroll, ...props }) {
         setCameraReady(true);
         console.log('Camera is ready to switch!');
       }
-    } else {
-      mixer.setTime(
-        (t.current = THREE.MathUtils.lerp(t.current, scrollStart, 0.05))
-      );
+      // Go to phase 2 end, enter phase 3 when in position
+    } else if (
+      scroll.current > secondPhaseEnd &&
+      actions['CameraAction.005'].isRunning() &&
+      !isThirdPhase // is this required?
+    ) {
+      mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 5.8, 0.05)));
+      if (t.current >= 5.75) {
+        mixer.stopAllAction();
+        state.camera.quaternion.copy(animEndQuaternion);
+        groupCameraRef.current.position.copy(animEndPosition);
+        // setIsThirdPhase(false); // is this required?
+      }
+      // Prep for phase 2 -> phase 1
+    } else if (actions['CameraAction.005'].isRunning()) {
+      mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 0, 0.05)));
 
+      // Switch to phase 1 when camera in position
       if (t.current < 0.02 && actions['CameraAction.005'].isRunning()) {
         actions['CameraAction.005'].stop();
         groupCameraRef.current.position.copy(animStartPosition);
         cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);
+      }
+
+      // THIS IS WHERE THE WORK GOES
+    } // Prep for phase 3 -> phase 2
+    else if (
+      !actions['CameraAction.005'].isRunning() &&
+      scroll.current < thirdPhase &&
+      isThirdPhase
+    ) {
+      groupCameraRef.current.position.lerp(animEndPosition, 0.5);
+      state.camera.quaternion.slerp(animEndQuaternion, 0.1);
+
+      if (
+        Math.abs(state.camera.quaternion.x - animEndQuaternion.x) < 0.01 &&
+        Math.abs(state.camera.quaternion.y - animEndQuaternion.y) < 0.01 &&
+        Math.abs(state.camera.quaternion.z - animEndQuaternion.z) < 0.01 &&
+        Math.abs(state.camera.quaternion.w - animEndQuaternion.w) < 0.01
+      ) {
+        console.log('Third phase set to false!');
+        setIsThirdPhase(false);
+      }
+    }
+
+    // Go to phase 3 when camera in position
+    if (
+      !actions['CameraAction.005'].isRunning() &&
+      scroll.current > thirdPhase &&
+      // scroll.current < thirdPhase &&
+      !isThirdPhase
+    ) {
+      state.camera.quaternion.slerp(thirdPhaseQuart, 0.1);
+      if (
+        // check if state.camera.quaternion roughly equals thirdPhaseQuart
+        Math.abs(state.camera.quaternion.x - thirdPhaseQuart.x) < 0.01 &&
+        Math.abs(state.camera.quaternion.y - thirdPhaseQuart.y) < 0.01 &&
+        Math.abs(state.camera.quaternion.z - thirdPhaseQuart.z) < 0.01 &&
+        Math.abs(state.camera.quaternion.w - thirdPhaseQuart.w) < 0.01
+      ) {
+        console.log('Third phase set to true!');
+        setIsThirdPhase(true);
       }
     }
 
