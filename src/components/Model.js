@@ -240,6 +240,12 @@ export default function Model({ scroll, ...props }) {
           {...extras}
         />
         <mesh
+          name="Delorean"
+          geometry={nodes.Delorean_Material_0.geometry}
+          material={materials.Material}
+          {...extras}
+        />
+        <mesh
           name="Notebook"
           geometry={nodes.Notebook.geometry}
           material={materials.M_Notebook}
