@@ -77,9 +77,9 @@ export default function Model({ scroll, ...props }) {
     state.camera.updateProjectionMatrix();
 
     group.current.children[0].children.forEach((child, index) => {
-      child.material.color.lerp(
+      child.children[0].material.color.lerp(
         color
-          .set(hovered === child.name ? 'blue' : '#202020')
+          .set(hovered === child.children[0].name ? 'blue' : '#202020')
           .convertSRGBToLinear(),
         hovered ? 0.1 : 0.05
       );
@@ -115,8 +115,8 @@ export default function Model({ scroll, ...props }) {
       scroll.current < secondPhase
     ) {
       setCameraReady(false);
-      groupCameraRef.current.position.lerp(animStartPosition, 0.02);
-      state.camera.quaternion.slerp(animStartQuaternion, 0.05);
+      groupCameraRef.current.position.lerp(animStartPosition, 0.1);
+      state.camera.quaternion.slerp(animStartQuaternion, 0.1);
     }
 
     // Camera enter second phase when camera is READY
@@ -145,7 +145,7 @@ export default function Model({ scroll, ...props }) {
     }
     // Go to phase 2 start position and set camera to READY when in position
     else if (scroll.current > secondPhase && !cameraReady) {
-      groupCameraRef.current.position.lerp(animStartPosition, 0.05);
+      groupCameraRef.current.position.lerp(animStartPosition, 0.1);
       state.camera.quaternion.slerp(animStartQuaternion, 0.1);
       if (
         !cameraReady &&
@@ -229,58 +229,74 @@ export default function Model({ scroll, ...props }) {
         onClick={(e) => {
           setToggle(!toggle);
           console.log(`click model! ${e.object.name}`);
+          console.log(nodes);
         }}
         position={[0.06, 4.04, 0.35]}
         scale={[0.25, 0.25, 0.25]}
       >
-        <mesh
-          name="Headphones"
-          geometry={nodes.Headphones.geometry}
-          material={materials.M_Headphone}
-          {...extras}
-        />
-        <mesh
-          name="Delorean"
-          geometry={nodes.Delorean_Material_0.geometry}
-          material={materials.Material}
-          {...extras}
-        />
-        <mesh
-          name="Notebook"
-          geometry={nodes.Notebook.geometry}
-          material={materials.M_Notebook}
-          {...extras}
-        />
-        <mesh
-          name="Rocket003"
-          geometry={nodes.Rocket003.geometry}
-          material={materials.M_Rocket}
-          {...extras}
-        />
-        <mesh
-          name="Roundcube001"
-          geometry={nodes.Roundcube001.geometry}
-          material={materials.M_Roundcube}
-          {...extras}
-        />
-        <mesh
-          name="Table"
-          geometry={nodes.Table.geometry}
-          material={materials.M_Table}
-          {...extras}
-        />
-        <mesh
-          name="VR_Headset"
-          geometry={nodes.VR_Headset.geometry}
-          material={materials.M_Headset}
-          {...extras}
-        />
-        <mesh
-          name="Zeppelin"
-          geometry={nodes.Zeppelin.geometry}
-          material={materials.M_Zeppelin}
-          v
-        />
+        <group>
+          <mesh
+            name="Notebook"
+            geometry={nodes.Notebook.geometry}
+            material={materials.M_Notebook}
+            {...extras}
+          />
+        </group>
+        <group position={[36.52, 2.88, 16.7]} scale={[3, 3, 3]}>
+          <mesh
+            name="Delorean"
+            geometry={nodes.Delorean.geometry}
+            material={materials.M_Delorean}
+            rotation={[-1.57, 0, -2.34]}
+            {...extras}
+          />
+
+          <mesh
+            geometry={nodes.Shock.geometry}
+            material={materials.M_Shock}
+            rotation={[-1.65, -0.1, -2.25]}
+          />
+        </group>
+        <group>
+          <mesh
+            name="Rocket003"
+            geometry={nodes.Rocket003.geometry}
+            material={materials.M_Rocket}
+            {...extras}
+          />
+        </group>
+        <group>
+          <mesh
+            name="Roundcube001"
+            geometry={nodes.Roundcube001.geometry}
+            material={materials.M_Roundcube}
+            {...extras}
+          />
+        </group>
+        <group>
+          <mesh
+            name="Table"
+            geometry={nodes.Table.geometry}
+            material={materials.M_Table}
+            {...extras}
+          />
+        </group>
+        <group>
+          <mesh
+            name="VR_Headset"
+            geometry={nodes.VR_Headset.geometry}
+            material={materials.M_Headset}
+            {...extras}
+          />
+        </group>
+        <group>
+          <mesh
+            name="Zeppelin"
+            geometry={nodes.Zeppelin.geometry}
+            material={materials.M_Zeppelin}
+            {...extras}
+          />
+        </group>
       </group>
       <group name="Camera" ref={groupCameraRef}>
         <PerspectiveCamera
