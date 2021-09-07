@@ -77,12 +77,14 @@ export default function Model({ scroll, ...props }) {
     state.camera.updateProjectionMatrix();
 
     group.current.children[0].children.forEach((child, index) => {
-      child.children[0].material.color.lerp(
-        color
-          .set(hovered === child.children[0].name ? 'blue' : '#202020')
-          .convertSRGBToLinear(),
-        hovered ? 0.1 : 0.05
-      );
+      if (child.children[0].material) {
+        child.children[0].material.color.lerp(
+          color
+            .set(hovered === child.children[0].name ? 'blue' : '#202020')
+            .convertSRGBToLinear(),
+          hovered ? 0.1 : 0.05
+        );
+      }
       const et = state.clock.elapsedTime;
       child.position.y = Math.sin((et + index * 2000) / 2) * 1;
       child.rotation.x = Math.sin((et + index * 2000) / 3) / 10;
@@ -242,6 +244,87 @@ export default function Model({ scroll, ...props }) {
             {...extras}
           />
         </group>
+
+        <group>
+          <group
+            position={[33.65, 11.08, -13.34]}
+            rotation={[-Math.PI, 0.6, -Math.PI]}
+            scale={[0.2, 0.2, 0.2]}
+          >
+            <primitive object={nodes._rootJoint} />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.rock_GEO_Rock_MAT_0.geometry}
+              material={materials.Rock_MAT}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.sides_GEO_Side_MAT_0.geometry}
+              material={materials.Side_MAT}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.ground_GEO_treeline_MAT_0.geometry}
+              material={materials.treeline_MAT}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.rocks_GEO_Rock_MAT_0.geometry}
+              material={materials.Rock_MAT_0}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.shadow_GEO_Shadow_MAT_0.geometry}
+              material={materials.Shadow_MAT}
+            />
+            <skinnedMesh
+              geometry={nodes.sword.geometry}
+              material={materials.Doom_MAT_0}
+              skeleton={nodes.sword.skeleton}
+            />
+            <skinnedMesh
+              geometry={nodes.flame.geometry}
+              material={materials.Doom_MAT_1}
+              skeleton={nodes.flame.skeleton}
+            />
+            <skinnedMesh
+              geometry={nodes.shotgun.geometry}
+              material={nodes.shotgun.material}
+              skeleton={nodes.shotgun.skeleton}
+            />
+            <skinnedMesh
+              geometry={nodes.fists.geometry}
+              material={nodes.fists.material}
+              skeleton={nodes.fists.skeleton}
+            />
+            <skinnedMesh
+              geometry={nodes.body.geometry}
+              material={nodes.body.material}
+              skeleton={nodes.body.skeleton}
+            />
+            <skinnedMesh
+              geometry={nodes.arms.geometry}
+              material={materials.Doom_MAT_3}
+              skeleton={nodes.arms.skeleton}
+            />
+            <skinnedMesh
+              geometry={nodes.blade.geometry}
+              material={materials.Doom_MAT_2}
+              skeleton={nodes.blade.skeleton}
+            />
+            <skinnedMesh
+              geometry={nodes.head.geometry}
+              material={materials.Doom_MAT}
+              skeleton={nodes.head.skeleton}
+            />
+          </group>
+        </group>
+
         <group position={[36.52, 2.88, 16.7]} scale={[3, 3, 3]}>
           <mesh
             name="Delorean"
@@ -252,7 +335,7 @@ export default function Model({ scroll, ...props }) {
           />
 
           <mesh
-            geometry={nodes.Shock.geometry}
+            geometry={nodes.DeloreanShock.geometry}
             material={materials.M_Shock}
             rotation={[-1.65, -0.1, -2.25]}
           />
