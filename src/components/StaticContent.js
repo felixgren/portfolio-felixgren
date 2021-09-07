@@ -6,7 +6,7 @@ import { Text } from '@react-three/drei';
 
 import RotatingBox from './RotatingBox';
 
-function ScrollScene() {
+function StaticContent() {
   const viewport = useThree((state) => state.viewport);
   return (
     <>
@@ -73,4 +73,4 @@ function ScrollScene() {
   );
 }
 
-export default ScrollScene;
+export default StaticContent;

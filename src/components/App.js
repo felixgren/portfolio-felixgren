@@ -7,7 +7,7 @@ import { Stars, Plane, PerspectiveCamera } from '@react-three/drei';
 import './App.css';
 
 import RotatingBox from './RotatingBox';
-import ScrollContent from './ScrollBoxes';
+import StaticContent from './StaticContent';
 import ScrollContainer from './ScrollContainer';
 import Model from './Model';
 
@@ -22,7 +22,6 @@ function App() {
     <div id="App">
       <Canvas
         onCreated={(state) => state.events.connect(scrollRef.current)}
-        // camera={{ position: [0, 0, 20], fov: 50, near: 17, far: 40 }}
         raycaster={{
           computeOffsets: ({ clientX, clientY }) => ({
             offsetX: clientX,
@@ -31,7 +30,7 @@ function App() {
         }}
       >
         <ScrollContainer scroll={scroll}>
-          <ScrollContent />
+          <StaticContent />
         </ScrollContainer>
 
         <Suspense fallback={null}>
