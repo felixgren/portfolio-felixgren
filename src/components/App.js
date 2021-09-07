@@ -10,6 +10,7 @@ import RotatingBox from './RotatingBox';
 import StaticContent from './StaticContent';
 import ScrollContainer from './ScrollContainer';
 import Model from './Model';
+import Text from './Text';
 
 function App() {
   const scrollRef = useRef();
@@ -53,17 +54,7 @@ function App() {
         <ambientLight intensity={0.1} />
         <directionalLight color="red" position={[0, 0, 5]} />
       </Canvas>
-      <div ref={scrollRef} onScroll={doScroll} id="TEST" className="scroll">
-        <div style={{ height: `600vh`, color: 'white' }}>Welcome</div>
-        <div style={{ height: `80vh`, color: 'white' }}>Project 1</div>
-        <div style={{ height: `80vh`, color: 'white' }}>Project 2</div>
-        <div style={{ height: `80vh`, color: 'white' }}>Project 3</div>
-        <div style={{ height: `80vh`, color: 'white' }}>Project 4</div>
-        <div style={{ height: `80vh`, color: 'white' }}>Project 5</div>
-        <div style={{ height: `80vh`, color: 'white' }}>Project 6</div>
-        <div style={{ height: `160vh`, color: 'white' }}>Project 7</div>
-        <div style={{ height: `400vh`, color: 'white' }}>About me</div>
-      </div>
+      <Text ref={scrollRef} scroll={scroll} />
     </div>
   );
 }
