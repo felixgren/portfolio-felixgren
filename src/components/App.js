@@ -12,6 +12,7 @@ import ScrollContainer from './ScrollContainer';
 import StaticContent from './StaticContent';
 import Model from './Model';
 import Text from './Text';
+import Cubes from './Cubes';
 
 function App() {
   const scrollRef = useRef();
@@ -36,6 +37,8 @@ function App() {
         </ScrollContainer>
 
         <StaticContent />
+
+        <Cubes />
 
         <Suspense fallback={null}>
           <Model scroll={scroll} />

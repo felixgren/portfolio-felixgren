@@ -18,8 +18,8 @@ function StaticContent() {
       <group position={[-3, 15, -10]} rotation={[0, -15, 0]}>
         <Text
           color={'#FFFFFF'}
-          fontSize={viewport.width / 2}
-          maxWidth={200}
+          fontSize={viewport.width / 8}
+          maxWidth={10}
           lineHeight={1}
           letterSpacing={0.02}
           font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
@@ -27,7 +27,7 @@ function StaticContent() {
           anchorY="middle"
           position={(0, 0, 0)}
         >
-          cubes!
+          cubes will go here
         </Text>
       </group>
     </>
