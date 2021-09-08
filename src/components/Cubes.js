@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 
-function Cubes(props) {
+export function OneCube(props) {
   const myCube = useRef();
 
   useFrame(({ clock }) => {
@@ -11,11 +11,17 @@ function Cubes(props) {
   });
 
   return (
+    <mesh {...props} ref={myCube}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshNormalMaterial />
+    </mesh>
+  );
+}
+
+function Cubes(props) {
+  return (
     <group position={[-3, 15, -10]} rotation={[0, -15, 0]}>
-      <mesh ref={myCube}>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshNormalMaterial />
-      </mesh>
+      <OneCube position={[0, 0, 0]} />
     </group>
   );
 }
