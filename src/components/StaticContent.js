@@ -57,7 +57,7 @@ function StaticContent() {
       <group position={[-50, 0, 14]} rotation={[0, 20.4, 0]}>
         <Text
           color={'#FFFFFF'}
-          fontSize={12}
+          fontSize={viewport.width / 1}
           maxWidth={200}
           lineHeight={1}
           letterSpacing={0.02}
@@ -67,6 +67,20 @@ function StaticContent() {
           position={(0, 0, 0)}
         >
           HELLO!
+        </Text>
+
+        <Text
+          color={'#FFFFFF'}
+          fontSize={viewport.width / 3}
+          maxWidth={200}
+          lineHeight={1}
+          letterSpacing={0.02}
+          font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+          anchorX="center"
+          anchorY="middle"
+          position={[0, -viewport.width / 1.8, 0]}
+        >
+          Knowledge and skills
         </Text>
       </group>
     </>

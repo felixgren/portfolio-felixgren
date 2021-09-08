@@ -18,3 +18,59 @@ body {
   top: 0;
   left: 0;
 }
+
+.text > h2 {
+  -webkit-font-smoothing: auto;
+  pointer-events: none;
+  color: white;
+  font-size: 5em;
+  font-weight: 100;
+  line-height: 1em;
+  margin: 0;
+  margin-bottom: 0.25em;
+}
+
+.text {
+  color: #909090;
+  max-width: 600px;
+  padding: 60px;
+  line-height: 1.5em;
+  letter-spacing: 1.1px;
+  font-size: 16px;
+}
+
+.text > p > a {
+  color: #909090;
+  line-height: 1.5em;
+  letter-spacing: 1.1px;
+  font-size: 16px;
+  text-underline-offset: 2px;
+  /* text-decoration: none; */
+}
+
+.github {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.github-logo {
+  margin: 20px 30px;
+  width: 40px;
+}
+
+@media only screen and (max-width: 1000px) {
+}
+
+@media only screen and (max-width: 800px) {
+  .text > h2 {
+    font-size: 3em;
+  }
+  .github-logo {
+    margin: 15px 15px;
+    width: 30px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+}
