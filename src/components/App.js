@@ -7,8 +7,9 @@ import { Stars, Plane, PerspectiveCamera } from '@react-three/drei';
 import './App.css';
 
 import RotatingBox from './RotatingBox';
-import StaticContent from './StaticContent';
+import Content from './Content';
 import ScrollContainer from './ScrollContainer';
+import StaticContent from './StaticContent';
 import Model from './Model';
 import Text from './Text';
 
@@ -31,18 +32,15 @@ function App() {
         }}
       >
         <ScrollContainer scroll={scroll}>
-          <StaticContent />
+          <Content />
         </ScrollContainer>
+
+        <StaticContent />
 
         <Suspense fallback={null}>
           <Model scroll={scroll} />
         </Suspense>
 
-        <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
-          <meshBasicMaterial color="white" wireframe attach="material" />
-        </Plane>
-        <RotatingBox position={[-2, 0, -20]} />
-        <RotatingBox position={[2, 0, -20]} />
         <Stars
           radius={100} // Radius of the inner sphere (default=100)
           depth={10} // Depth of area where stars should fit (default=50)
