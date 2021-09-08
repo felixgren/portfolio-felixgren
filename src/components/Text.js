@@ -80,9 +80,13 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       <h2>Task Repo</h2>
       <p>Taaask repo ooooor maybe fake news...</p>
     </div>
-    <div style={{ height: `400vh` }} class="text">
-      <h2>About me</h2>
-      <p>yep...</p>
+    <div style={{ height: `400vh` }} class="contact-wrapper">
+      <div class="contact-text">
+        <h2>Reach out, say hi.</h2>
+        <p>
+          <a href="mailto:hello@felixgren.com">hello@felixgren.com</a>
+        </p>
+      </div>
     </div>
     <span class="github">
       <a href="https://github.com/felixgren" target="_blank">
