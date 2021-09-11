@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
+import AudioVisualizer from './AudioVisualizer';
 
 import Cube from './Cube';
 import SongURL from '../audio/bamboo.aac';
@@ -70,6 +71,7 @@ function UselessCubes() {
           {/* <boxGeometry /> */}
           {/* <meshPhongMaterial color="royalblue" /> */}
         </mesh>
+        <AudioVisualizer position={[0, -3, 0]} url={SongURL} />
       </Suspense>
     </group>
   );
