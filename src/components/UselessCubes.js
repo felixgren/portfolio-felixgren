@@ -1,7 +1,28 @@
-import React, { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
+import React, { useRef, useState, useEffect, Suspense } from 'react';
+import { useFrame, useLoader, useThree } from '@react-three/fiber';
 
 import Cube from './Cube';
+import SongURL from '../audio/bamboo.aac';
+
+function Sound({ url }) {
+  const sound = useRef();
+  const { camera } = useThree();
+  const [listener] = useState(() => new THREE.AudioListener());
+  const buffer = useLoader(THREE.AudioLoader, url);
+  useEffect(() => {
+    sound.current.setBuffer(buffer);
+    sound.current.setRefDistance(1);
+    sound.current.setDistanceModel('linear');
+    sound.current.setRolloffFactor(2);
+    sound.current.setMaxDistance(20);
+    sound.current.setLoop(true);
+    sound.current.play();
+    camera.add(listener);
+    return () => camera.remove(listener);
+  }, []);
+  return <positionalAudio ref={sound} args={[listener]} />;
+}
 
 export function Cubes() {
   const CubeGroup = useRef();
@@ -43,6 +64,13 @@ function UselessCubes() {
   return (
     <group position={[-3, 13, -10]} rotation={[0, -15, 0]}>
       <Cubes />
+      <Suspense fallback={null}>
+        <mesh position={[-2, -3, 10]}>
+          <Sound url={SongURL} />
+          {/* <boxGeometry /> */}
+          {/* <meshPhongMaterial color="royalblue" /> */}
+        </mesh>
+      </Suspense>
     </group>
   );
 }
