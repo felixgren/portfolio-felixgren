@@ -1,9 +1,9 @@
 import React from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
+import { Text, Plane } from '@react-three/drei';
 import './App.css';
 
-import { Text, Plane } from '@react-three/drei';
-import RotatingBox from './RotatingBox';
+import Cube from './Cube';
 
 function StaticContent() {
   const viewport = useThree((state) => state.viewport);
@@ -12,8 +12,8 @@ function StaticContent() {
       <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
         <meshBasicMaterial color="white" wireframe attach="material" />
       </Plane>
-      <RotatingBox position={[-2, 0, -20]} />
-      <RotatingBox position={[2, 0, -20]} />
+      <Cube position={[-2, 0, -20]} />
+      <Cube position={[2, 0, -20]} />
 
       <group position={[-3, 16, -10]} rotation={[0, -15, 0]}>
         <Text
@@ -25,7 +25,7 @@ function StaticContent() {
           font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
           anchorX="center"
           anchorY="middle"
-          position={(0, 0, 0)}
+          position={[0, 0, 0]}
         >
           cubes will go here
         </Text>

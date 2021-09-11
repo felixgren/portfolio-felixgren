@@ -9,10 +9,10 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         e.target.scrollTop / (e.target.scrollHeight - window.innerHeight);
     }}
   >
-    <div style={{ height: `600vh` }} class="text">
+    <div style={{ height: `600vh` }} className="text">
       <h2>welcome</h2>
     </div>
-    <div style={{ height: `80vh` }} class="text">
+    <div style={{ height: `80vh` }} className="text">
       <h2>Nintendo Event</h2>
       <p>
         A project about creating an asthetically pleasing and enticing event
@@ -26,7 +26,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         this website.
       </p>
     </div>
-    <div style={{ height: `80vh` }} class="text">
+    <div style={{ height: `80vh` }} className="text">
       <h2>Hacker News</h2>
       <p>
         A hacker news clone project, with the main focus being on the backend.
@@ -36,20 +36,20 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         BIO, the total accumulated likes, post history and of course an avatar.
       </p>
     </div>
-    <div style={{ height: `80vh` }} class="text">
+    <div style={{ height: `80vh` }} className="text">
       <h2>Three Arena</h2>
       <p>
         A game project utilizing three.js as the 3D game engine. It is a first
         person shooter which features an immersive fun area in which to kill
         your friends in, multiplayer mode stresstested for the first time by my
         entire class at once. A collaboration between me and{' '}
-        <a href="https://pnpjss.com/" target="_blank">
+        <a href="https://pnpjss.com/" target="_blank" rel="noreferrer">
           Lucas
         </a>
         .
       </p>
     </div>
-    <div style={{ height: `80vh` }} class="text">
+    <div style={{ height: `80vh` }} className="text">
       <h2>Electric</h2>
       <p>
         A landing page for a futuristic vehicle, a collaboration project between
@@ -57,7 +57,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         Figma, by us the developers.
       </p>
     </div>
-    <div style={{ height: `80vh` }} class="text">
+    <div style={{ height: `80vh` }} className="text">
       <h2>Useless Web</h2>
       <p>
         A very fun project where the prime directive was for it to be as useless
@@ -66,7 +66,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         turning it into a dance party? Hell yeuh.
       </p>
     </div>
-    <div style={{ height: `80vh` }} class="text">
+    <div style={{ height: `80vh` }} className="text">
       <h2>Nook Inc</h2>
       <p>
         My first web project which I created before starting my studies.
@@ -76,23 +76,23 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         dumb moth, basically a bad version of minecraft.
       </p>
     </div>
-    <div style={{ height: `160vh` }} class="text">
+    <div style={{ height: `160vh` }} className="text">
       <h2>Task Repo</h2>
       <p>Taaask repo ooooor maybe fake news...</p>
     </div>
-    <div style={{ height: `400vh` }} class="contact-wrapper">
-      <div class="contact-text">
+    <div style={{ height: `400vh` }} className="contact-wrapper">
+      <div className="contact-text">
         <h2>Reach out, say hi.</h2>
         <p>
           <a href="mailto:hello@felixgren.com">hello@felixgren.com</a>
         </p>
       </div>
     </div>
-    <span class="github">
-      <a href="https://github.com/felixgren" target="_blank">
+    <span className="github">
+      <a href="https://github.com/felixgren" target="_blank" rel="noreferrer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="github-logo"
+          className="github-logo"
           viewBox="0 0 24 24"
           fill="#fff"
         >

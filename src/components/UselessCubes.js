@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useSpring, animated } from '@react-spring/three';
-import RotatingBox from './RotatingBox';
+
+import Cube from './Cube';
 
 export function Cubes() {
   const CubeGroup = useRef();
@@ -21,20 +21,20 @@ export function Cubes() {
 
   return (
     <group ref={CubeGroup}>
-      <RotatingBox position={[0, 2, 0]} />
-      <RotatingBox position={[-1, 1, 0]} />
-      <RotatingBox position={[0, 1, 0]} />
-      <RotatingBox position={[-1, 1, 0]} />
-      <RotatingBox position={[1, 1, 0]} />
-      <RotatingBox position={[2, 0, 0]} />
-      <RotatingBox position={[1, 0, 0]} />
-      <RotatingBox position={[0, 0, 0]} />
-      <RotatingBox position={[-1, 0, 0]} />
-      <RotatingBox position={[-2, 0, 0]} />
-      <RotatingBox position={[-1, -1, 0]} />
-      <RotatingBox position={[0, -1, 0]} />
-      <RotatingBox position={[1, -1, 0]} />
-      <RotatingBox position={[0, -2, 0]} />
+      <Cube position={[0, 2, 0]} />
+      <Cube position={[-1, 1, 0]} />
+      <Cube position={[0, 1, 0]} />
+      <Cube position={[-1, 1, 0]} />
+      <Cube position={[1, 1, 0]} />
+      <Cube position={[2, 0, 0]} />
+      <Cube position={[1, 0, 0]} />
+      <Cube position={[0, 0, 0]} />
+      <Cube position={[-1, 0, 0]} />
+      <Cube position={[-2, 0, 0]} />
+      <Cube position={[-1, -1, 0]} />
+      <Cube position={[0, -1, 0]} />
+      <Cube position={[1, -1, 0]} />
+      <Cube position={[0, -2, 0]} />
     </group>
   );
 }

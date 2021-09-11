@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
-import { MeshWobbleMaterial, MeshDistortMaterial } from '@react-three/drei';
 
-function RotatingBox(props) {
+function Cube(props) {
   const myMesh = useRef();
   const [active, setActive] = useState(false);
   const [hovering, setHover] = useState(false);
@@ -52,4 +51,4 @@ function RotatingBox(props) {
   );
 }
 
-export default RotatingBox;
+export default Cube;

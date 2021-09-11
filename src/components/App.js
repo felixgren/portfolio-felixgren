@@ -1,9 +1,6 @@
-// eslint-disable-next-line
-import * as THREE from 'three';
 import React, { useRef, Suspense } from 'react';
-// eslint-disable-next-line
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Stars, Plane, PerspectiveCamera } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { Stars } from '@react-three/drei';
 import './App.css';
 
 import Content from './Content';
@@ -11,15 +8,11 @@ import ScrollContainer from './ScrollContainer';
 import StaticContent from './StaticContent';
 import Model from './Model';
 import Text from './Text';
-import UselessCubes from './Cubes';
+import UselessCubes from './UselessCubes';
 
 function App() {
   const scrollRef = useRef();
   const scroll = useRef(0);
-  const doScroll = (e) => {
-    scroll.current =
-      e.target.scrollTop / (e.target.scrollHeight - window.innerHeight);
-  };
   return (
     <div id="App">
       <Canvas

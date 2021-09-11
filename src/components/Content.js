@@ -1,17 +1,16 @@
 import React from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
+import { Text } from '@react-three/drei';
 import './App.css';
 
-import { Text } from '@react-three/drei';
-
-import RotatingBox from './RotatingBox';
+import Cube from './Cube';
 
 function Content() {
   const viewport = useThree((state) => state.viewport);
   return (
     <>
-      <RotatingBox position={[0, -2, -20]} />
-      <RotatingBox position={[0, -viewport.height / 2, -20]} />
+      <Cube position={[0, -2, -20]} />
+      <Cube position={[0, -viewport.height / 2, -20]} />
       <Text
         color={'#FFFFFF'}
         fontSize={viewport.width / 1.1}
@@ -64,7 +63,7 @@ function Content() {
           font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
           anchorX="center"
           anchorY="middle"
-          position={(0, 0, 0)}
+          position={[0, 0, 0]}
         >
           HELLO!
         </Text>
