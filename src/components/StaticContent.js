@@ -15,7 +15,7 @@ function StaticContent() {
       <RotatingBox position={[-2, 0, -20]} />
       <RotatingBox position={[2, 0, -20]} />
 
-      <group position={[-3, 15, -10]} rotation={[0, -15, 0]}>
+      <group position={[-3, 16, -10]} rotation={[0, -15, 0]}>
         <Text
           color={'#FFFFFF'}
           fontSize={viewport.width / 8}

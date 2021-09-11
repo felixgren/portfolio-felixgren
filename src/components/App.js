@@ -6,13 +6,12 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars, Plane, PerspectiveCamera } from '@react-three/drei';
 import './App.css';
 
-import RotatingBox from './RotatingBox';
 import Content from './Content';
 import ScrollContainer from './ScrollContainer';
 import StaticContent from './StaticContent';
 import Model from './Model';
 import Text from './Text';
-import Cubes from './Cubes';
+import UselessCubes from './Cubes';
 
 function App() {
   const scrollRef = useRef();
@@ -38,7 +37,7 @@ function App() {
 
         <StaticContent />
 
-        <Cubes />
+        <UselessCubes />
 
         <Suspense fallback={null}>
           <Model scroll={scroll} />

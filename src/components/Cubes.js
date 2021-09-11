@@ -1,29 +1,50 @@
 import React, { useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
+import RotatingBox from './RotatingBox';
 
-export function OneCube(props) {
-  const myCube = useRef();
-
+export function Cubes() {
+  const CubeGroup = useRef();
   useFrame(({ clock }) => {
     const time = clock.getElapsedTime();
-    myCube.current.rotation.x = time;
+    // CubeGroup.current.rotation.x = time * 0.2;
+    // CubeGroup.current.rotation.y = time * 0.2;
+    CubeGroup.current.rotation.z = time * 0.2;
+
+    // CubeGroup.current.scale.y = Math.sin(time * 0.22) * 1.1;
+    // CubeGroup.current.scale.x = Math.sin(time * 0.22) * 1.1;
+
+    // defaults
+    // CubeGroup.scale.y = Math.sin(time * 0.22) * 1.1;
+    // CubeGroup.scale.x = Math.sin(time * 0.22) * 1.1;
   });
 
   return (
-    <mesh {...props} ref={myCube}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshNormalMaterial />
-    </mesh>
-  );
-}
-
-function Cubes(props) {
-  return (
-    <group position={[-3, 15, -10]} rotation={[0, -15, 0]}>
-      <OneCube position={[0, 0, 0]} />
+    <group ref={CubeGroup}>
+      <RotatingBox position={[0, 2, 0]} />
+      <RotatingBox position={[-1, 1, 0]} />
+      <RotatingBox position={[0, 1, 0]} />
+      <RotatingBox position={[-1, 1, 0]} />
+      <RotatingBox position={[1, 1, 0]} />
+      <RotatingBox position={[2, 0, 0]} />
+      <RotatingBox position={[1, 0, 0]} />
+      <RotatingBox position={[0, 0, 0]} />
+      <RotatingBox position={[-1, 0, 0]} />
+      <RotatingBox position={[-2, 0, 0]} />
+      <RotatingBox position={[-1, -1, 0]} />
+      <RotatingBox position={[0, -1, 0]} />
+      <RotatingBox position={[1, -1, 0]} />
+      <RotatingBox position={[0, -2, 0]} />
     </group>
   );
 }
 
-export default Cubes;
+function UselessCubes() {
+  return (
+    <group position={[-3, 13, -10]} rotation={[0, -15, 0]}>
+      <Cubes />
+    </group>
+  );
+}
+
+export default UselessCubes;
