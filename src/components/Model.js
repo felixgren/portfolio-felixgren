@@ -57,7 +57,7 @@ export default function Model({ scroll, ...props }) {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
   }, [hovered]);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     state.camera.getWorldPosition(worldCameraPosition);
     state.camera.getWorldDirection(worldCameraDirection);
     state.camera.getWorldQuaternion(worldCameraQuaternion);
@@ -65,7 +65,7 @@ export default function Model({ scroll, ...props }) {
     // console.log(worldCameraDirection);
     // console.log(worldCameraQuaternion);
 
-    const step = 0.05;
+    const step = 5 * delta;
     state.camera.fov = THREE.MathUtils.lerp(
       state.camera.fov,
       toggle ? 90 : 28,
@@ -107,8 +107,8 @@ export default function Model({ scroll, ...props }) {
       scroll.current < transitionPhase &&
       !actions['CameraAction.005'].isRunning()
     ) {
-      groupCameraRef.current.position.lerp(defaultPos, 0.02);
-      state.camera.quaternion.slerp(defaultQuart, 0.05);
+      groupCameraRef.current.position.lerp(defaultPos, 4 * delta);
+      state.camera.quaternion.slerp(defaultQuart, 8 * delta);
     }
 
     // Camera prep for second phase
@@ -118,8 +118,8 @@ export default function Model({ scroll, ...props }) {
       scroll.current < secondPhase
     ) {
       setCameraReady(false);
-      groupCameraRef.current.position.lerp(animStartPosition, 0.1);
-      state.camera.quaternion.slerp(animStartQuaternion, 0.1);
+      groupCameraRef.current.position.lerp(animStartPosition, 5 * delta);
+      state.camera.quaternion.slerp(animStartQuaternion, 5 * delta);
     }
 
     // Camera enter second phase when camera is READY
@@ -148,8 +148,8 @@ export default function Model({ scroll, ...props }) {
     }
     // Go to phase 2 start position and set camera to READY when in position
     else if (scroll.current > secondPhase && !cameraReady) {
-      groupCameraRef.current.position.lerp(animStartPosition, 0.1);
-      state.camera.quaternion.slerp(animStartQuaternion, 0.1);
+      groupCameraRef.current.position.lerp(animStartPosition, 10 * delta);
+      state.camera.quaternion.slerp(animStartQuaternion, 10 * delta);
       if (
         !cameraReady &&
         Math.abs(
@@ -190,8 +190,8 @@ export default function Model({ scroll, ...props }) {
       scroll.current < thirdPhase &&
       isThirdPhase
     ) {
-      groupCameraRef.current.position.lerp(animEndPosition, 0.5);
-      state.camera.quaternion.slerp(animEndQuaternion, 0.1);
+      groupCameraRef.current.position.lerp(animEndPosition, 5 * delta);
+      state.camera.quaternion.slerp(animEndQuaternion, 10 * delta);
 
       if (
         Math.abs(state.camera.quaternion.x - animEndQuaternion.x) < 0.01 &&
@@ -211,7 +211,7 @@ export default function Model({ scroll, ...props }) {
       // scroll.current < thirdPhase &&
       !isThirdPhase
     ) {
-      state.camera.quaternion.slerp(thirdPhaseQuart, 0.1);
+      state.camera.quaternion.slerp(thirdPhaseQuart, 10 * delta);
       if (
         Math.abs(state.camera.quaternion.x - thirdPhaseQuart.x) < 0.01 &&
         Math.abs(state.camera.quaternion.y - thirdPhaseQuart.y) < 0.01 &&
