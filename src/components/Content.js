@@ -7,6 +7,7 @@ import Cube from './Cube';
 
 function Content() {
   const viewport = useThree((state) => state.viewport);
+  console.log(viewport.width);
   return (
     <>
       <Cube position={[0, -2, -20]} />
@@ -34,7 +35,11 @@ function Content() {
         font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
         anchorX="center"
         anchorY="bottom"
-        position={[-viewport.width / 0.5, viewport.width - 10, -40]}
+        position={[
+          -viewport.width / 0.52,
+          viewport.width - viewport.width * 0.6,
+          -40,
+        ]}
       >
         Web Developer
       </Text>

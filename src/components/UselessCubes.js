@@ -18,10 +18,11 @@ function Sound({ url }) {
     sound.current.setRolloffFactor(2);
     sound.current.setMaxDistance(20);
     sound.current.setLoop(true);
+    sound.current.setVolume(0.6);
     sound.current.play();
     camera.add(listener);
     return () => camera.remove(listener);
-  }, []);
+  }, [buffer, camera, listener]);
   return <positionalAudio ref={sound} args={[listener]} />;
 }
 
