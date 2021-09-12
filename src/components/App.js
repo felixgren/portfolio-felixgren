@@ -9,6 +9,7 @@ import StaticContent from './StaticContent';
 import Model from './Model';
 import Text from './Text';
 import UselessCubes from './UselessCubes';
+import DetailedText from './DetailedText';
 
 function App() {
   const scrollRef = useRef();
@@ -48,6 +49,8 @@ function App() {
         <directionalLight color="red" position={[0, 0, 5]} />
       </Canvas>
       <Text ref={scrollRef} scroll={scroll} />
+      <DetailedText />
+      {/* <Nav style={{ color: props.color }} /> */}
     </div>
   );
 }
