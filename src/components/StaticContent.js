@@ -12,8 +12,8 @@ function StaticContent() {
       <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
         <meshBasicMaterial color="white" wireframe attach="material" />
       </Plane>
-      <Cube position={[-2, 0, -20]} />
-      <Cube position={[2, 0, -20]} />
+      {/* <Cube position={[-2, 0, -20]} />
+      <Cube position={[2, 0, -20]} /> */}
 
       <group position={[-3, 16, -10]} rotation={[0, -15, 0]}>
         <Text

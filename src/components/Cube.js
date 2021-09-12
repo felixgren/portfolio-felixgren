@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import React, { useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
@@ -8,7 +9,7 @@ function Cube(props) {
   const [hovering, setHover] = useState(false);
 
   const { scale } = useSpring({
-    scale: active ? 1 : 0.5,
+    scale: active ? 1 : 0.6,
     config: { mass: 1, tension: 500, friction: 20 },
   });
 
@@ -16,13 +17,13 @@ function Cube(props) {
     const time = clock.getElapsedTime();
     myMesh.current.rotation.x = time;
 
-    // myMesh.current.position.z = Math.sin(
-    //   time * 3 +
-    //     Math.sqrt(
-    //       myMesh.current.position.x * myMesh.current.position.x +
-    //         myMesh.current.position.y * myMesh.current.position.y
-    //     )
-    // );
+    myMesh.current.position.z = Math.sin(
+      time * 3 +
+        Math.sqrt(
+          myMesh.current.position.x * myMesh.current.position.x +
+            myMesh.current.position.y * myMesh.current.position.y
+        )
+    );
 
     // myMesh.current.position.z = Math.tan(
     //   time * 0.1 +

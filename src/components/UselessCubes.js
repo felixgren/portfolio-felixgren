@@ -28,14 +28,85 @@ function Sound({ url }) {
 
 export function Cubes() {
   const CubeGroup = useRef();
-  useFrame(({ clock }) => {
-    const time = clock.getElapsedTime();
+  const [hovering, setHover] = useState(false);
+  useFrame((state, delta) => {
+    const time = state.clock.getElapsedTime();
     // CubeGroup.current.rotation.x = time * 0.2;
     // CubeGroup.current.rotation.y = time * 0.2;
-    CubeGroup.current.rotation.z = time * 0.2;
+    // CubeGroup.current.rotation.z = time * 0.2;
 
-    // CubeGroup.current.scale.y = Math.sin(time * 0.22) * 1.1;
-    // CubeGroup.current.scale.x = Math.sin(time * 0.22) * 1.1;
+    CubeGroup.current.rotation.z = THREE.Math.lerp(
+      CubeGroup.current.rotation.z, // current
+      hovering ? 10 : 0, // target
+      0.05 * delta // amount
+    );
+
+    // for (let i = 0; i < CubeGroup.current.children.length; i++) {
+    //   CubeGroup.current.children[i].rotation.x = THREE.Math.lerp(
+    //     CubeGroup.current.children[i].rotation.x, // current
+    //     hovering ? 5 + i : 0, // target
+    //     0.05 * delta // amount
+    //   );
+    // }
+
+    // if (hovering) {
+    //   for (let i = 0; i < CubeGroup.current.children.length; i++) {
+    //     CubeGroup.current.children[i].scale.x = THREE.Math.lerp(
+    //       CubeGroup.current.children[i].scale.x, // current
+    //       Math.abs(Math.tan(time * 0.5) * 0.5), // target
+    //       0.001 * time // amount
+    //     );
+    //     CubeGroup.current.children[i].scale.z = THREE.Math.lerp(
+    //       CubeGroup.current.children[i].scale.z, // current
+    //       time * 0.22 * 1.1, // target
+    //       0.001 * time // amount
+    //     );
+    //   }
+    // } else {
+    //   for (let i = 0; i < CubeGroup.current.children.length; i++) {
+    //     CubeGroup.current.children[i].scale.x = THREE.Math.lerp(
+    //       CubeGroup.current.children[i].scale.x, // current
+    //       0.5, // target
+    //       0.001 * time // amount
+    //     );
+    //     CubeGroup.current.children[i].scale.z = THREE.Math.lerp(
+    //       CubeGroup.current.children[i].scale.z, // current
+    //       0.5, // target
+    //       0.001 * time // amount
+    //     );
+    //   }
+    // }
+
+    // if (hovering) {
+    //   for (let i = 0; i < CubeGroup.current.children.length; i++) {
+    //     CubeGroup.current.children[i].scale.x = THREE.Math.lerp(
+    //       CubeGroup.current.children[i].scale.x, // current
+    //       Math.abs(Math.tan(time * 0.5) * 0.5), // target
+    //       0.001 * time // amount
+    //     );
+    //     CubeGroup.current.children[i].scale.z = THREE.Math.lerp(
+    //       CubeGroup.current.children[i].scale.z, // current
+    //       time * 0.22 * 1.1, // target
+    //       0.001 * time // amount
+    //     );
+    //   }
+    // } else {
+    //   for (let i = 0; i < CubeGroup.current.children.length; i++) {
+    //     CubeGroup.current.children[i].scale.x = THREE.Math.lerp(
+    //       CubeGroup.current.children[i].scale.x, // current
+    //       0.5, // target
+    //       0.001 * time // amount
+    //     );
+    //     CubeGroup.current.children[i].scale.z = THREE.Math.lerp(
+    //       CubeGroup.current.children[i].scale.z, // current
+    //       0.5, // target
+    //       0.001 * time // amount
+    //     );
+    //   }
+    // }
+
+    // CubeGroup.current.scale.y = Math.tan(time * 0.22) * 1.1;
+    // CubeGroup.current.scale.x = Math.tan(time * 0.22) * 1.1;
 
     // defaults
     // CubeGroup.scale.y = Math.sin(time * 0.22) * 1.1;
@@ -43,11 +114,14 @@ export function Cubes() {
   });
 
   return (
-    <group ref={CubeGroup}>
+    <group
+      ref={CubeGroup}
+      onPointerOver={() => setHover(true)}
+      onPointerOut={() => setHover(false)}
+    >
       <Cube position={[0, 2, 0]} />
       <Cube position={[-1, 1, 0]} />
       <Cube position={[0, 1, 0]} />
-      <Cube position={[-1, 1, 0]} />
       <Cube position={[1, 1, 0]} />
       <Cube position={[2, 0, 0]} />
       <Cube position={[1, 0, 0]} />

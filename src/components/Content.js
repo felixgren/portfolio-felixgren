@@ -10,8 +10,8 @@ function Content() {
   console.log(viewport.width);
   return (
     <>
-      <Cube position={[0, -2, -20]} />
-      <Cube position={[0, -viewport.height / 2, -20]} />
+      {/* <Cube position={[0, -2, -20]} />
+      <Cube position={[0, -viewport.height / 2, -20]} /> */}
       <Text
         color={'#FFFFFF'}
         fontSize={viewport.width / 1.1}
