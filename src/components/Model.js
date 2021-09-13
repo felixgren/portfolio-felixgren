@@ -326,44 +326,24 @@ export default function Model({ scroll, ...props }) {
           </group>
         </group>
 
-        <group position={[36.52, 2.88, 16.7]} scale={[3, 3, 3]}>
-          <mesh
-            name="Delorean"
-            geometry={nodes.Delorean.geometry}
-            material={materials.M_Delorean}
-            rotation={[-1.57, 0, -2.34]}
-            {...extras}
-          />
+        <group>
+          <group
+            position={[20.71, 17.21, -29.71]}
+            scale={[3, 3, 3]}
+            rotation={[-1.44, -0.15, -0.77]}
+          >
+            <mesh
+              name="Delorean"
+              geometry={nodes.Delorean.geometry}
+              material={materials.M_Delorean}
+              {...extras}
+            />
 
-          <mesh
-            geometry={nodes.DeloreanShock.geometry}
-            material={materials.M_Shock}
-            rotation={[-1.65, -0.1, -2.25]}
-          />
-        </group>
-        <group>
-          <mesh
-            name="Rocket003"
-            geometry={nodes.Rocket003.geometry}
-            material={materials.M_Rocket}
-            {...extras}
-          />
-        </group>
-        <group>
-          <mesh
-            name="Roundcube001"
-            geometry={nodes.Roundcube001.geometry}
-            material={materials.M_Roundcube}
-            {...extras}
-          />
-        </group>
-        <group>
-          <mesh
-            name="Table"
-            geometry={nodes.Table.geometry}
-            material={materials.M_Table}
-            {...extras}
-          />
+            <mesh
+              geometry={nodes.DeloreanShock.geometry}
+              material={materials.M_Shock}
+            />
+          </group>
         </group>
         <group>
           <mesh

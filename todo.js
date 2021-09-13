@@ -27,5 +27,12 @@
   <General>
     <Fix>Resolve camera breaking from scrollwheel jumping</Fix>
     <Code>Verify mobile support</Code>
+    <Audio>Compress audio file & verify performance/remove preload</Audio>
   </General>
 </PortfolioMVP>;
+
+// - Import all models
+// - Create project info
+// - Create skills/aboutme
+// - Adjust the hero
+// - Compress audio
