@@ -238,12 +238,17 @@ export default function Model({ scroll, ...props }) {
         scale={[0.25, 0.25, 0.25]}
       >
         <group>
-          <mesh
-            name="VR_Headset"
-            geometry={nodes.VR_Headset.geometry}
-            material={materials.M_Headset}
-            {...extras}
-          />
+          <group
+            position={[0, -15.37, 20.62]}
+            rotation={[-Math.PI / 2, 0, -0.32]}
+          >
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Mario.geometry}
+              material={materials.MarioMat}
+            />
+          </group>
         </group>
 
         <group>
@@ -346,12 +351,168 @@ export default function Model({ scroll, ...props }) {
         </group>
 
         <group>
-          <mesh
-            name="Notebook"
-            geometry={nodes.Notebook.geometry}
-            material={materials.M_Notebook}
-            {...extras}
-          />
+          <group
+            position={[-31.34, 28.14, -21.87]}
+            rotation={[-Math.PI, -1.05, -Math.PI]}
+            scale={[0.05, 0.05, 0.05]}
+          >
+            <group
+              position={[-5.59, 134.86, -11.56]}
+              rotation={[-Math.PI / 2, 0, 1.31]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Bag_bag_Mat00_0.geometry}
+                material={materials.bag_Mat00}
+              />
+            </group>
+            <group
+              position={[-3.66, 177.74, -18.8]}
+              rotation={[-1.76, 0.03, 1.32]}
+              scale={[45.01, 44.27, 61.54]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Ribbon001_ribbon_Mat00_0.geometry}
+                material={nodes.bell_Ribbon001_ribbon_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[59.12, 145.46, 56.44]}
+              rotation={[-3.07, 0.39, -2.68]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Ribbon002_ribbon_Mat00_0.geometry}
+                material={nodes.bell_Ribbon002_ribbon_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[-91.11, 133.84, -34.65]}
+              rotation={[-0.07, -0.39, 0.46]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Ribbon_ribbon_Mat00_0.geometry}
+                material={nodes.bell_Ribbon_ribbon_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[84.4, 86.6, 117.71]}
+              rotation={[2.81, 0.65, -1.55]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin_bell_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[-138.53, 304.91, -75.78]}
+              rotation={[2.95, 0.51, 2.72]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin001_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin001_bell_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[46.72, 428.62, -33.36]}
+              rotation={[2.81, 0.65, -1.55]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin002_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin002_bell_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[122.47, 351.52, -116.6]}
+              rotation={[-2.33, 0.76, 2.3]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin003_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin003_bell_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[-185.29, 143.48, 29.52]}
+              rotation={[3.02, -0.57, 0.98]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin004_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin004_bell_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[-91.38, 419.22, -30.81]}
+              rotation={[2.04, -0.01, 3.08]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin005_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin005_bell_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[-119.72, 205.86, -180.75]}
+              rotation={[-2.44, -0.51, 1.44]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin007_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin007_bell_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[142.76, 253.41, -10.37]}
+              rotation={[-1.44, 0.8, -0.7]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin008_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin008_bell_Mat00_0.material}
+              />
+            </group>
+            <group
+              position={[193.25, 271.61, 97.33]}
+              rotation={[-2.86, 0.39, 2.39]}
+              scale={[100, 100, 100]}
+            >
+              <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.bell_Coin009_bell_Mat00_0.geometry}
+                material={nodes.bell_Coin009_bell_Mat00_0.material}
+              />
+            </group>
+          </group>
         </group>
 
         <group>
