@@ -35,14 +35,15 @@ const Headline = styled(animated.div)`
 `;
 
 const TextStyle = styled.div`
-  font-size: 5em;
+  font-size: 3em;
   font-weight: 800;
-  letter-spacing: -5px;
+  letter-spacing: -3px;
   line-height: 1em;
+  margin: 24px 14px;
 `;
 
 const headlineContent = {
-  '/': ['Nothing at all', 'tis is blank!'],
+  '/': ['Felix Gren'],
   '/nintendo-event': ['Nintendo Event', 'its a me, mario!'],
   '/hacker-news': ['Hacker News', 'I bloody love it', 'hackin the news!'],
   '/three-arena': ['Three Arena', 'i looove', 'three arena'],
@@ -57,7 +58,7 @@ function renderSwitch(param) {
     case '/':
       return [{ background: 'transparent' }, { text: '#272730' }];
     case '/nintendo-event':
-      return [{ background: 'rgba(255, 0, 0, 1)' }, { text: '#fdbf00' }];
+      return [{ background: '#FF0000' }, { text: '#fdbf00' }];
     case '/hacker-news':
       return [{ background: '#FF6600' }, { text: 'black' }];
     case '/three-arena':
@@ -80,13 +81,27 @@ function TempNav(props) {
     <>
       <DevNav {...props}>
         <Link to="/">None</Link>
-        <Link to="/nintendo-event">Nintendo Event</Link>
-        <Link to="/hacker-news">Hacker News</Link>
-        <Link to="/three-arena">Three Arena</Link>
-        <Link to="/electric">Electric</Link>
-        <Link to="/useless-web">Useless Web</Link>
-        <Link to="/nook-inc">Nook Inc</Link>
-        <Link to="/task-repo">Task Repo</Link>
+        <Link id="nintendo-event-link" to="/nintendo-event">
+          Nintendo Event
+        </Link>
+        <Link id="hacker-news-link" to="/hacker-news">
+          Hacker News
+        </Link>
+        <Link id="three-arena-link" to="/three-arena">
+          Three Arena
+        </Link>
+        <Link id="electric-link" to="/electric">
+          Electric
+        </Link>
+        <Link id="useless-web-link" to="/useless-web">
+          Useless Web
+        </Link>
+        <Link id="nook-inc-link" to="/nook-inc">
+          Nook Inc
+        </Link>
+        <Link id="task-repo-link" to="/task-repo">
+          Task Repo
+        </Link>
       </DevNav>
     </>
   );

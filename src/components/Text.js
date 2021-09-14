@@ -10,10 +10,10 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
     }}
   >
     <div style={{ height: `600vh` }} className="text">
-      <h2>welcome</h2>
+      {/* <h2>welcome</h2> */}
     </div>
     <div style={{ height: `80vh` }} className="text">
-      <h2>Nintendo Event</h2>
+      <h2 id="nintendo-event">Nintendo Event</h2>
       <p>
         A project about creating an asthetically pleasing and enticing event
         page, for the new Super Mario 3D World + Bowsers Fury game. Built and
@@ -27,7 +27,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       </p>
     </div>
     <div style={{ height: `80vh` }} className="text">
-      <h2>Hacker News</h2>
+      <h2 id="hacker-news">Hacker News</h2>
       <p>
         A hacker news clone project, with the main focus being on the backend.
         It has features such as login, likes, creation, deletion & editing of
@@ -37,7 +37,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       </p>
     </div>
     <div style={{ height: `80vh` }} className="text">
-      <h2>Three Arena</h2>
+      <h2 id="three-arena">Three Arena</h2>
       <p>
         A game project utilizing three.js as the 3D game engine. It is a first
         person shooter which features an immersive fun area in which to kill
@@ -50,7 +50,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       </p>
     </div>
     <div style={{ height: `80vh` }} className="text">
-      <h2>Electric</h2>
+      <h2 id="electric">Electric</h2>
       <p>
         A landing page for a futuristic vehicle, a collaboration project between
         web developers and computer graphics designers at YRGO. Desgined in
@@ -58,7 +58,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       </p>
     </div>
     <div style={{ height: `80vh` }} className="text">
-      <h2>Useless Web</h2>
+      <h2 id="useless-web">Useless Web</h2>
       <p>
         A very fun project where the prime directive was for it to be as useless
         as possible, it features cubes dancing around. It was a nice
@@ -67,7 +67,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       </p>
     </div>
     <div style={{ height: `80vh` }} className="text">
-      <h2>Nook Inc</h2>
+      <h2 id="nook-inc">Nook Inc</h2>
       <p>
         My first web project which I created before starting my studies.
         Honestly though, this game gets boring way too quick. I really wanted to
@@ -77,7 +77,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       </p>
     </div>
     <div style={{ height: `160vh` }} className="text">
-      <h2>Task Repo</h2>
+      <h2 id="task-repo">Task Repo</h2>
       <p>Taaask repo ooooor maybe fake news...</p>
     </div>
     <div style={{ height: `400vh` }} className="contact-wrapper">

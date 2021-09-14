@@ -7,11 +7,11 @@ function StaticContent() {
   const viewport = useThree((state) => state.viewport);
   return (
     <>
-      <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
+      {/* <Plane rotation-x={Math.PI / 2} args={[100, 100, 4, 4]}>
         <meshBasicMaterial color="white" wireframe attach="material" />
-      </Plane>
+      </Plane> */}
       <group position={[-3, 16, -10]} rotation={[0, -15, 0]}>
-        <Text
+        {/* <Text
           color={'#FFFFFF'}
           fontSize={viewport.width / 8}
           maxWidth={10}
@@ -23,7 +23,7 @@ function StaticContent() {
           position={[0, 0, 0]}
         >
           cubes will go here
-        </Text>
+        </Text> */}
       </group>
     </>
   );

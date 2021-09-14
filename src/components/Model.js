@@ -6,6 +6,8 @@ import * as THREE from 'three';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGLTF, useAnimations, PerspectiveCamera } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import { useLocation } from 'wouter';
+import UselessCubes from './UselessCubes';
 
 const color = new THREE.Color();
 
@@ -30,22 +32,42 @@ export default function Model({ scroll, ...props }) {
   const worldCameraPosition = new THREE.Vector3();
   const worldCameraDirection = new THREE.Vector3();
   const worldCameraQuaternion = new THREE.Quaternion();
+
   const { nodes, materials, animations } = useGLTF('/model.glb');
   const { actions, mixer } = useAnimations(animations, group);
+
   const [cameraReady, setCameraReady] = useState(false);
   const [isThirdPhase, setIsThirdPhase] = useState(false);
   const [toggle, setToggle] = useState(true);
   const [hovered, set] = useState();
+  const [location, setLocation] = useLocation('/');
+
   const extras = {
     receiveShadow: true,
     castShadow: true,
     'material-envMapIntensity': 0.2,
   };
+
   const scrollStart = 0;
   const transitionPhase = 0.25;
   const secondPhase = 0.3;
   const secondPhaseEnd = 0.7;
   const thirdPhase = 0.75;
+
+  const locationId = location.substring(1);
+  const scrollElement = document.querySelector('.scroll');
+
+  if (!toggle) {
+    if (locationId !== '') {
+      const currentLocation = document.querySelector(`#${locationId}`);
+      scrollElement.scrollTop = currentLocation.offsetTop - 120;
+      const currentLink = document.querySelector(`#${locationId}-link`);
+      currentLink.style.display = 'initial';
+    }
+    setTimeout(() => (scrollElement.style.overflow = 'hidden'), 100);
+  } else {
+    scrollElement.style.overflow = 'auto';
+  }
 
   // I should check if dependency affects performance in any way
   // eslint-disable-next-line
@@ -61,6 +83,7 @@ export default function Model({ scroll, ...props }) {
     state.camera.getWorldPosition(worldCameraPosition);
     state.camera.getWorldDirection(worldCameraDirection);
     state.camera.getWorldQuaternion(worldCameraQuaternion);
+
     // console.log(worldCameraPosition);
     // console.log(worldCameraDirection);
     // console.log(worldCameraQuaternion);
@@ -229,15 +252,20 @@ export default function Model({ scroll, ...props }) {
       <group
         onPointerOver={(e) => [e.stopPropagation(), set(e.object.name)]}
         onPointerOut={(e) => [e.stopPropagation(), set(null)]}
-        onClick={(e) => {
-          setToggle(!toggle);
-          console.log(`click model! ${e.object.name}`);
-          console.log(nodes);
-        }}
         position={[0.06, 4.04, 0.35]}
         scale={[0.25, 0.25, 0.25]}
       >
-        <group>
+        {/* mario model */}
+        <group
+          onClick={() => {
+            setToggle(!toggle);
+            setTimeout(
+              () => setLocation(toggle ? '/nintendo-event' : '/'),
+              600
+            );
+            console.log(`click model! mario`);
+          }}
+        >
           <group
             position={[0, -15.37, 20.62]}
             rotation={[-Math.PI / 2, 0, -0.32]}
@@ -250,8 +278,14 @@ export default function Model({ scroll, ...props }) {
             />
           </group>
         </group>
-
-        <group>
+        ´{/* three arena model */}
+        <group
+          onClick={() => {
+            setToggle(!toggle);
+            setTimeout(() => setLocation(toggle ? '/three-arena' : '/'), 600);
+            console.log(`click model! three arena`);
+          }}
+        >
           <group
             position={[33.65, 11.08, -13.34]}
             rotation={[-Math.PI, 0.6, -Math.PI]}
@@ -330,8 +364,14 @@ export default function Model({ scroll, ...props }) {
             />
           </group>
         </group>
-
-        <group>
+        {/* electric model */}
+        <group
+          onClick={() => {
+            setToggle(!toggle);
+            setTimeout(() => setLocation(toggle ? '/electric' : '/'), 600);
+            console.log(`click model! electric`);
+          }}
+        >
           <group
             position={[20.71, 17.21, -29.71]}
             scale={[3, 3, 3]}
@@ -349,8 +389,22 @@ export default function Model({ scroll, ...props }) {
             />
           </group>
         </group>
-
-        <group>
+        {/* useless cubes model */}
+        <UselessCubes
+          onClickEvent={() => {
+            setToggle(!toggle);
+            setTimeout(() => setLocation(toggle ? '/useless-web' : '/'), 600);
+            console.log(`click model! useless web`);
+          }}
+        />
+        {/* nook inc model */}
+        <group
+          onClick={() => {
+            setToggle(!toggle);
+            setTimeout(() => setLocation(toggle ? '/nook-inc' : '/'), 600);
+            console.log(`click model! nook inc`);
+          }}
+        >
           <group
             position={[-31.34, 28.14, -21.87]}
             rotation={[-Math.PI, -1.05, -Math.PI]}
@@ -514,8 +568,14 @@ export default function Model({ scroll, ...props }) {
             </group>
           </group>
         </group>
-
-        <group>
+        {/* task repo model */}
+        <group
+          onClick={() => {
+            setToggle(!toggle);
+            setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 600);
+            console.log(`click model! task repo`);
+          }}
+        >
           <mesh
             name="Zeppelin"
             geometry={nodes.Zeppelin.geometry}

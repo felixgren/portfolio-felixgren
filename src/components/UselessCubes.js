@@ -11,6 +11,7 @@ function Sound({ url }) {
   const { camera } = useThree();
   const [listener] = useState(() => new THREE.AudioListener());
   const buffer = useLoader(THREE.AudioLoader, url);
+
   useEffect(() => {
     sound.current.setBuffer(buffer);
     sound.current.setRefDistance(1);
@@ -29,6 +30,7 @@ function Sound({ url }) {
 export function Cubes() {
   const CubeGroup = useRef();
   const [hovering, setHover] = useState(false);
+
   useFrame((state, delta) => {
     // const time = state.clock.getElapsedTime();
     // CubeGroup.current.rotation.x = time * 0.2;
@@ -118,6 +120,9 @@ export function Cubes() {
       ref={CubeGroup}
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
+      scale={[4, 4, 4]}
+      position={[-12, 26, -40]}
+      rotation={[0, -15, 0]}
     >
       <Cube position={[0, 2, 0]} />
       <Cube position={[-1, 1, 0]} />
@@ -136,20 +141,26 @@ export function Cubes() {
   );
 }
 
-function UselessCubes() {
+const UselessCubes = ({ onClickEvent }) => {
   return (
-    <group position={[-3, 13, -10]} rotation={[0, -15, 0]}>
+    <group onClick={onClickEvent}>
       <Cubes />
       <Suspense fallback={null}>
-        <mesh position={[-2, -3, 10]}>
+        <mesh position={[-36, 16, -98]} scale={[4, 4, 4]}>
           <Sound url={SongURL} />
           {/* <boxGeometry /> */}
           {/* <meshPhongMaterial color="royalblue" /> */}
         </mesh>
-        <AudioVisualizer position={[0, -3, 0]} url={SongURL} />
+
+        <AudioVisualizer
+          rotation={[0, -15, 0]}
+          scale={[5, 5, 5]}
+          position={[-12, 16, -40]}
+          url={SongURL}
+        />
       </Suspense>
     </group>
   );
-}
+};
 
 export default UselessCubes;

@@ -39,7 +39,6 @@ function Cube(props) {
       scale={scale}
       onClick={() => {
         setActive(!active);
-        console.log('click!');
       }}
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}

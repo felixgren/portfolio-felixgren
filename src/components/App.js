@@ -8,7 +8,6 @@ import ScrollContainer from './ScrollContainer';
 import StaticContent from './StaticContent';
 import Model from './Model';
 import Text from './Text';
-import UselessCubes from './UselessCubes';
 import DetailedText from './DetailedText';
 
 function App() {
@@ -30,8 +29,6 @@ function App() {
         </ScrollContainer>
 
         <StaticContent />
-
-        <UselessCubes />
 
         <Suspense fallback={null}>
           <Model scroll={scroll} />

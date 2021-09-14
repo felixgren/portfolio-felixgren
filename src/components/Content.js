@@ -10,37 +10,37 @@ function Content() {
     <>
       <Text
         color={'#FFFFFF'}
-        fontSize={viewport.width / 1.1}
+        fontSize={viewport.width / 1.8}
         maxWidth={200}
         lineHeight={1}
-        letterSpacing={0.02}
+        letterSpacing={-0.04}
         font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
         anchorX="center"
         anchorY="middle"
-        position={[0, viewport.width / 1.1, -20]}
+        position={[0, viewport.width / 2, -20]}
       >
         Felix Gren
       </Text>
 
       <Text
         color={'#FFFFFF'}
-        fontSize={viewport.width / 1.5}
+        fontSize={viewport.width / 2.2}
         maxWidth={200}
         lineHeight={1}
-        letterSpacing={0.02}
+        letterSpacing={-0.02}
         font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
         anchorX="center"
         anchorY="bottom"
         position={[
-          -viewport.width / 0.52,
-          viewport.width - viewport.width * 0.6,
+          -viewport.width / 1.2,
+          viewport.width - viewport.width * 1.2,
           -40,
         ]}
       >
         Web Developer
       </Text>
 
-      <Text
+      {/* <Text
         color={'#FFFFFF'}
         fontSize={viewport.width / 1.1}
         maxWidth={200}
@@ -52,7 +52,7 @@ function Content() {
         position={[viewport.width / 0.3, -10, -50]}
       >
         heyayaya!
-      </Text>
+      </Text> */}
 
       <group position={[-50, 0, 14]} rotation={[0, 20.4, 0]}>
         <Text
