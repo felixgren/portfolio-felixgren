@@ -56,17 +56,42 @@ export default function Model({ scroll, ...props }) {
 
   const locationId = location.substring(1);
   const scrollElement = document.querySelector('.scroll');
+  const projectButtons = document.querySelectorAll('.project-buttons');
+  const devNav = document.querySelector('#dev-nav');
 
   if (!toggle) {
     if (locationId !== '') {
       const currentLocation = document.querySelector(`#${locationId}`);
-      scrollElement.scrollTop = currentLocation.offsetTop - 120;
+      scrollElement.scrollTop = currentLocation.offsetTop - 250;
       const currentLink = document.querySelector(`#${locationId}-link`);
       currentLink.style.display = 'initial';
+      scrollElement.style.webkitMaskImage = 'none';
+
+      setTimeout(
+        () =>
+          Array.from(projectButtons).map((projectButton) => {
+            projectButton.style.opacity = '1';
+            projectButton.style.pointerEvents = 'initial';
+            devNav.style.opacity = '1';
+          }),
+        100
+      );
     }
     setTimeout(() => (scrollElement.style.overflow = 'hidden'), 100);
   } else {
     scrollElement.style.overflow = 'auto';
+    scrollElement.style.webkitMaskImage =
+      'linear-gradient(to bottom, black 30%, transparent 60%)';
+
+    setTimeout(
+      () =>
+        Array.from(projectButtons).map((projectButton) => {
+          projectButton.style.opacity = '0';
+          projectButton.style.pointerEvents = 'none';
+          devNav.style.opacity = '0';
+        }),
+      600
+    );
   }
 
   // I should check if dependency affects performance in any way
@@ -91,7 +116,7 @@ export default function Model({ scroll, ...props }) {
     const step = 5 * delta;
     state.camera.fov = THREE.MathUtils.lerp(
       state.camera.fov,
-      toggle ? 90 : 28,
+      toggle ? 55 : 28,
       step
     );
     state.camera.position.lerp(
@@ -109,11 +134,11 @@ export default function Model({ scroll, ...props }) {
           hovered ? 0.1 : 0.05
         );
       }
-      const et = state.clock.elapsedTime;
-      child.position.y = Math.sin((et + index * 2000) / 2) * 1;
-      child.rotation.x = Math.sin((et + index * 2000) / 3) / 10;
-      child.rotation.y = Math.cos((et + index * 2000) / 2) / 10;
-      child.rotation.z = Math.sin((et + index * 2000) / 3) / 10;
+      const time = state.clock.elapsedTime;
+      child.position.y = Math.sin((time + index * 2000) / 2) * 1;
+      child.rotation.x = Math.sin((time + index * 2000) / 3) / 30;
+      child.rotation.y = Math.cos((time + index * 2000) / 2) / 30;
+      child.rotation.z = Math.sin((time + index * 2000) / 3) / 30;
     });
 
     // There are 3 phases.
@@ -261,13 +286,13 @@ export default function Model({ scroll, ...props }) {
             setToggle(!toggle);
             setTimeout(
               () => setLocation(toggle ? '/nintendo-event' : '/'),
-              600
+              800
             );
             console.log(`click model! mario`);
           }}
         >
           <group
-            position={[0, -15.37, 20.62]}
+            position={[18, -15.37, 20.62]}
             rotation={[-Math.PI / 2, 0, -0.32]}
           >
             <mesh
@@ -282,12 +307,12 @@ export default function Model({ scroll, ...props }) {
         <group
           onClick={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/three-arena' : '/'), 600);
+            setTimeout(() => setLocation(toggle ? '/three-arena' : '/'), 800);
             console.log(`click model! three arena`);
           }}
         >
           <group
-            position={[33.65, 11.08, -13.34]}
+            position={[33.65, 11.08, -17.34]}
             rotation={[-Math.PI, 0.6, -Math.PI]}
             scale={[0.2, 0.2, 0.2]}
           >
@@ -368,12 +393,12 @@ export default function Model({ scroll, ...props }) {
         <group
           onClick={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/electric' : '/'), 600);
+            setTimeout(() => setLocation(toggle ? '/electric' : '/'), 800);
             console.log(`click model! electric`);
           }}
         >
           <group
-            position={[20.71, 17.21, -29.71]}
+            position={[12.71, 22.21, -32.71]}
             scale={[3, 3, 3]}
             rotation={[-1.44, -0.15, -0.77]}
           >
@@ -393,7 +418,7 @@ export default function Model({ scroll, ...props }) {
         <UselessCubes
           onClickEvent={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/useless-web' : '/'), 600);
+            setTimeout(() => setLocation(toggle ? '/useless-web' : '/'), 800);
             console.log(`click model! useless web`);
           }}
         />
@@ -401,7 +426,7 @@ export default function Model({ scroll, ...props }) {
         <group
           onClick={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/nook-inc' : '/'), 600);
+            setTimeout(() => setLocation(toggle ? '/nook-inc' : '/'), 800);
             console.log(`click model! nook inc`);
           }}
         >
@@ -572,7 +597,7 @@ export default function Model({ scroll, ...props }) {
         <group
           onClick={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 600);
+            setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 800);
             console.log(`click model! task repo`);
           }}
         >

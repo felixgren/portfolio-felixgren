@@ -19,6 +19,8 @@ const DevNav = styled(animated.div)`
   left: 5px;
   top: 5px;
   pointer-events: auto;
+  margin-left: 36px;
+  transition: 0.2s;
 `;
 
 const HeadlineWrapper = styled(animated.div)`
@@ -31,7 +33,6 @@ const Headline = styled(animated.div)`
   position: relative;
   width: 100%;
   will-change: transform;
-  overflow: hidden;
 `;
 
 const TextStyle = styled.div`
@@ -39,18 +40,20 @@ const TextStyle = styled.div`
   font-weight: 800;
   letter-spacing: -3px;
   line-height: 1em;
-  margin: 24px 14px;
+  margin: 32px 50px;
+  z-index: 10;
+  position: relative;
 `;
 
 const headlineContent = {
   '/': ['Felix Gren'],
-  '/nintendo-event': ['Nintendo Event', 'its a me, mario!'],
-  '/hacker-news': ['Hacker News', 'I bloody love it', 'hackin the news!'],
-  '/three-arena': ['Three Arena', 'i looove', 'three arena'],
-  '/electric': ['Electric', 'i looove', 'electric'],
-  '/useless-web': ['Useless Web', 'i looove', 'useless things'],
-  '/nook-inc': ['Nook Inc', 'i looove', 'nooks'],
-  '/task-repo': ['Task Repo', 'i looove', 'tasks'],
+  '/nintendo-event': ['React'],
+  '/hacker-news': ['Laravel, Vue', 'Fractal, AWS, Tailwind'],
+  '/three-arena': ['Three.js, Socket.io', 'Express, Octrees, Shaders'],
+  '/electric': ['Javascript', 'HTML & CSS'],
+  '/useless-web': ['Three.js'],
+  '/nook-inc': ['JavaScript', 'HTML & CSS'],
+  '/task-repo': ['Laravel'],
 };
 
 function renderSwitch(param) {
@@ -58,28 +61,28 @@ function renderSwitch(param) {
     case '/':
       return [{ background: 'transparent' }, { text: '#272730' }];
     case '/nintendo-event':
-      return [{ background: '#FF0000' }, { text: '#fdbf00' }];
+      return [{ background: '#ff0000' }, { text: '#fdc600' }];
     case '/hacker-news':
-      return [{ background: '#FF6600' }, { text: 'black' }];
+      return [{ background: '#ff6600' }, { text: 'black' }];
     case '/three-arena':
-      return [{ background: 'grey' }, { text: 'white' }];
+      return [{ background: '#c8cdde' }, { text: 'darkred' }];
     case '/electric':
-      return [{ background: 'tomato' }, { text: 'black' }];
+      return [{ background: 'royalblue' }, { text: 'aquamarine' }];
     case '/useless-web':
-      return [{ background: 'tomato' }, { text: 'black' }];
+      return [{ background: 'blueviolet' }, { text: 'lime' }];
     case '/nook-inc':
-      return [{ background: 'tomato' }, { text: 'black' }];
+      return [{ background: '#80ffff' }, { text: '#ff2655' }];
     case '/task-repo':
-      return [{ background: 'tomato' }, { text: 'black' }];
+      return [{ background: '#2200ab' }, { text: '#9019ff' }];
     default:
-      return [{ background: 'orange' }, { text: 'pink' }];
+      return [{ background: 'transparent' }, { text: 'pink' }];
   }
 }
 
 function TempNav(props) {
   return (
     <>
-      <DevNav {...props}>
+      <DevNav id="dev-nav" {...props}>
         <Link to="/">None</Link>
         <Link id="nintendo-event-link" to="/nintendo-event">
           Nintendo Event

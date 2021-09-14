@@ -9,6 +9,7 @@ import StaticContent from './StaticContent';
 import Model from './Model';
 import Text from './Text';
 import DetailedText from './DetailedText';
+import Fade from './Fade';
 
 function App() {
   const scrollRef = useRef();
@@ -25,7 +26,7 @@ function App() {
         }}
       >
         <ScrollContainer scroll={scroll}>
-          <Content />
+          <Content scroll={scroll} />
         </ScrollContainer>
 
         <StaticContent />
@@ -42,11 +43,17 @@ function App() {
           saturation={1} // Saturation 0-1 (default=0)
           fade={true} // Faded dots (default=false)
         />
+
         <ambientLight intensity={0.1} />
+
         <directionalLight color="red" position={[0, 0, 5]} />
       </Canvas>
+
       <Text ref={scrollRef} scroll={scroll} />
+
       <DetailedText />
+
+      <Fade />
     </div>
   );
 }

@@ -12,6 +12,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
     <div style={{ height: `600vh` }} className="text">
       {/* <h2>welcome</h2> */}
     </div>
+
     <div style={{ height: `80vh` }} className="text">
       <h2 id="nintendo-event">Nintendo Event</h2>
       <p>
@@ -25,7 +26,27 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         just way more fun that I thought it would be. I really enjoyed creating
         this website.
       </p>
+
+      <div style={{ marginTop: '36px' }}>
+        <a
+          href="https://marioevent.live"
+          rel="noreferrer"
+          target="_blank"
+          class="project-buttons"
+        >
+          Go to Nintendo Event
+        </a>
+        <a
+          href="https://github.com/felixgren/nintendo-event"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Source Code
+        </a>
+      </div>
     </div>
+
     <div style={{ height: `80vh` }} className="text">
       <h2 id="hacker-news">Hacker News</h2>
       <p>
@@ -35,7 +56,19 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         Vue. The website also features user profiles with expression through the
         BIO, the total accumulated likes, post history and of course an avatar.
       </p>
+
+      <div style={{ marginTop: '36px' }}>
+        <a
+          href="https://github.com/felixgren/hacker-news"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Source Code
+        </a>
+      </div>
     </div>
+
     <div style={{ height: `80vh` }} className="text">
       <h2 id="three-arena">Three Arena</h2>
       <p>
@@ -48,7 +81,27 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         </a>
         .
       </p>
+
+      <div style={{ marginTop: '36px' }}>
+        <a
+          href="https://shootyourfriends.com"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Go to Three Arena
+        </a>
+        <a
+          href="https://github.com/felixgren/three-arena"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Source Code
+        </a>
+      </div>
     </div>
+
     <div style={{ height: `80vh` }} className="text">
       <h2 id="electric">Electric</h2>
       <p>
@@ -56,7 +109,27 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         web developers and computer graphics designers at YRGO. Desgined in
         Figma, by us the developers.
       </p>
+
+      <div style={{ marginTop: '36px' }}>
+        <a
+          href="https://flightoftomorrow.com"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Go to Electric
+        </a>
+        <a
+          href="https://github.com/felixgren/electric"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Source Code
+        </a>
+      </div>
     </div>
+
     <div style={{ height: `80vh` }} className="text">
       <h2 id="useless-web">Useless Web</h2>
       <p>
@@ -65,7 +138,27 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         introduction to three.js, I mean taking the hello world of three.js and
         turning it into a dance party? Hell yeuh.
       </p>
+
+      <div style={{ marginTop: '36px' }}>
+        <a
+          href="https://uselesscube.com"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Go to Useless Web
+        </a>
+        <a
+          href="https://github.com/felixgren/useless-web"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Source Code
+        </a>
+      </div>
     </div>
+
     <div style={{ height: `80vh` }} className="text">
       <h2 id="nook-inc">Nook Inc</h2>
       <p>
@@ -75,11 +168,43 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         animation play over and over, cutting some stupid tree, catching some
         dumb moth, basically a bad version of minecraft.
       </p>
+
+      <div style={{ marginTop: '36px' }}>
+        <a
+          href="https://felixgren.github.io/nook-inc"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Go to Nook Inc
+        </a>
+        <a
+          href="https://github.com/felixgren/nook-inc"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Source Code
+        </a>
+      </div>
     </div>
+
     <div style={{ height: `160vh` }} className="text">
       <h2 id="task-repo">Task Repo</h2>
       <p>Taaask repo ooooor maybe fake news...</p>
+
+      <div style={{ marginTop: '36px' }}>
+        <a
+          href="https://github.com/felixgren/assignment-repo"
+          target="_blank"
+          rel="noreferrer"
+          class="project-buttons"
+        >
+          Source Code
+        </a>
+      </div>
     </div>
+
     <div style={{ height: `400vh` }} className="contact-wrapper">
       <div className="contact-text">
         <h2>Reach out, say hi.</h2>
@@ -88,6 +213,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         </p>
       </div>
     </div>
+
     <span className="github">
       <a href="https://github.com/felixgren" target="_blank" rel="noreferrer">
         <svg

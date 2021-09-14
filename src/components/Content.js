@@ -1,15 +1,27 @@
-import React from 'react';
-import { useThree } from '@react-three/fiber';
+import React, { useEffect, useState } from 'react';
+import { useThree, useFrame } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import './App.css';
 
-function Content() {
+function Content({ scroll }) {
   const viewport = useThree((state) => state.viewport);
-  console.log(viewport.width);
+  const [toggle, setToggle] = useState(true);
+
+  useFrame(() => {
+    if (scroll.current > 0.2 && toggle) {
+      setToggle(false);
+      console.log('hello');
+    } else if (scroll.current < 0.2 && !toggle) {
+      setToggle(true);
+      console.log('hehehe');
+    }
+  });
+
   return (
     <>
       <Text
-        color={'#FFFFFF'}
+        color={toggle ? '#FFFFFF' : '#272730'}
+        // fillOpacity={0.3}
         fontSize={viewport.width / 1.8}
         maxWidth={200}
         lineHeight={1}
