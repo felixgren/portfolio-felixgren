@@ -50,7 +50,6 @@ function App() {
       </Canvas>
       <Text ref={scrollRef} scroll={scroll} />
       <DetailedText />
-      {/* <Nav style={{ color: props.color }} /> */}
     </div>
   );
 }

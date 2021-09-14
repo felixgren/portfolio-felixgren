@@ -30,7 +30,7 @@ export function Cubes() {
   const CubeGroup = useRef();
   const [hovering, setHover] = useState(false);
   useFrame((state, delta) => {
-    const time = state.clock.getElapsedTime();
+    // const time = state.clock.getElapsedTime();
     // CubeGroup.current.rotation.x = time * 0.2;
     // CubeGroup.current.rotation.y = time * 0.2;
     // CubeGroup.current.rotation.z = time * 0.2;

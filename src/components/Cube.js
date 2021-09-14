@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import React, { useState, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';

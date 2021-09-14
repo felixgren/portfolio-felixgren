@@ -3,15 +3,11 @@ import { useThree } from '@react-three/fiber';
 import { Text } from '@react-three/drei';
 import './App.css';
 
-import Cube from './Cube';
-
 function Content() {
   const viewport = useThree((state) => state.viewport);
   console.log(viewport.width);
   return (
     <>
-      {/* <Cube position={[0, -2, -20]} />
-      <Cube position={[0, -viewport.height / 2, -20]} /> */}
       <Text
         color={'#FFFFFF'}
         fontSize={viewport.width / 1.1}

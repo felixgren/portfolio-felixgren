@@ -62,13 +62,13 @@ function renderSwitch(param) {
       return [{ background: '#FF6600' }, { text: 'black' }];
     case '/three-arena':
       return [{ background: 'grey' }, { text: 'white' }];
-    case '/hacker-news':
-      return [{ background: 'tomato' }, { text: 'black' }];
     case '/electric':
       return [{ background: 'tomato' }, { text: 'black' }];
     case '/useless-web':
       return [{ background: 'tomato' }, { text: 'black' }];
     case '/nook-inc':
+      return [{ background: 'tomato' }, { text: 'black' }];
+    case '/task-repo':
       return [{ background: 'tomato' }, { text: 'black' }];
     default:
       return [{ background: 'orange' }, { text: 'pink' }];
