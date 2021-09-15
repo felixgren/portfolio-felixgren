@@ -121,7 +121,7 @@ export function Cubes() {
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
       scale={[4, 4, 4]}
-      position={[-12, 26, -40]}
+      position={[-10, 26, -40]}
       rotation={[0, -15, 0]}
     >
       <Cube position={[0, 2, 0]} />

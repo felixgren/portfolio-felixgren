@@ -10,6 +10,7 @@ import Model from './Model';
 import Text from './Text';
 import DetailedText from './DetailedText';
 import Fade from './Fade';
+import StartFade from './StartFade';
 
 function App() {
   const scrollRef = useRef();
@@ -52,6 +53,8 @@ function App() {
       <Text ref={scrollRef} scroll={scroll} />
 
       <DetailedText />
+
+      <StartFade />
 
       <Fade />
     </div>

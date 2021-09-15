@@ -17,7 +17,8 @@ const Container = styled(animated.div)`
 const DevNav = styled(animated.div)`
   position: absolute;
   left: 5px;
-  top: 5px;
+  top: 12px;
+  font-size: 18px;
   pointer-events: auto;
   margin-left: 36px;
   transition: 0.2s;
@@ -36,13 +37,16 @@ const Headline = styled(animated.div)`
 `;
 
 const TextStyle = styled.div`
-  font-size: 3em;
+  font-size: 2.8em;
   font-weight: 800;
-  letter-spacing: -3px;
+  letter-spacing: -2px;
   line-height: 1em;
-  margin: 32px 50px;
-  z-index: 10;
+  margin: 40px 50px;
   position: relative;
+
+  @media only screen and (max-width: 600px) {
+    margin: 40px 0;
+  }
 `;
 
 const headlineContent = {
@@ -63,7 +67,7 @@ function renderSwitch(param) {
     case '/nintendo-event':
       return [{ background: '#ff0000' }, { text: '#fdc600' }];
     case '/hacker-news':
-      return [{ background: '#ff6600' }, { text: 'black' }];
+      return [{ background: '#ff6600' }, { text: 'antiquewhite' }];
     case '/three-arena':
       return [{ background: '#c8cdde' }, { text: 'darkred' }];
     case '/electric':
@@ -83,7 +87,7 @@ function TempNav(props) {
   return (
     <>
       <DevNav id="dev-nav" {...props}>
-        <Link to="/">None</Link>
+        {/* <Link to="/">None</Link> */}
         <Link id="nintendo-event-link" to="/nintendo-event">
           Nintendo Event
         </Link>

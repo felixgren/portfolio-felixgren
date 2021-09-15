@@ -63,8 +63,9 @@ export default function Model({ scroll, ...props }) {
     if (locationId !== '') {
       const currentLocation = document.querySelector(`#${locationId}`);
       scrollElement.scrollTop = currentLocation.offsetTop - 250;
-      const currentLink = document.querySelector(`#${locationId}-link`);
-      currentLink.style.display = 'initial';
+      // Enable link after seeing project
+      // const currentLink = document.querySelector(`#${locationId}-link`);
+      // currentLink.style.display = 'initial';
       scrollElement.style.webkitMaskImage = 'none';
 
       setTimeout(
@@ -81,7 +82,7 @@ export default function Model({ scroll, ...props }) {
   } else {
     scrollElement.style.overflow = 'auto';
     scrollElement.style.webkitMaskImage =
-      'linear-gradient(to bottom, black 30%, transparent 60%)';
+      'linear-gradient(to bottom, black 40%, transparent 70%)';
 
     setTimeout(
       () =>
@@ -108,10 +109,6 @@ export default function Model({ scroll, ...props }) {
     state.camera.getWorldPosition(worldCameraPosition);
     state.camera.getWorldDirection(worldCameraDirection);
     state.camera.getWorldQuaternion(worldCameraQuaternion);
-
-    // console.log(worldCameraPosition);
-    // console.log(worldCameraDirection);
-    // console.log(worldCameraQuaternion);
 
     const step = 5 * delta;
     state.camera.fov = THREE.MathUtils.lerp(
@@ -286,9 +283,8 @@ export default function Model({ scroll, ...props }) {
             setToggle(!toggle);
             setTimeout(
               () => setLocation(toggle ? '/nintendo-event' : '/'),
-              800
+              500
             );
-            console.log(`click model! mario`);
           }}
         >
           <group
@@ -307,8 +303,7 @@ export default function Model({ scroll, ...props }) {
         <group
           onClick={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/three-arena' : '/'), 800);
-            console.log(`click model! three arena`);
+            setTimeout(() => setLocation(toggle ? '/three-arena' : '/'), 500);
           }}
         >
           <group
@@ -393,8 +388,7 @@ export default function Model({ scroll, ...props }) {
         <group
           onClick={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/electric' : '/'), 800);
-            console.log(`click model! electric`);
+            setTimeout(() => setLocation(toggle ? '/electric' : '/'), 500);
           }}
         >
           <group
@@ -418,20 +412,18 @@ export default function Model({ scroll, ...props }) {
         <UselessCubes
           onClickEvent={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/useless-web' : '/'), 800);
-            console.log(`click model! useless web`);
+            setTimeout(() => setLocation(toggle ? '/useless-web' : '/'), 500);
           }}
         />
         {/* nook inc model */}
         <group
           onClick={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/nook-inc' : '/'), 800);
-            console.log(`click model! nook inc`);
+            setTimeout(() => setLocation(toggle ? '/nook-inc' : '/'), 500);
           }}
         >
           <group
-            position={[-31.34, 28.14, -21.87]}
+            position={[-31.34, 28.14, -12.87]}
             rotation={[-Math.PI, -1.05, -Math.PI]}
             scale={[0.05, 0.05, 0.05]}
           >
@@ -597,8 +589,7 @@ export default function Model({ scroll, ...props }) {
         <group
           onClick={() => {
             setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 800);
-            console.log(`click model! task repo`);
+            setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 500);
           }}
         >
           <mesh

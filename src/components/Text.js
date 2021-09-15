@@ -205,12 +205,38 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       </div>
     </div>
 
-    <div style={{ height: `400vh` }} className="contact-wrapper">
+    <div style={{ height: `200vh` }} className="contact-wrapper">
+      <div className="knowledge-text">
+        <div>
+          <p>React</p>
+          <p>ThreeJS</p>
+          <p>Three Fiber</p>
+          <p>TypeScript</p>
+          <p>Vue</p>
+        </div>
+
+        <div>
+          <p>Laravel</p>
+          <p>PHP</p>
+          <p>C#</p>
+          <p>Node</p>
+          <p>Docker</p>
+        </div>
+
+        <div>
+          <p>JavaScript</p>
+          <p>HTML & CSS</p>
+          <p>Wordpress</p>
+          <p>Figma</p>
+          <p>SQL</p>
+        </div>
+      </div>
+    </div>
+
+    <div style={{ height: `200vh` }} className="contact-wrapper">
       <div className="contact-text">
         <h2>Reach out, say hi.</h2>
-        <p>
-          <a href="mailto:hello@felixgren.com">hello@felixgren.com</a>
-        </p>
+        <a href="mailto:hello@felixgren.com">hello@felixgren.com</a>
       </div>
     </div>
 
