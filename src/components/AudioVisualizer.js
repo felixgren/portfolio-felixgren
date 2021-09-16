@@ -67,6 +67,16 @@ async function createAudio(url) {
   source.connect(analyser);
   analyser.connect(gain);
   const data = new Uint8Array(analyser.frequencyBinCount);
+
+  const resumeAudio = () => {
+    context.resume();
+    document.removeEventListener('click', resumeAudio);
+    console.log('AudioContext resumed');
+  };
+  if (context.state === 'suspended') {
+    document.addEventListener('click', resumeAudio);
+  }
+
   return {
     context,
     source,

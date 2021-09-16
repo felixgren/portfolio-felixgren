@@ -1,6 +1,9 @@
 {
-    "recommendations": [
-        "esbenp.prettier-vscode",
-        "vscode-icons-team.vscode-icons"
-    ]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "vscode-icons-team.vscode-icons",
+    "jpoissonnier.vscode-styled-components",
+    "slevesque.shader",
+    "cesium.gltf-vscode"
+  ]
 }

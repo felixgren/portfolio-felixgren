@@ -9,13 +9,12 @@ import { useFrame } from '@react-three/fiber';
 import { useLocation } from 'wouter';
 import UselessCubes from './UselessCubes';
 
-const color = new THREE.Color();
-
 export default function Model({ scroll, ...props }) {
-  const t = useRef(0);
+  const time = useRef(0);
   const group = useRef();
   const cameraRef = useRef();
   const groupCameraRef = useRef();
+  const color = new THREE.Color();
   const defaultPos = new THREE.Vector3(0, 0, 0);
   const defaultQuart = new THREE.Quaternion(0, 0, 0, 1);
   const localCamPosVec = new THREE.Vector3();
@@ -42,12 +41,6 @@ export default function Model({ scroll, ...props }) {
   const [hovered, set] = useState();
   const [location, setLocation] = useLocation('/');
 
-  const extras = {
-    receiveShadow: true,
-    castShadow: true,
-    'material-envMapIntensity': 0.2,
-  };
-
   const scrollStart = 0;
   const transitionPhase = 0.25;
   const secondPhase = 0.3;
@@ -58,6 +51,12 @@ export default function Model({ scroll, ...props }) {
   const scrollElement = document.querySelector('.scroll');
   const projectButtons = document.querySelectorAll('.project-buttons');
   const devNav = document.querySelector('#dev-nav');
+
+  const extras = {
+    receiveShadow: true,
+    castShadow: true,
+    'material-envMapIntensity': 0.2,
+  };
 
   if (!toggle) {
     if (locationId !== '') {
@@ -71,9 +70,11 @@ export default function Model({ scroll, ...props }) {
       setTimeout(
         () =>
           Array.from(projectButtons).map((projectButton) => {
-            projectButton.style.opacity = '1';
-            projectButton.style.pointerEvents = 'initial';
-            devNav.style.opacity = '1';
+            return (
+              (projectButton.style.opacity = '1'),
+              (projectButton.style.pointerEvents = 'initial'),
+              (devNav.style.opacity = '1')
+            );
           }),
         100
       );
@@ -87,9 +88,11 @@ export default function Model({ scroll, ...props }) {
     setTimeout(
       () =>
         Array.from(projectButtons).map((projectButton) => {
-          projectButton.style.opacity = '0';
-          projectButton.style.pointerEvents = 'none';
-          devNav.style.opacity = '0';
+          return (
+            (projectButton.style.opacity = '0'),
+            (projectButton.style.pointerEvents = 'none'),
+            (devNav.style.opacity = '0')
+          );
         }),
       600
     );
@@ -177,9 +180,9 @@ export default function Model({ scroll, ...props }) {
       cameraRef.current.rotation.set(-Math.PI / 2, 0, 0);
       actions['CameraAction.005'].play();
       mixer.setTime(
-        (t.current = THREE.MathUtils.lerp(
-          t.current,
-          // Calculate scroll between scrollStart (0.5) and scrollEnd (1)
+        (time.current = THREE.MathUtils.lerp(
+          time.current,
+          // Calculate scroll between scrollStart (0.3) and scrollEnd (0.7)
           THREE.MathUtils.mapLinear(
             scroll.current,
             secondPhase,
@@ -211,8 +214,10 @@ export default function Model({ scroll, ...props }) {
       actions['CameraAction.005'].isRunning() &&
       !isThirdPhase
     ) {
-      mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 5.8, 0.05)));
-      if (t.current >= 5.75) {
+      mixer.setTime(
+        (time.current = THREE.MathUtils.lerp(time.current, 5.8, 0.05))
+      );
+      if (time.current >= 5.75) {
         mixer.stopAllAction();
         state.camera.quaternion.copy(animEndQuaternion);
         groupCameraRef.current.position.copy(animEndPosition);
@@ -220,10 +225,12 @@ export default function Model({ scroll, ...props }) {
     }
     // Prep for phase 2 -> phase 1
     else if (actions['CameraAction.005'].isRunning()) {
-      mixer.setTime((t.current = THREE.MathUtils.lerp(t.current, 0, 0.05)));
+      mixer.setTime(
+        (time.current = THREE.MathUtils.lerp(time.current, 0, 0.05))
+      );
 
       // Switch to phase 1 when camera in position
-      if (t.current < 0.02 && actions['CameraAction.005'].isRunning()) {
+      if (time.current < 0.02 && actions['CameraAction.005'].isRunning()) {
         actions['CameraAction.005'].stop();
         groupCameraRef.current.position.copy(animStartPosition);
         cameraRef.current.rotation.setFromQuaternion(animStartQuaternion);

@@ -12,6 +12,15 @@ function Sound({ url }) {
   const [listener] = useState(() => new THREE.AudioListener());
   const buffer = useLoader(THREE.AudioLoader, url);
 
+  const resumeAudio = () => {
+    sound.current.context.resume();
+    document.removeEventListener('click', resumeAudio);
+    console.log('AudioContext resumed');
+  };
+  if (sound.current && sound.current.context.state === 'suspended') {
+    document.addEventListener('click', resumeAudio);
+  }
+
   useEffect(() => {
     sound.current.setBuffer(buffer);
     sound.current.setRefDistance(1);
@@ -32,87 +41,11 @@ export function Cubes() {
   const [hovering, setHover] = useState(false);
 
   useFrame((state, delta) => {
-    // const time = state.clock.getElapsedTime();
-    // CubeGroup.current.rotation.x = time * 0.2;
-    // CubeGroup.current.rotation.y = time * 0.2;
-    // CubeGroup.current.rotation.z = time * 0.2;
-
     CubeGroup.current.rotation.z = THREE.Math.lerp(
       CubeGroup.current.rotation.z, // current
       hovering ? 10 : 0, // target
-      0.05 * delta // amount
+      0.05 * delta
     );
-
-    // for (let i = 0; i < CubeGroup.current.children.length; i++) {
-    //   CubeGroup.current.children[i].rotation.x = THREE.Math.lerp(
-    //     CubeGroup.current.children[i].rotation.x, // current
-    //     hovering ? 5 + i : 0, // target
-    //     0.05 * delta // amount
-    //   );
-    // }
-
-    // if (hovering) {
-    //   for (let i = 0; i < CubeGroup.current.children.length; i++) {
-    //     CubeGroup.current.children[i].scale.x = THREE.Math.lerp(
-    //       CubeGroup.current.children[i].scale.x, // current
-    //       Math.abs(Math.tan(time * 0.5) * 0.5), // target
-    //       0.001 * time // amount
-    //     );
-    //     CubeGroup.current.children[i].scale.z = THREE.Math.lerp(
-    //       CubeGroup.current.children[i].scale.z, // current
-    //       time * 0.22 * 1.1, // target
-    //       0.001 * time // amount
-    //     );
-    //   }
-    // } else {
-    //   for (let i = 0; i < CubeGroup.current.children.length; i++) {
-    //     CubeGroup.current.children[i].scale.x = THREE.Math.lerp(
-    //       CubeGroup.current.children[i].scale.x, // current
-    //       0.5, // target
-    //       0.001 * time // amount
-    //     );
-    //     CubeGroup.current.children[i].scale.z = THREE.Math.lerp(
-    //       CubeGroup.current.children[i].scale.z, // current
-    //       0.5, // target
-    //       0.001 * time // amount
-    //     );
-    //   }
-    // }
-
-    // if (hovering) {
-    //   for (let i = 0; i < CubeGroup.current.children.length; i++) {
-    //     CubeGroup.current.children[i].scale.x = THREE.Math.lerp(
-    //       CubeGroup.current.children[i].scale.x, // current
-    //       Math.abs(Math.tan(time * 0.5) * 0.5), // target
-    //       0.001 * time // amount
-    //     );
-    //     CubeGroup.current.children[i].scale.z = THREE.Math.lerp(
-    //       CubeGroup.current.children[i].scale.z, // current
-    //       time * 0.22 * 1.1, // target
-    //       0.001 * time // amount
-    //     );
-    //   }
-    // } else {
-    //   for (let i = 0; i < CubeGroup.current.children.length; i++) {
-    //     CubeGroup.current.children[i].scale.x = THREE.Math.lerp(
-    //       CubeGroup.current.children[i].scale.x, // current
-    //       0.5, // target
-    //       0.001 * time // amount
-    //     );
-    //     CubeGroup.current.children[i].scale.z = THREE.Math.lerp(
-    //       CubeGroup.current.children[i].scale.z, // current
-    //       0.5, // target
-    //       0.001 * time // amount
-    //     );
-    //   }
-    // }
-
-    // CubeGroup.current.scale.y = Math.tan(time * 0.22) * 1.1;
-    // CubeGroup.current.scale.x = Math.tan(time * 0.22) * 1.1;
-
-    // defaults
-    // CubeGroup.scale.y = Math.sin(time * 0.22) * 1.1;
-    // CubeGroup.scale.x = Math.sin(time * 0.22) * 1.1;
   });
 
   return (

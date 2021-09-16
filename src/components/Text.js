@@ -32,7 +32,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://marioevent.live"
           rel="noreferrer"
           target="_blank"
-          class="project-buttons"
+          className="project-buttons"
         >
           Go to Nintendo Event
         </a>
@@ -40,7 +40,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://github.com/felixgren/nintendo-event"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Source Code
         </a>
@@ -62,7 +62,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://github.com/felixgren/hacker-news"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Source Code
         </a>
@@ -87,7 +87,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://shootyourfriends.com"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Go to Three Arena
         </a>
@@ -95,7 +95,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://github.com/felixgren/three-arena"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Source Code
         </a>
@@ -115,7 +115,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://flightoftomorrow.com"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Go to Electric
         </a>
@@ -123,7 +123,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://github.com/felixgren/electric"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Source Code
         </a>
@@ -144,7 +144,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://uselesscube.com"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Go to Useless Web
         </a>
@@ -152,7 +152,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://github.com/felixgren/useless-web"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Source Code
         </a>
@@ -174,7 +174,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://felixgren.github.io/nook-inc"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Go to Nook Inc
         </a>
@@ -182,7 +182,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://github.com/felixgren/nook-inc"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Source Code
         </a>
@@ -198,7 +198,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
           href="https://github.com/felixgren/assignment-repo"
           target="_blank"
           rel="noreferrer"
-          class="project-buttons"
+          className="project-buttons"
         >
           Source Code
         </a>

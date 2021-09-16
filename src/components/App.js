@@ -5,7 +5,6 @@ import './App.css';
 
 import Content from './Content';
 import ScrollContainer from './ScrollContainer';
-import StaticContent from './StaticContent';
 import Model from './Model';
 import Text from './Text';
 import DetailedText from './DetailedText';
@@ -29,8 +28,6 @@ function App() {
         <ScrollContainer scroll={scroll}>
           <Content scroll={scroll} />
         </ScrollContainer>
-
-        <StaticContent />
 
         <Suspense fallback={null}>
           <Model scroll={scroll} />

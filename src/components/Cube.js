@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 
 function Cube(props) {
-  const myMesh = useRef();
+  const cube = useRef();
   const [active, setActive] = useState(false);
   const [hovering, setHover] = useState(false);
 
@@ -14,23 +14,15 @@ function Cube(props) {
 
   useFrame(({ clock }) => {
     const time = clock.getElapsedTime();
-    myMesh.current.rotation.x = time;
+    cube.current.rotation.x = time;
 
-    myMesh.current.position.z = Math.sin(
+    cube.current.position.z = Math.sin(
       time * 3 +
         Math.sqrt(
-          myMesh.current.position.x * myMesh.current.position.x +
-            myMesh.current.position.y * myMesh.current.position.y
+          cube.current.position.x * cube.current.position.x +
+            cube.current.position.y * cube.current.position.y
         )
     );
-
-    // myMesh.current.position.z = Math.tan(
-    //   time * 0.1 +
-    //     Math.sqrt(
-    //       myMesh.current.position.x * myMesh.current.position.x +
-    //         myMesh.current.position.y * myMesh.current.position.y
-    //     )
-    // );
   });
 
   return (
@@ -42,7 +34,7 @@ function Cube(props) {
       }}
       onPointerOver={() => setHover(true)}
       onPointerOut={() => setHover(false)}
-      ref={myMesh}
+      ref={cube}
     >
       <boxBufferGeometry args={[1, 1, 1]} />
       <meshPhongMaterial color={hovering ? 'red' : 'royalblue'} />
