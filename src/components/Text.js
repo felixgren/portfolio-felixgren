@@ -20,7 +20,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         page, I chose the new Super Mario 3D World + Bowsers Fury game. Built
         and designed from scratch in Figma by me.
       </p>
-      <p>
+      <p className="hide-mobile">
         Now this is a game I can get behind, it’s fresh, varied, and to the
         point. Fury is truly respectable sucessor to Odyssey, and 3D World is
         just way more fun than I thought it would be. I really enjoyed creating

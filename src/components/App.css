@@ -217,6 +217,10 @@ canvas {
 }
 
 @media only screen and (max-width: 600px) {
+  .hide-mobile {
+    display: none;
+  }
+
   .text {
     padding: 12px;
     line-height: 1.5em;
