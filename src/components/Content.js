@@ -78,7 +78,7 @@ function Content({ scroll }) {
           font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
           anchorX="center"
           anchorY="middle"
-          position={[1, -viewport.width / 15, -10]}
+          position={[-1, -viewport.width / 15, -10]}
         >
           Knowledge & Skills
         </Text>

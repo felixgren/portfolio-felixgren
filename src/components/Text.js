@@ -17,13 +17,13 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       <h2 id="nintendo-event">Nintendo Event</h2>
       <p>
         A project about creating an asthetically pleasing and enticing event
-        page, for the new Super Mario 3D World + Bowsers Fury game. Built and
-        designed from scratch in Figma by me.
+        page, I chose the new Super Mario 3D World + Bowsers Fury game. Built
+        and designed from scratch in Figma by me.
       </p>
       <p>
         Now this is a game I can get behind, it’s fresh, varied, and to the
-        point. Fury is truly respectable sucessor to Odyssey, and 3D world is
-        just way more fun that I thought it would be. I really enjoyed creating
+        point. Fury is truly respectable sucessor to Odyssey, and 3D World is
+        just way more fun than I thought it would be. I really enjoyed creating
         this website.
       </p>
 
@@ -54,7 +54,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         It has features such as login, likes, creation, deletion & editing of
         posts and comments, with the former being all completely live, built in
         Vue. The website also features user profiles with expression through the
-        BIO, the total accumulated likes, post history and of course an avatar.
+        BIO, the total accumulated likes, post history and of course avatars.
       </p>
 
       <div style={{ marginTop: '36px' }}>
@@ -73,8 +73,8 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       <h2 id="three-arena">Three Arena</h2>
       <p>
         A game project utilizing three.js as the 3D game engine. It is a first
-        person shooter which features an immersive fun area in which to kill
-        your friends in, multiplayer mode stresstested for the first time by my
+        person shooter which features a sweet arena in which to kill your
+        friends in. Multiplayer mode stresstested for the first time by my
         entire class at once. A collaboration between me and{' '}
         <a href="https://pnpjss.com/" target="_blank" rel="noreferrer">
           Lucas
@@ -106,7 +106,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       <h2 id="electric">Electric</h2>
       <p>
         A landing page for a futuristic vehicle, a collaboration project between
-        web developers and computer graphics designers at YRGO. Desgined in
+        web developers and computer graphics designers at YRGO. Designed in
         Figma, by us the developers.
       </p>
 
@@ -135,8 +135,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       <p>
         A very fun project where the prime directive was for it to be as useless
         as possible, it features cubes dancing around. It was a nice
-        introduction to three.js, I mean taking the hello world of three.js and
-        turning it into a dance party? Hell yeuh.
+        introduction to three.js.
       </p>
 
       <div style={{ marginTop: '36px' }}>
@@ -164,9 +163,9 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       <p>
         My first web project which I created before starting my studies.
         Honestly though, this game gets boring way too quick. I really wanted to
-        enjoy it but lets be honest, why do you enjoy watching the same
+        enjoy it but lets be honest; why would you enjoy watching the same
         animation play over and over, cutting some stupid tree, catching some
-        dumb moth, basically a bad version of minecraft.
+        dumb moth. Basically a bad version of minecraft.
       </p>
 
       <div style={{ marginTop: '36px' }}>
@@ -191,7 +190,9 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
 
     <div style={{ height: `160vh` }} className="text">
       <h2 id="task-repo">Task Repo</h2>
-      <p>Taaask repo ooooor maybe fake news...</p>
+      <p>
+        This is another Laravel project, this one was a collaborative effort
+      </p>
 
       <div style={{ marginTop: '36px' }}>
         <a

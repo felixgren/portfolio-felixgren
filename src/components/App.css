@@ -75,6 +75,12 @@ a.project-buttons:hover {
 canvas {
   z-index: 10;
   position: relative;
+  mask: linear-gradient(135deg, transparent 5px, black 80%) top left,
+    linear-gradient(-135deg, transparent 5px, black 50%) top right,
+    linear-gradient(-45deg, transparent 5px, black 20%) bottom right,
+    linear-gradient(45deg, transparent 5px, black 80%) bottom left;
+  mask-size: 50% 50%;
+  mask-repeat: no-repeat;
 }
 
 .scroll {
