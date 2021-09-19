@@ -75,9 +75,10 @@ a.project-buttons:hover {
 canvas {
   z-index: 10;
   position: relative;
-  mask: linear-gradient(135deg, transparent 5px, black 80%) top left,
-    linear-gradient(-135deg, transparent 5px, black 50%) top right,
-    linear-gradient(-45deg, transparent 5px, black 20%) bottom right,
+
+  mask: linear-gradient(170deg, transparent 0%, black 0%) top left,
+    linear-gradient(-135deg, transparent -50%, #000000 40%) top right,
+    linear-gradient(-45deg, transparent 0%, black 30%) bottom right,
     linear-gradient(45deg, transparent 5px, black 80%) bottom left;
   mask-size: 50% 50%;
   mask-repeat: no-repeat;
@@ -118,6 +119,10 @@ canvas {
   font-weight: 300;
 }
 
+.text > p:last-of-type {
+  margin-bottom: 32px;
+}
+
 .text > p > a {
   opacity: 0.5;
   line-height: 1.5em;
@@ -128,9 +133,9 @@ canvas {
   /* text-decoration: none; */
 }
 
-.contact-wrapper {
-  /* somethingsomething */
-}
+/* .contact-wrapper { */
+/* somethingsomething */
+/* } */
 
 .contact-text {
   position: sticky;
@@ -155,7 +160,7 @@ canvas {
 
 .contact-text > a {
   color: white;
-  font-weight: 100;
+  font-weight: 200;
   font-size: 1.8em;
   margin-left: 0;
 }
@@ -202,7 +207,7 @@ canvas {
 
 @media only screen and (max-width: 800px) {
   .text > h2 {
-    font-size: 2.2em;
+    font-size: 2.5em;
     letter-spacing: 0.04em;
   }
   .github-logo {
@@ -228,6 +233,10 @@ canvas {
     max-width: 270px;
   }
 
+  .text > p:last-of-type {
+    margin-bottom: 22px;
+  }
+
   .text > p > a {
     line-height: 1.5em;
     font-size: 14px;
@@ -235,7 +244,7 @@ canvas {
   }
 
   .fade {
-    height: 130vh;
+    height: 120vh;
   }
 
   #dev-nav {
@@ -246,10 +255,10 @@ canvas {
     justify-content: flex-start;
     flex-wrap: wrap;
     margin-right: 0;
-    margin-left: 28px;
+    margin-left: calc(9.5vw - 4px);
     background: linear-gradient(transparent 0%, black 100%);
     box-shadow: -20px 10px 30px black;
-    padding-bottom: 360px;
+    padding-bottom: 400px;
   }
 
   .knowledge-text > div {
@@ -279,5 +288,9 @@ canvas {
 
   .contact-text > a {
     font-size: 1.4em;
+  }
+
+  canvas {
+    mask: none;
   }
 }

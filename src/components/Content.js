@@ -25,9 +25,10 @@ function Content({ scroll }) {
     <>
       <Text
         color={isWhite ? '#FFFFFF' : '#272730'}
-        fillOpacity={isWhite ? 1 : 0.15}
+        // Opacity should be tested for performance cost
+        fillOpacity={isWhite ? 1 : 0.2}
         fontSize={
-          window.innerWidth < 800 ? viewport.width / 2.6 : viewport.width / 3.4
+          window.innerWidth < 800 ? viewport.width / 2.1 : viewport.width / 3.4
         }
         maxWidth={200}
         lineHeight={1}
@@ -37,7 +38,7 @@ function Content({ scroll }) {
         anchorY="middle"
         position={[
           0,
-          window.innerWidth < 800 ? viewport.width / 3.2 : viewport.width / 5.4,
+          window.innerWidth < 800 ? viewport.width / 2.5 : viewport.width / 5.4,
           -20,
         ]}
       >
@@ -45,10 +46,33 @@ function Content({ scroll }) {
       </Text>
 
       <Text
+        color="#272730"
+        fillOpacity={0.15}
+        fontSize={
+          window.innerWidth < 800 ? viewport.width / 2.1 : viewport.width / 2.4
+        }
+        maxWidth={200}
+        lineHeight={1}
+        font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+        anchorX="center"
+        anchorY="middle"
+        position={[
+          18,
+          window.innerWidth < 800
+            ? viewport.width / 4
+            : -(viewport.width / 0.9),
+          18,
+        ]}
+        rotation={[0, -8, 0]}
+      >
+        Projects
+      </Text>
+
+      <Text
         color={isWhite ? '#FFFFFF' : '#272730'}
         fillOpacity={isWhite ? 1 : 0.15}
         fontSize={
-          window.innerWidth < 800 ? viewport.width / 3 : viewport.width / 4.5
+          window.innerWidth < 800 ? viewport.width / 2.2 : viewport.width / 4.5
         }
         maxWidth={200}
         lineHeight={1}
@@ -70,7 +94,7 @@ function Content({ scroll }) {
           color={isWhite ? '#FFFFFF' : '#272730'}
           fillOpacity={isWhite ? 1 : 0}
           fontSize={
-            window.innerWidth < 800 ? viewport.width / 2.3 : viewport.width / 4
+            window.innerWidth < 800 ? viewport.width / 2.1 : viewport.width / 4
           }
           maxWidth={200}
           lineHeight={1}
@@ -78,7 +102,7 @@ function Content({ scroll }) {
           font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
           anchorX="center"
           anchorY="middle"
-          position={[-1, -viewport.width / 15, -10]}
+          position={[0, -viewport.width / 15, -10]}
         >
           Knowledge & Skills
         </Text>

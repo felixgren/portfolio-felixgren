@@ -17,7 +17,7 @@ function Cube(props) {
     cube.current.rotation.x = time;
 
     cube.current.position.z = Math.sin(
-      time * 3 +
+      time * 2 +
         Math.sqrt(
           cube.current.position.x * cube.current.position.x +
             cube.current.position.y * cube.current.position.y

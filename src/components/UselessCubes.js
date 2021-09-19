@@ -55,7 +55,7 @@ export function Cubes() {
       // onPointerOver={() => setHover(true)}
       // onPointerOut={() => setHover(false)}
       scale={window.innerWidth < 800 ? [3, 3, 3] : [4, 4, 4]}
-      position={window.innerWidth < 800 ? [-5, 19, -40] : [-10, 26, -40]}
+      position={window.innerWidth < 800 ? [-4, 22, -40] : [-10, 25, -40]}
       rotation={[0, -15, 0]}
     >
       <Cube position={[0, 2, 0]} />
@@ -89,7 +89,7 @@ const UselessCubes = ({ onClickEvent }) => {
         <AudioVisualizer
           rotation={[0, -15, 0]}
           scale={[5, 5, 5]}
-          position={[-12, window.innerWidth < 800 ? 9 : 16, -40]}
+          position={[-11, window.innerWidth < 800 ? 12 : 15, -40]}
           url={SongURL}
         />
       </Suspense>

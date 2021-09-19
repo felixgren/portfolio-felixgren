@@ -27,7 +27,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         this website.
       </p>
 
-      <div style={{ marginTop: '36px' }}>
+      <div>
         <a
           href="https://marioevent.live"
           rel="noreferrer"
@@ -57,7 +57,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         BIO, the total accumulated likes, post history and of course avatars.
       </p>
 
-      <div style={{ marginTop: '36px' }}>
+      <div>
         <a
           href="https://github.com/felixgren/hacker-news"
           target="_blank"
@@ -82,7 +82,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         .
       </p>
 
-      <div style={{ marginTop: '36px' }}>
+      <div>
         <a
           href="https://shootyourfriends.com"
           target="_blank"
@@ -110,7 +110,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         Figma, by us the developers.
       </p>
 
-      <div style={{ marginTop: '36px' }}>
+      <div>
         <a
           href="https://flightoftomorrow.com"
           target="_blank"
@@ -138,7 +138,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         introduction to three.js.
       </p>
 
-      <div style={{ marginTop: '36px' }}>
+      <div>
         <a
           href="https://uselesscube.com"
           target="_blank"
@@ -168,7 +168,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         dumb moth. Basically a bad version of minecraft.
       </p>
 
-      <div style={{ marginTop: '36px' }}>
+      <div>
         <a
           href="https://felixgren.github.io/nook-inc"
           target="_blank"
@@ -194,7 +194,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
         This is another Laravel project, this one was a collaborative effort
       </p>
 
-      <div style={{ marginTop: '36px' }}>
+      <div>
         <a
           href="https://github.com/felixgren/assignment-repo"
           target="_blank"

@@ -155,9 +155,9 @@ export default function Model({ scroll, ...props }) {
 
       const movement = window.innerHeight < 800 ? 1000 : 2000;
       child.position.y = Math.sin((time + index * movement) / 2) * 1;
-      child.rotation.x = Math.sin((time + index * movement) / 3) / 30;
-      child.rotation.y = Math.cos((time + index * movement) / 2) / 30;
-      child.rotation.z = Math.sin((time + index * movement) / 3) / 30;
+      child.rotation.x = Math.sin((time + index * movement) / 3) / 60;
+      child.rotation.y = Math.cos((time + index * movement) / 2) / 60;
+      child.rotation.z = Math.sin((time + index * movement) / 3) / 60;
     });
 
     // There are 3 phases.
@@ -338,7 +338,7 @@ export default function Model({ scroll, ...props }) {
           }}
         >
           <group
-            position={[33.65, window.innerHeight < 800 ? 8 : 12.08, -17.34]}
+            position={[33.65, window.innerHeight < 800 ? 10.5 : 12, -17.34]}
             rotation={[-Math.PI, 0.6, -Math.PI]}
             scale={[0.2, 0.2, 0.2]}
           >
@@ -436,9 +436,9 @@ export default function Model({ scroll, ...props }) {
           }}
         >
           <group
-            position={[12.71, window.innerWidth < 800 ? 16.21 : 23.21, -32.71]}
+            position={[14.71, window.innerWidth < 800 ? 19.21 : 23.21, -32.71]}
             scale={[3, 3, 3]}
-            rotation={[-1.44, -0.15, -0.77]}
+            rotation={[-1.44, -0.15, -0.67]}
           >
             <mesh
               name="Electric"
@@ -470,7 +470,7 @@ export default function Model({ scroll, ...props }) {
           <group
             position={[
               window.innerWidth < 800 ? -20 : -31.34,
-              window.innerWidth < 800 ? 20.14 : 28.14,
+              window.innerWidth < 800 ? 24.14 : 26.14,
               -11.87,
             ]}
             rotation={[-Math.PI, -1.05, -Math.PI]}

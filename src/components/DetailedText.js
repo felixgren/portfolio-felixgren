@@ -113,7 +113,7 @@ function renderSwitch(param) {
     case '/nintendo-event':
       return [{ background: '#ff0000' }, { text: '#fdc600' }];
     case '/hacker-news':
-      return [{ background: '#ff6600' }, { text: '#fedbff' }]; // #fedbff? ffeb66?
+      return [{ background: '#ff6600' }, { text: 'antiquewhite' }];
     case '/three-arena':
       return [{ background: '#c8cdde' }, { text: 'darkred' }];
     case '/electric':
