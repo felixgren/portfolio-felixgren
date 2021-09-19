@@ -12,6 +12,7 @@ const Container = styled(animated.div)`
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 `;
 
 const DevNav = styled(animated.div)`
@@ -22,6 +23,46 @@ const DevNav = styled(animated.div)`
   pointer-events: auto;
   margin-left: 36px;
   transition: 0.2s;
+
+  & > a:hover {
+    color: white;
+  }
+
+  @media only screen and (max-width: 600px) {
+    bottom: 0;
+    top: unset;
+    left: 0;
+    margin-left: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: scroll;
+    width: 100%;
+    z-index: 20;
+    height: 64px;
+    background: linear-gradient(transparent, #00000070);
+    -webkit-mask-image: linear-gradient(to right, black 70%, transparent);
+    mask-image: linear-gradient(to right, black 70%, transparent);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    & > a {
+      margin-left: 12px;
+      margin-right: 12px;
+      min-width: fit-content;
+    }
+
+    & > a:last-of-type {
+      margin-right: 40px;
+    }
+  }
 `;
 
 const HeadlineWrapper = styled(animated.div)`
@@ -43,9 +84,14 @@ const TextStyle = styled.div`
   line-height: 1em;
   margin: 40px 50px;
   position: relative;
+  z-index: 1;
 
   @media only screen and (max-width: 600px) {
     margin: 40px 0;
+    font-size: 1.7em;
+    letter-spacing: -1px;
+    line-height: 1.1em;
+    margin-top: 10px;
   }
 `;
 
@@ -67,7 +113,7 @@ function renderSwitch(param) {
     case '/nintendo-event':
       return [{ background: '#ff0000' }, { text: '#fdc600' }];
     case '/hacker-news':
-      return [{ background: '#ff6600' }, { text: 'antiquewhite' }];
+      return [{ background: '#ff6600' }, { text: '#fedbff' }]; // #fedbff? ffeb66?
     case '/three-arena':
       return [{ background: '#c8cdde' }, { text: 'darkred' }];
     case '/electric':

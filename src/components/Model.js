@@ -61,7 +61,13 @@ export default function Model({ scroll, ...props }) {
   if (!toggle) {
     if (locationId !== '') {
       const currentLocation = document.querySelector(`#${locationId}`);
-      scrollElement.scrollTop = currentLocation.offsetTop - 250;
+
+      if (window.innerWidth > 800) {
+        scrollElement.scrollTop = currentLocation.offsetTop - 230;
+      } else {
+        scrollElement.scrollTop = currentLocation.offsetTop - 130;
+      }
+
       // Enable link after seeing project
       // const currentLink = document.querySelector(`#${locationId}-link`);
       // currentLink.style.display = 'initial';
@@ -98,14 +104,19 @@ export default function Model({ scroll, ...props }) {
     );
   }
 
+  const setHover = (isHovered) => {
+    document.body.style.cursor = isHovered ? 'pointer' : 'auto';
+  };
+
   // I should check if dependency affects performance in any way
   // eslint-disable-next-line
   useEffect(() => void actions['CameraAction.005'].play(), []);
 
   useEffect(() => {
-    if (hovered)
+    if (hovered) {
+      // console.log(group.current.getObjectByName(hovered));
       group.current.getObjectByName(hovered).material.color.set('white');
-    document.body.style.cursor = hovered ? 'pointer' : 'auto';
+    }
   }, [hovered]);
 
   useFrame((state, delta) => {
@@ -116,7 +127,13 @@ export default function Model({ scroll, ...props }) {
     const step = 5 * delta;
     state.camera.fov = THREE.MathUtils.lerp(
       state.camera.fov,
-      toggle ? 55 : 28,
+      toggle
+        ? window.innerWidth < 800
+          ? 65
+          : 57
+        : window.innerWidth < 800
+        ? 42
+        : 28,
       step
     );
     state.camera.position.lerp(
@@ -135,10 +152,12 @@ export default function Model({ scroll, ...props }) {
         );
       }
       const time = state.clock.elapsedTime;
-      child.position.y = Math.sin((time + index * 2000) / 2) * 1;
-      child.rotation.x = Math.sin((time + index * 2000) / 3) / 30;
-      child.rotation.y = Math.cos((time + index * 2000) / 2) / 30;
-      child.rotation.z = Math.sin((time + index * 2000) / 3) / 30;
+
+      const movement = window.innerHeight < 800 ? 1000 : 2000;
+      child.position.y = Math.sin((time + index * movement) / 2) * 1;
+      child.rotation.x = Math.sin((time + index * movement) / 3) / 30;
+      child.rotation.y = Math.cos((time + index * movement) / 2) / 30;
+      child.rotation.z = Math.sin((time + index * movement) / 3) / 30;
     });
 
     // There are 3 phases.
@@ -279,8 +298,12 @@ export default function Model({ scroll, ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group
-        onPointerOver={(e) => [e.stopPropagation(), set(e.object.name)]}
-        onPointerOut={(e) => [e.stopPropagation(), set(null)]}
+        onPointerOver={(e) => [
+          e.stopPropagation(),
+          set(e.object.name),
+          setHover(true),
+        ]}
+        onPointerOut={(e) => [e.stopPropagation(), set(null), setHover(false)]}
         position={[0.06, 4.04, 0.35]}
         scale={[0.25, 0.25, 0.25]}
       >
@@ -295,10 +318,11 @@ export default function Model({ scroll, ...props }) {
           }}
         >
           <group
-            position={[18, -15.37, 20.62]}
+            position={[window.innerWidth < 800 ? 8 : 18, -15.37, 20.62]}
             rotation={[-Math.PI / 2, 0, -0.32]}
           >
             <mesh
+              name="NintendoEvent"
               castShadow
               receiveShadow
               geometry={nodes.Mario.geometry}
@@ -314,77 +338,90 @@ export default function Model({ scroll, ...props }) {
           }}
         >
           <group
-            position={[33.65, 11.08, -17.34]}
+            position={[33.65, window.innerHeight < 800 ? 8 : 12.08, -17.34]}
             rotation={[-Math.PI, 0.6, -Math.PI]}
             scale={[0.2, 0.2, 0.2]}
           >
             <primitive object={nodes._rootJoint} />
             <mesh
+              name="ThreeArena"
               castShadow
               receiveShadow
               geometry={nodes.rock_GEO_Rock_MAT_0.geometry}
               material={materials.Rock_MAT}
             />
             <mesh
+              name="ThreeArena"
               castShadow
               receiveShadow
               geometry={nodes.sides_GEO_Side_MAT_0.geometry}
               material={materials.Side_MAT}
             />
             <mesh
+              name="ThreeArena"
               castShadow
               receiveShadow
               geometry={nodes.ground_GEO_treeline_MAT_0.geometry}
               material={materials.treeline_MAT}
             />
             <mesh
+              name="ThreeArena"
               castShadow
               receiveShadow
               geometry={nodes.rocks_GEO_Rock_MAT_0.geometry}
               material={materials.Rock_MAT_0}
             />
             <mesh
+              name="ThreeArena"
               castShadow
               receiveShadow
               geometry={nodes.shadow_GEO_Shadow_MAT_0.geometry}
               material={materials.Shadow_MAT}
             />
             <skinnedMesh
+              name="ThreeArena"
               geometry={nodes.sword.geometry}
               material={materials.Doom_MAT_0}
               skeleton={nodes.sword.skeleton}
             />
             <skinnedMesh
+              name="ThreeArena"
               geometry={nodes.flame.geometry}
               material={materials.Doom_MAT_1}
               skeleton={nodes.flame.skeleton}
             />
             <skinnedMesh
+              name="ThreeArena"
               geometry={nodes.shotgun.geometry}
               material={nodes.shotgun.material}
               skeleton={nodes.shotgun.skeleton}
             />
             <skinnedMesh
+              name="ThreeArena"
               geometry={nodes.fists.geometry}
               material={nodes.fists.material}
               skeleton={nodes.fists.skeleton}
             />
             <skinnedMesh
+              name="ThreeArena"
               geometry={nodes.body.geometry}
               material={nodes.body.material}
               skeleton={nodes.body.skeleton}
             />
             <skinnedMesh
+              name="ThreeArena"
               geometry={nodes.arms.geometry}
               material={materials.Doom_MAT_3}
               skeleton={nodes.arms.skeleton}
             />
             <skinnedMesh
+              name="ThreeArena"
               geometry={nodes.blade.geometry}
               material={materials.Doom_MAT_2}
               skeleton={nodes.blade.skeleton}
             />
             <skinnedMesh
+              name="ThreeArena"
               geometry={nodes.head.geometry}
               material={materials.Doom_MAT}
               skeleton={nodes.head.skeleton}
@@ -399,17 +436,18 @@ export default function Model({ scroll, ...props }) {
           }}
         >
           <group
-            position={[12.71, 22.21, -32.71]}
+            position={[12.71, window.innerWidth < 800 ? 16.21 : 23.21, -32.71]}
             scale={[3, 3, 3]}
             rotation={[-1.44, -0.15, -0.77]}
           >
             <mesh
-              name="Delorean"
+              name="Electric"
               geometry={nodes.Delorean.geometry}
               material={materials.M_Delorean}
               {...extras}
             />
             <mesh
+              name="Electric"
               geometry={nodes.DeloreanShock.geometry}
               material={materials.M_Shock}
             />
@@ -430,7 +468,11 @@ export default function Model({ scroll, ...props }) {
           }}
         >
           <group
-            position={[-31.34, 28.14, -12.87]}
+            position={[
+              window.innerWidth < 800 ? -20 : -31.34,
+              window.innerWidth < 800 ? 20.14 : 28.14,
+              -11.87,
+            ]}
             rotation={[-Math.PI, -1.05, -Math.PI]}
             scale={[0.05, 0.05, 0.05]}
           >
@@ -440,6 +482,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Bag_bag_Mat00_0.geometry}
@@ -452,6 +495,7 @@ export default function Model({ scroll, ...props }) {
               scale={[45.01, 44.27, 61.54]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Ribbon001_ribbon_Mat00_0.geometry}
@@ -464,6 +508,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Ribbon002_ribbon_Mat00_0.geometry}
@@ -476,6 +521,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Ribbon_ribbon_Mat00_0.geometry}
@@ -488,6 +534,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin_bell_Mat00_0.geometry}
@@ -500,6 +547,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin001_bell_Mat00_0.geometry}
@@ -512,6 +560,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin002_bell_Mat00_0.geometry}
@@ -524,6 +573,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin003_bell_Mat00_0.geometry}
@@ -536,6 +586,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin004_bell_Mat00_0.geometry}
@@ -548,6 +599,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin005_bell_Mat00_0.geometry}
@@ -560,6 +612,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin007_bell_Mat00_0.geometry}
@@ -572,6 +625,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin008_bell_Mat00_0.geometry}
@@ -584,6 +638,7 @@ export default function Model({ scroll, ...props }) {
               scale={[100, 100, 100]}
             >
               <mesh
+                name="NookInc"
                 castShadow
                 receiveShadow
                 geometry={nodes.bell_Coin009_bell_Mat00_0.geometry}
@@ -607,6 +662,7 @@ export default function Model({ scroll, ...props }) {
           />
         </group>
       </group>
+
       <group name="Camera" ref={groupCameraRef}>
         <PerspectiveCamera
           makeDefault

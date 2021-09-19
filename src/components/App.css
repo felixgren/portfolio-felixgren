@@ -83,7 +83,7 @@ canvas {
   z-index: 10;
   width: 100vw;
   height: 100vh;
-  overflow-y: auto;
+  overflow: auto;
   top: 0;
   left: 0;
   transition: 0.2s;
@@ -106,16 +106,18 @@ canvas {
   color: white;
   max-width: 600px;
   padding: 60px;
-  line-height: 1.5em;
+  line-height: 1.6em;
   letter-spacing: 1.1px;
   font-size: 16px;
+  font-weight: 300;
 }
 
 .text > p > a {
-  color: #909090;
+  opacity: 0.5;
   line-height: 1.5em;
   letter-spacing: 1.1px;
   font-size: 16px;
+  margin-left: 0;
   text-underline-offset: 2px;
   /* text-decoration: none; */
 }
@@ -148,7 +150,7 @@ canvas {
 .contact-text > a {
   color: white;
   font-weight: 100;
-  font-size: 2em;
+  font-size: 1.8em;
   margin-left: 0;
 }
 
@@ -157,12 +159,12 @@ canvas {
   justify-content: center;
   z-index: 100000;
   position: relative;
-  margin-right: 60px;
+  margin-right: 20px;
 }
 
 .knowledge-text > div {
   width: 160px;
-  padding: 50px;
+  padding: 50px 40px;
   background: linear-gradient(transparent 0%, black 100%);
   box-shadow: 0 50px 30px black;
   margin-top: 50vh;
@@ -170,11 +172,12 @@ canvas {
 
 .knowledge-text > div > p {
   color: white;
-  text-align: center;
-  font-size: 24px;
+  font-size: 18px;
+  font-weight: 300;
   letter-spacing: 0.05em;
   z-index: 100000;
   position: relative;
+  margin: 14px;
 }
 
 .github {
@@ -193,7 +196,8 @@ canvas {
 
 @media only screen and (max-width: 800px) {
   .text > h2 {
-    font-size: 3em;
+    font-size: 2.2em;
+    letter-spacing: 0.04em;
   }
   .github-logo {
     margin: 15px 15px;
@@ -206,25 +210,68 @@ canvas {
     padding: 12px;
     line-height: 1.5em;
     font-size: 14px;
-    /* max-width: 100%; */
+    letter-spacing: 0.03em;
+  }
+
+  a.project-buttons {
+    padding: 8px;
+    background-color: #00000030;
+  }
+
+  .text > p {
+    max-width: 270px;
+  }
+
+  .text > p > a {
+    line-height: 1.5em;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+  }
+
+  .fade {
+    height: 130vh;
   }
 
   #dev-nav {
-    display: none;
+    opacity: 0;
+  }
+
+  .knowledge-text {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-right: 0;
+    margin-left: 28px;
+    background: linear-gradient(transparent 0%, black 100%);
+    box-shadow: -20px 10px 30px black;
+    padding-bottom: 360px;
   }
 
   .knowledge-text > div {
     padding: 0;
-    width: calc(100%);
     margin-top: 0px;
+    min-width: 30vw;
+    margin-top: 24px;
+    box-shadow: none;
+    background: none;
   }
 
-  .knowledge-text {
-    flex-direction: column;
-    margin-right: 0;
+  .knowledge-text > div > p {
+    font-size: 16px;
+    margin: 10px 14px;
   }
 
   .contact-text {
     padding: 40px 12px;
+  }
+
+  .contact-text > h2 {
+    font-size: 2.4em;
+
+    margin-top: 16vh;
+    margin-bottom: 12px;
+  }
+
+  .contact-text > a {
+    font-size: 1.4em;
   }
 }

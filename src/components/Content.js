@@ -25,15 +25,21 @@ function Content({ scroll }) {
     <>
       <Text
         color={isWhite ? '#FFFFFF' : '#272730'}
-        fillOpacity={isWhite ? 1 : 0.1}
-        fontSize={viewport.width / 3.4}
+        fillOpacity={isWhite ? 1 : 0.15}
+        fontSize={
+          window.innerWidth < 800 ? viewport.width / 2.6 : viewport.width / 3.4
+        }
         maxWidth={200}
         lineHeight={1}
         letterSpacing={-0.04}
         font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
         anchorX="center"
         anchorY="middle"
-        position={[0, viewport.width / 5.4, -20]}
+        position={[
+          0,
+          window.innerWidth < 800 ? viewport.width / 3.2 : viewport.width / 5.4,
+          -20,
+        ]}
       >
         Felix Gren
       </Text>
@@ -41,7 +47,9 @@ function Content({ scroll }) {
       <Text
         color={isWhite ? '#FFFFFF' : '#272730'}
         fillOpacity={isWhite ? 1 : 0.15}
-        fontSize={viewport.width / 4.5}
+        fontSize={
+          window.innerWidth < 800 ? viewport.width / 3 : viewport.width / 4.5
+        }
         maxWidth={200}
         lineHeight={1}
         letterSpacing={-0.02}
@@ -61,14 +69,16 @@ function Content({ scroll }) {
         <Text
           color={isWhite ? '#FFFFFF' : '#272730'}
           fillOpacity={isWhite ? 1 : 0}
-          fontSize={viewport.width / 4}
+          fontSize={
+            window.innerWidth < 800 ? viewport.width / 2.3 : viewport.width / 4
+          }
           maxWidth={200}
           lineHeight={1}
           letterSpacing={0.02}
           font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
           anchorX="center"
           anchorY="middle"
-          position={[0, -viewport.width / 15, -10]}
+          position={[1, -viewport.width / 15, -10]}
         >
           Knowledge & Skills
         </Text>

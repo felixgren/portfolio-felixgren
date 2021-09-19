@@ -38,6 +38,7 @@ function Sound({ url }) {
 
 export function Cubes() {
   const CubeGroup = useRef();
+  // eslint-disable-next-line
   const [hovering, setHover] = useState(false);
 
   useFrame((state, delta) => {
@@ -51,10 +52,10 @@ export function Cubes() {
   return (
     <group
       ref={CubeGroup}
-      onPointerOver={() => setHover(true)}
-      onPointerOut={() => setHover(false)}
-      scale={[4, 4, 4]}
-      position={[-10, 26, -40]}
+      // onPointerOver={() => setHover(true)}
+      // onPointerOut={() => setHover(false)}
+      scale={window.innerWidth < 800 ? [3, 3, 3] : [4, 4, 4]}
+      position={window.innerWidth < 800 ? [-5, 19, -40] : [-10, 26, -40]}
       rotation={[0, -15, 0]}
     >
       <Cube position={[0, 2, 0]} />
@@ -88,7 +89,7 @@ const UselessCubes = ({ onClickEvent }) => {
         <AudioVisualizer
           rotation={[0, -15, 0]}
           scale={[5, 5, 5]}
-          position={[-12, 16, -40]}
+          position={[-12, window.innerWidth < 800 ? 9 : 16, -40]}
           url={SongURL}
         />
       </Suspense>

@@ -209,23 +209,23 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       <div className="knowledge-text">
         <div>
           <p>React</p>
+          <p>Vue</p>
           <p>ThreeJS</p>
           <p>Three Fiber</p>
           <p>TypeScript</p>
-          <p>Vue</p>
         </div>
 
         <div>
           <p>Laravel</p>
           <p>PHP</p>
-          <p>C#</p>
-          <p>Node</p>
           <p>Docker</p>
+          <p>Node</p>
+          <p>C#</p>
         </div>
 
         <div>
-          <p>JavaScript</p>
           <p>HTML & CSS</p>
+          <p>JavaScript</p>
           <p>Wordpress</p>
           <p>Figma</p>
           <p>SQL</p>
