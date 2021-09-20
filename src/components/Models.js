@@ -8,8 +8,9 @@ import { useGLTF, useAnimations, PerspectiveCamera } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useLocation } from 'wouter';
 import UselessCubes from './UselessCubes';
+import ComputerModel from './ComputerModel';
 
-export default function Model({ scroll, ...props }) {
+export default function Models({ scroll, ...props }) {
   const time = useRef(0);
   const group = useRef();
   const cameraRef = useRef();
@@ -432,6 +433,14 @@ export default function Model({ scroll, ...props }) {
             />
           </group>
         </group>
+
+        {/* hacker news model */}
+        <ComputerModel
+          onClickEvent={() => {
+            setToggle(!toggle);
+            setTimeout(() => setLocation(toggle ? '/hacker-news' : '/'), 500);
+          }}
+        />
 
         {/* three arena model */}
         <group

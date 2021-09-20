@@ -5,7 +5,7 @@ import './App.css';
 
 import Content from './Content';
 import ScrollContainer from './ScrollContainer';
-import Model from './Model';
+import Models from './Models';
 import Text from './Text';
 import DetailedText from './DetailedText';
 import Fade from './Fade';
@@ -32,7 +32,7 @@ function App() {
         </ScrollContainer>
 
         <Suspense fallback={null}>
-          <Model scroll={scroll} />
+          <Models scroll={scroll} />
         </Suspense>
 
         <Stars
