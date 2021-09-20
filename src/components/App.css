@@ -72,6 +72,13 @@ a.project-buttons:hover {
   bottom: 0;
 }
 
+.fps-counter canvas {
+  position: inherit;
+  top: 0;
+  left: unset;
+  right: 15px;
+}
+
 canvas {
   z-index: 10;
   position: relative;

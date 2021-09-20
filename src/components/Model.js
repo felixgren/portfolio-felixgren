@@ -298,8 +298,12 @@ export default function Model({ scroll, ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group
-        onPointerOver={() => setHover(true)}
-        onPointerOut={() => setHover(false)}
+        onPointerOver={(e) => [
+          e.stopPropagation(),
+          set(e.object.name),
+          setHover(true),
+        ]}
+        onPointerOut={(e) => [e.stopPropagation(), set(null), setHover(false)]}
         position={[0.06, 4.04, 0.35]}
         scale={[0.25, 0.25, 0.25]}
       >
