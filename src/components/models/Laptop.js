@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 
-const ComputerModel = ({ onClickEvent }) => {
+const LaptopModel = ({ onClickEvent }) => {
   const group = useRef();
-  const { nodes, materials } = useGLTF('/computer.glb');
+  const { nodes, materials } = useGLTF('models/computer.glb');
 
   return (
     <group
@@ -52,4 +52,4 @@ const ComputerModel = ({ onClickEvent }) => {
   );
 };
 
-export default ComputerModel;
+export default LaptopModel;

@@ -11,8 +11,9 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 
 export default function ArcadeModel(props) {
   const arcadeGroup = useRef();
-  const { nodes, materials, animations } = useGLTF('/arcademachine.glb');
+  const { nodes, materials, animations } = useGLTF('models/arcademachine.glb');
   const { actions } = useAnimations(animations, arcadeGroup);
+  // eslint-disable-next-line
   useEffect(() => void actions['Take 001'].play(), []);
   return (
     <group ref={arcadeGroup} {...props} dispose={null}>

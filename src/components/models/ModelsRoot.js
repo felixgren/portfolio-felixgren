@@ -7,8 +7,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useGLTF, useAnimations, PerspectiveCamera } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useLocation } from 'wouter';
-import UselessCubes from './UselessCubes';
-import ComputerModel from './ComputerModel';
+import UselessCubes from './UselessCubesGroup';
+import LaptopModel from './Laptop';
 import ArcadeModel from './Arcade';
 
 export default function Models({ scroll, ...props }) {
@@ -34,7 +34,7 @@ export default function Models({ scroll, ...props }) {
   const worldCameraDirection = new THREE.Vector3();
   const worldCameraQuaternion = new THREE.Quaternion();
 
-  const { nodes, materials, animations } = useGLTF('/model.glb');
+  const { nodes, materials, animations } = useGLTF('models/model-nobowser.glb');
   const { actions, mixer } = useAnimations(animations, group);
 
   const [cameraReady, setCameraReady] = useState(false);
@@ -437,7 +437,7 @@ export default function Models({ scroll, ...props }) {
         </group> */}
 
         {/* hacker news model */}
-        <ComputerModel
+        <LaptopModel
           onClickEvent={() => {
             setToggle(!toggle);
             setTimeout(() => setLocation(toggle ? '/hacker-news' : '/'), 500);

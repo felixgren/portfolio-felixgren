@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { useFrame, useLoader, useThree } from '@react-three/fiber';
-import AudioVisualizer from './AudioVisualizer';
+import AudioVisualizer from '../AudioVisualizer';
 
-import Cube from './Cube';
-import SongURL from '../audio/bamboo.aac';
+import Cube from './UselessCube';
+import SongURL from '../../audio/bamboo.aac';
 
 function Sound({ url }) {
   const sound = useRef();

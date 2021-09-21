@@ -5,9 +5,9 @@ import './App.css';
 
 import Content from './Content';
 import ScrollContainer from './ScrollContainer';
-import Models from './Models';
+import Models from './models/ModelsRoot';
 import Text from './Text';
-import DetailedText from './DetailedText';
+import TextFocused from './TextFocused';
 import Fade from './Fade';
 import StartFade from './StartFade';
 // eslint-disable-next-line
@@ -51,7 +51,7 @@ function App() {
 
       <Text ref={scrollRef} scroll={scroll} />
 
-      <DetailedText />
+      <TextFocused />
 
       <StartFade />
 

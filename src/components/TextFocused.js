@@ -182,7 +182,7 @@ function Text({ children, opacity }) {
   );
 }
 
-export default function DetailedText() {
+export default function TextFocused() {
   const [location] = useLocation();
   const props = useSpring({
     background: renderSwitch(location)[0].background,
