@@ -9,6 +9,7 @@ import { useFrame } from '@react-three/fiber';
 import { useLocation } from 'wouter';
 import UselessCubes from './UselessCubes';
 import ComputerModel from './ComputerModel';
+import ArcadeModel from './Arcade';
 
 export default function Models({ scroll, ...props }) {
   const time = useRef(0);
@@ -112,6 +113,7 @@ export default function Models({ scroll, ...props }) {
   // I should check if dependency affects performance in any way
   // eslint-disable-next-line
   useEffect(() => void actions['CameraAction.005'].play(), []);
+  // useEffect(() => void actions['Take 001'].play(), []);
 
   useEffect(() => {
     if (hovered) {
@@ -338,7 +340,7 @@ export default function Models({ scroll, ...props }) {
         </group>
 
         {/* bowser model */}
-        <group
+        {/* <group
           onClick={() => {
             setToggle(!toggle);
             setTimeout(
@@ -432,7 +434,7 @@ export default function Models({ scroll, ...props }) {
               position={[78.96, 11.47, -119.92]}
             />
           </group>
-        </group>
+        </group> */}
 
         {/* hacker news model */}
         <ComputerModel
@@ -441,6 +443,8 @@ export default function Models({ scroll, ...props }) {
             setTimeout(() => setLocation(toggle ? '/hacker-news' : '/'), 500);
           }}
         />
+        {/* Arcade */}
+        <ArcadeModel />
 
         {/* three arena model */}
         <group
@@ -800,4 +804,4 @@ export default function Models({ scroll, ...props }) {
   );
 }
 
-useGLTF.preload('/model.glb');
+useGLTF.preload('/model-nobowser.glb');
