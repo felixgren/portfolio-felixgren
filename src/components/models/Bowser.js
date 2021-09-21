@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
 
-export default function Bowser() {
+export default function BowserModel() {
   const { nodes, materials } = useGLTF('models/bowser.glb');
   return (
     <group

@@ -8,9 +8,9 @@ import { useGLTF, useAnimations, PerspectiveCamera } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useLocation } from 'wouter';
 import UselessCubes from './UselessCubesGroup';
-import LaptopModel from './Laptop';
+import ComputerModel from './Computer';
 import ArcadeModel from './Arcade';
-import Bowser from './Bowser';
+import BowserModel from './Bowser';
 import Mario from './Mario';
 
 export default function Models({ scroll, ...props }) {
@@ -324,16 +324,20 @@ export default function Models({ scroll, ...props }) {
           }}
         >
           <Mario />
-          <Bowser />
+          <BowserModel />
         </group>
 
         {/* hacker news model */}
-        <LaptopModel
+        <group
+          position={[32, 12, 1]}
           onClick={() => {
             setToggle(!toggle);
             setTimeout(() => setLocation(toggle ? '/hacker-news' : '/'), 500);
           }}
-        />
+        >
+          <ComputerModel />
+        </group>
+
         {/* Arcade */}
         <group>
           <group position={[10, 10, 10]} rotation={[0, 3, 0]}>
