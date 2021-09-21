@@ -444,7 +444,11 @@ export default function Models({ scroll, ...props }) {
           }}
         />
         {/* Arcade */}
-        <ArcadeModel />
+        <group>
+          <group position={[10, 10, 10]} rotation={[0, 3, 0]}>
+            <ArcadeModel />
+          </group>
+        </group>
 
         {/* three arena model */}
         <group
