@@ -5,11 +5,13 @@ import './App.css';
 
 import Content from './Content';
 import ScrollContainer from './ScrollContainer';
-import Model from './Model';
+import Models from './models/ModelsRoot';
 import Text from './Text';
-import DetailedText from './DetailedText';
+import TextFocused from './TextFocused';
 import Fade from './Fade';
 import StartFade from './StartFade';
+// eslint-disable-next-line
+// import StatsFPS from './StatsFPS';
 
 function App() {
   const scrollRef = useRef();
@@ -30,7 +32,7 @@ function App() {
         </ScrollContainer>
 
         <Suspense fallback={null}>
-          <Model scroll={scroll} />
+          <Models scroll={scroll} />
         </Suspense>
 
         <Stars
@@ -49,11 +51,13 @@ function App() {
 
       <Text ref={scrollRef} scroll={scroll} />
 
-      <DetailedText />
+      <TextFocused />
 
       <StartFade />
 
       <Fade />
+
+      {/* <StatsFPS /> */}
     </div>
   );
 }

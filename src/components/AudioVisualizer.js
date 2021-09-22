@@ -38,12 +38,7 @@ export default function AudioVisaulizer({
     ref.current.instanceMatrix.needsUpdate = true;
   });
   return (
-    <instancedMesh
-      castShadow
-      ref={ref}
-      args={[null, null, data.length]}
-      {...props}
-    >
+    <instancedMesh ref={ref} args={[null, null, data.length]} {...props}>
       <planeGeometry args={[width, height]} />
       <meshBasicMaterial toneMapped={false} />
     </instancedMesh>
