@@ -189,14 +189,22 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
     </div>
 
     <div style={{ height: `160vh` }} className="text">
-      <h2 id="task-repo">Task Repo</h2>
+      <h2 id="fake-news">Fake News</h2>
       <p>
-        This is another Laravel project, this one was a collaborative effort
+        This was my first PHP project where we learned to use the power of PHP
+        and SQL to spread fake news.
       </p>
-
       <div>
         <a
-          href="https://github.com/felixgren/assignment-repo"
+          href="https://fake-news-live.herokuapp.com"
+          target="_blank"
+          rel="noreferrer"
+          className="project-buttons"
+        >
+          Go read the news
+        </a>
+        <a
+          href="https://github.com/felixgren/fake-news"
           target="_blank"
           rel="noreferrer"
           className="project-buttons"

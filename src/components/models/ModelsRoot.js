@@ -628,7 +628,7 @@ export default function Models({ scroll, ...props }) {
             <ArcadeModel
               onClick={() => {
                 setToggle(!toggle);
-                setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 500);
+                setTimeout(() => setLocation(toggle ? '/fake-news' : '/'), 500);
               }}
             />
           </group>

@@ -103,7 +103,7 @@ const headlineContent = {
   '/electric': ['Javascript', 'HTML & CSS'],
   '/useless-web': ['Three.js'],
   '/nook-inc': ['JavaScript', 'HTML & CSS'],
-  '/task-repo': ['Laravel'],
+  '/fake-news': ['PHP', 'SQL'],
 };
 
 function renderSwitch(param) {
@@ -122,7 +122,7 @@ function renderSwitch(param) {
       return [{ background: 'blueviolet' }, { text: 'lime' }];
     case '/nook-inc':
       return [{ background: '#80ffff' }, { text: '#ff2655' }];
-    case '/task-repo':
+    case '/fake-news':
       return [{ background: '#2200ab' }, { text: '#9019ff' }];
     default:
       return [{ background: 'transparent' }, { text: 'pink' }];
@@ -152,7 +152,7 @@ function TempNav(props) {
         <Link id="nook-inc-link" to="/nook-inc">
           Nook Inc
         </Link>
-        <Link id="task-repo-link" to="/task-repo">
+        <Link id="fake-news-link" to="/fake-news">
           Task Repo
         </Link>
       </DevNav>
