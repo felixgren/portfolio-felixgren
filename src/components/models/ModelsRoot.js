@@ -294,14 +294,17 @@ export default function Models({ scroll, ...props }) {
         </group>
 
         {/* hacker news model */}
-        <group
-          position={[32, 12, 1]}
-          onClick={() => {
-            setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/hacker-news' : '/'), 500);
-          }}
-        >
-          <ComputerModel />
+        <group>
+          <group
+            position={window.innerWidth < 800 ? [42, -2, 1] : [42, -2, 5]}
+            rotation={[0, window.innerWidth < 800 ? 0.2 : -0.15, 0]}
+            onClick={() => {
+              setToggle(!toggle);
+              setTimeout(() => setLocation(toggle ? '/hacker-news' : '/'), 500);
+            }}
+          >
+            <ComputerModel />
+          </group>
         </group>
 
         {/* three arena model */}
@@ -433,12 +436,16 @@ export default function Models({ scroll, ...props }) {
         >
           <group
             position={[
-              window.innerWidth < 800 ? -20 : -31.34,
-              window.innerWidth < 800 ? 24.14 : 26.14,
-              -11.87,
+              window.innerWidth < 800 ? -20 : -36.34,
+              window.innerWidth < 800 ? 18 : 28,
+              -12,
             ]}
             rotation={[-Math.PI, -1.05, -Math.PI]}
-            scale={[0.05, 0.05, 0.05]}
+            scale={
+              window.innerWidth < 800
+                ? [0.055, 0.055, 0.055]
+                : [0.04, 0.04, 0.04]
+            }
           >
             <group
               position={[-5.59, 134.86, -11.56]}
@@ -589,7 +596,10 @@ export default function Models({ scroll, ...props }) {
         {/* Fake News model */}
         <group>
           <group
-            position={[-33, 32, window.innerWidth < 800 ? 25 : 30]}
+            visible={
+              locationId === '' || locationId === 'fake-news' ? true : false
+            }
+            position={[-33, 32, window.innerWidth < 800 ? 21 : 30]}
             rotation={[0.3, -1.1, 0.2]}
             scale={[0.4, 0.4, 0.4]}
           >

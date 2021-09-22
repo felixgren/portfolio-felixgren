@@ -7,7 +7,9 @@ export default function BowserModel() {
     <group
       position={window.innerWidth < 800 ? [4.5, -13.5, 40] : [-1, -19, 47]}
       rotation={window.innerWidth < 800 ? [-0.3, 0.2, 0.1] : [0, -0.9, 0]}
-      scale={window.innerWidth < 800 ? [0.04, 0.04, 0.04] : [0.05, 0.05, 0.05]}
+      scale={
+        window.innerWidth < 800 ? [0.035, 0.035, 0.035] : [0.05, 0.05, 0.05]
+      }
     >
       <mesh
         geometry={nodes.BOWSER_SMOL_FLAME.geometry}

@@ -4,7 +4,7 @@ import { useGLTF } from '@react-three/drei';
 export default function ComputerModel() {
   const { nodes, materials } = useGLTF('models/computer.glb');
   return (
-    <group scale={[1.8, 1.8, 1.8]} rotation={[0, 0, 0]}>
+    <group scale={[1.2, 1.2, 1.2]} rotation={[0, 0, 0]}>
       <group rotationX={-0.425} position={[0, -0.04, 0.41]}>
         <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, -0.7]}>
           <mesh

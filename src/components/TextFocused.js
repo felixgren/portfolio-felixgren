@@ -41,8 +41,8 @@ const DevNav = styled(animated.div)`
     z-index: 20;
     height: 64px;
     background: linear-gradient(transparent, #00000070);
-    -webkit-mask-image: linear-gradient(to right, black 70%, transparent);
-    mask-image: linear-gradient(to right, black 70%, transparent);
+    -webkit-mask-image: linear-gradient(to right, black 100%, transparent);
+    mask-image: linear-gradient(to right, black 100%, transparent);
 
     &::-webkit-scrollbar {
       display: none;
@@ -60,7 +60,8 @@ const DevNav = styled(animated.div)`
     }
 
     & > a:last-of-type {
-      margin-right: 40px;
+      margin-right: 12px;
+      padding-right: 24px;
     }
   }
 `;
@@ -100,10 +101,10 @@ const headlineContent = {
   '/nintendo-event': ['React'],
   '/hacker-news': ['Laravel, Vue', 'Fractal, AWS, Tailwind'],
   '/three-arena': ['Three.js, Socket.io', 'Express, Octrees, Shaders'],
-  '/electric': ['Javascript', 'HTML & CSS'],
+  '/electric': ['JavaScript', 'HTML & CSS'],
   '/useless-web': ['Three.js'],
   '/nook-inc': ['JavaScript', 'HTML & CSS'],
-  '/fake-news': ['PHP', 'SQL'],
+  '/fake-news': ['PHP, SQL', 'JavaScript'],
 };
 
 function renderSwitch(param) {
