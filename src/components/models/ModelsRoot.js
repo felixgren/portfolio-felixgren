@@ -586,7 +586,7 @@ export default function Models({ scroll, ...props }) {
           </group>
         </group>
 
-        {/* Task Repo model */}
+        {/* Fake News model */}
         <group>
           <group
             position={[-33, 32, window.innerWidth < 800 ? 25 : 30]}

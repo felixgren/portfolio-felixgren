@@ -153,7 +153,7 @@ function TempNav(props) {
           Nook Inc
         </Link>
         <Link id="fake-news-link" to="/fake-news">
-          Task Repo
+          Fake News
         </Link>
       </DevNav>
     </>

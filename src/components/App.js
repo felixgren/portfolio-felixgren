@@ -26,6 +26,7 @@ function App() {
             offsetY: clientY,
           }),
         }}
+        mode="concurrent"
       >
         <ScrollContainer scroll={scroll}>
           <Content scroll={scroll} />
