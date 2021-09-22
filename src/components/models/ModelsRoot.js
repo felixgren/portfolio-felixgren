@@ -3,7 +3,7 @@ GLTF imports with the help of: https://gltf.pmnd.rs/ https://github.com/pmndrs/g
 */
 
 import * as THREE from 'three';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useGLTF, useAnimations, PerspectiveCamera } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useLocation } from 'wouter';
@@ -18,10 +18,8 @@ export default function Models({ scroll, ...props }) {
   const group = useRef();
   const cameraRef = useRef();
   const groupCameraRef = useRef();
-  const color = new THREE.Color();
   const defaultPos = new THREE.Vector3(0, 0, 0);
   const defaultQuart = new THREE.Quaternion(0, 0, 0, 1);
-  const localCamPosVec = new THREE.Vector3();
   const animStartPosition = new THREE.Vector3(-10.722, -5.981, 2.297);
   const animStartQuaternion = new THREE.Quaternion(
     0.17168,
@@ -32,9 +30,6 @@ export default function Models({ scroll, ...props }) {
   const animEndPosition = new THREE.Vector3(-18.193, 14.412, 14.28);
   const animEndQuaternion = new THREE.Quaternion(0.0928, -0.3936, 0.04, 0.9136);
   const thirdPhaseQuart = new THREE.Quaternion(0, 0.7, 0, 0.7122);
-  const worldCameraPosition = new THREE.Vector3();
-  const worldCameraDirection = new THREE.Vector3();
-  const worldCameraQuaternion = new THREE.Quaternion();
 
   const { nodes, materials, animations } = useGLTF('models/modelGroup.glb');
   const { actions, mixer } = useAnimations(animations, group);
@@ -42,7 +37,6 @@ export default function Models({ scroll, ...props }) {
   const [cameraReady, setCameraReady] = useState(false);
   const [isThirdPhase, setIsThirdPhase] = useState(false);
   const [toggle, setToggle] = useState(true);
-  const [hovered, set] = useState();
   const [location, setLocation] = useLocation('/');
 
   const scrollStart = 0;
@@ -68,6 +62,11 @@ export default function Models({ scroll, ...props }) {
         scrollElement.scrollTop = currentLocation.offsetTop - 230;
       } else {
         scrollElement.scrollTop = currentLocation.offsetTop - 130;
+      }
+
+      if (window.innerWidth > 800 && locationId === 'nintendo-event') {
+        scrollElement.scrollTop =
+          currentLocation.offsetTop - window.innerHeight / 3;
       }
 
       // Enable link after seeing project
@@ -110,23 +109,7 @@ export default function Models({ scroll, ...props }) {
     document.body.style.cursor = isHovered ? 'pointer' : 'auto';
   };
 
-  // I should check if dependency affects performance in any way
-  // eslint-disable-next-line
-  useEffect(() => void actions['CameraAction.005'].play(), []);
-  // useEffect(() => void actions['Take 001'].play(), []);
-
-  useEffect(() => {
-    if (hovered) {
-      // console.log(group.current.getObjectByName(hovered));
-      group.current.getObjectByName(hovered).material.color.set('white');
-    }
-  }, [hovered]);
-
   useFrame((state, delta) => {
-    state.camera.getWorldPosition(worldCameraPosition);
-    state.camera.getWorldDirection(worldCameraDirection);
-    state.camera.getWorldQuaternion(worldCameraQuaternion);
-
     const step = 5 * delta;
     state.camera.fov = THREE.MathUtils.lerp(
       state.camera.fov,
@@ -139,24 +122,13 @@ export default function Models({ scroll, ...props }) {
         : 28,
       step
     );
-    state.camera.position.lerp(
-      localCamPosVec.set(toggle ? 0 : 0, toggle ? 0 : 0, toggle ? 0 : 0),
-      step
-    );
+
     state.camera.updateProjectionMatrix();
 
     group.current.children[0].children.forEach((child, index) => {
-      if (child.children[0].material) {
-        child.children[0].material.color.lerp(
-          color
-            .set(hovered === child.children[0].name ? 'blue' : '#202020')
-            .convertSRGBToLinear(),
-          hovered ? 0.1 : 0.05
-        );
-      }
       const time = state.clock.elapsedTime;
-
       const movement = window.innerHeight < 800 ? 1000 : 2000;
+
       child.position.y = Math.sin((time + index * movement) / 3) * 0.5;
       child.rotation.x = Math.sin((time + index * movement) / 5) / 50;
       child.rotation.y = Math.cos((time + index * movement) / 3) / 50;
@@ -301,12 +273,8 @@ export default function Models({ scroll, ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group
-        onPointerOver={(e) => [
-          e.stopPropagation(),
-          set(e.object.name),
-          setHover(true),
-        ]}
-        onPointerOut={(e) => [e.stopPropagation(), set(null), setHover(false)]}
+        onPointerOver={(e) => [e.stopPropagation(), setHover(true)]}
+        onPointerOut={(e) => [e.stopPropagation(), setHover(false)]}
         position={[0.06, 4.04, 0.35]}
         scale={[0.25, 0.25, 0.25]}
       >
