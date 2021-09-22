@@ -86,8 +86,8 @@ canvas {
   mask: linear-gradient(170deg, transparent 0%, black 0%) top left,
     linear-gradient(-135deg, transparent -50%, #000000 40%) top right,
     linear-gradient(-45deg, transparent 0%, black 30%) bottom right,
-    linear-gradient(45deg, transparent 5px, black 80%) bottom left;
-  mask-size: 50% 50%;
+    linear-gradient(30deg, transparent 5px, black 60%) bottom left;
+  mask-size: 51% 51%;
   mask-repeat: no-repeat;
 }
 

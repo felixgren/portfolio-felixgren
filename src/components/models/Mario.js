@@ -15,8 +15,6 @@ export default function Mario() {
     >
       <mesh
         name="NintendoEvent"
-        castShadow
-        receiveShadow
         geometry={nodes.Mario.geometry}
         material={materials.MarioMat}
       />

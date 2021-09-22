@@ -57,8 +57,6 @@ export default function Models({ scroll, ...props }) {
   const devNav = document.querySelector('#dev-nav');
 
   const extras = {
-    receiveShadow: true,
-    castShadow: true,
     'material-envMapIntensity': 0.2,
   };
 
@@ -338,17 +336,6 @@ export default function Models({ scroll, ...props }) {
           <ComputerModel />
         </group>
 
-        {/* Arcade */}
-        <group>
-          <group position={[10, 10, 10]} rotation={[0, 3, 0]}>
-            <ArcadeModel
-              onClick={() => {
-                setToggle(!toggle);
-                setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 500);
-              }}
-            />
-          </group>
-        </group>
         {/* three arena model */}
         <group
           onClick={() => {
@@ -364,36 +351,26 @@ export default function Models({ scroll, ...props }) {
             <primitive object={nodes._rootJoint} />
             <mesh
               name="ThreeArena"
-              castShadow
-              receiveShadow
               geometry={nodes.rock_GEO_Rock_MAT_0.geometry}
               material={materials.Rock_MAT}
             />
             <mesh
               name="ThreeArena"
-              castShadow
-              receiveShadow
               geometry={nodes.sides_GEO_Side_MAT_0.geometry}
               material={materials.Side_MAT}
             />
             <mesh
               name="ThreeArena"
-              castShadow
-              receiveShadow
               geometry={nodes.ground_GEO_treeline_MAT_0.geometry}
               material={materials.treeline_MAT}
             />
             <mesh
               name="ThreeArena"
-              castShadow
-              receiveShadow
               geometry={nodes.rocks_GEO_Rock_MAT_0.geometry}
               material={materials.Rock_MAT_0}
             />
             <mesh
               name="ThreeArena"
-              castShadow
-              receiveShadow
               geometry={nodes.shadow_GEO_Shadow_MAT_0.geometry}
               material={materials.Shadow_MAT}
             />
@@ -502,8 +479,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Bag_bag_Mat00_0.geometry}
                 material={materials.bag_Mat00}
               />
@@ -515,8 +490,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Ribbon001_ribbon_Mat00_0.geometry}
                 material={nodes.bell_Ribbon001_ribbon_Mat00_0.material}
               />
@@ -528,8 +501,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Ribbon002_ribbon_Mat00_0.geometry}
                 material={nodes.bell_Ribbon002_ribbon_Mat00_0.material}
               />
@@ -541,8 +512,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Ribbon_ribbon_Mat00_0.geometry}
                 material={nodes.bell_Ribbon_ribbon_Mat00_0.material}
               />
@@ -554,8 +523,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin_bell_Mat00_0.material}
               />
@@ -567,8 +534,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin001_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin001_bell_Mat00_0.material}
               />
@@ -580,8 +545,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin002_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin002_bell_Mat00_0.material}
               />
@@ -593,8 +556,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin003_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin003_bell_Mat00_0.material}
               />
@@ -606,8 +567,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin004_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin004_bell_Mat00_0.material}
               />
@@ -619,8 +578,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin005_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin005_bell_Mat00_0.material}
               />
@@ -632,8 +589,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin007_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin007_bell_Mat00_0.material}
               />
@@ -645,8 +600,6 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin008_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin008_bell_Mat00_0.material}
               />
@@ -658,27 +611,27 @@ export default function Models({ scroll, ...props }) {
             >
               <mesh
                 name="NookInc"
-                castShadow
-                receiveShadow
                 geometry={nodes.bell_Coin009_bell_Mat00_0.geometry}
                 material={nodes.bell_Coin009_bell_Mat00_0.material}
               />
             </group>
           </group>
         </group>
-        {/* task repo model */}
-        <group
-          onClick={() => {
-            setToggle(!toggle);
-            setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 500);
-          }}
-        >
-          <mesh
-            name="Zeppelin"
-            geometry={nodes.Zeppelin.geometry}
-            material={materials.M_Zeppelin}
-            {...extras}
-          />
+
+        {/* Task Repo model */}
+        <group>
+          <group
+            position={[-33, 32, window.innerWidth < 800 ? 25 : 30]}
+            rotation={[0.3, -1.1, 0.2]}
+            scale={[0.4, 0.4, 0.4]}
+          >
+            <ArcadeModel
+              onClick={() => {
+                setToggle(!toggle);
+                setTimeout(() => setLocation(toggle ? '/task-repo' : '/'), 500);
+              }}
+            />
+          </group>
         </group>
       </group>
       <group name="Camera" ref={groupCameraRef}>
@@ -690,7 +643,6 @@ export default function Models({ scroll, ...props }) {
           fov={90}
         >
           <directionalLight
-            castShadow
             position={[10, 20, 15]}
             shadow-camera-right={8}
             shadow-camera-top={8}
