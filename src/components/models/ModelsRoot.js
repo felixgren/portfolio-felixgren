@@ -281,7 +281,8 @@ export default function Models({ scroll, ...props }) {
         {/****  START OF ALL MODEL GROUPS  ****/}
         {/* New Bowser & Mario */}
         <group
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setToggle(!toggle);
             setTimeout(
               () => setLocation(toggle ? '/nintendo-event' : '/'),
@@ -298,7 +299,8 @@ export default function Models({ scroll, ...props }) {
           <group
             position={window.innerWidth < 800 ? [42, -2, 1] : [42, -2, 5]}
             rotation={[0, window.innerWidth < 800 ? 0.2 : -0.15, 0]}
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setToggle(!toggle);
               setTimeout(() => setLocation(toggle ? '/hacker-news' : '/'), 500);
             }}
@@ -309,7 +311,8 @@ export default function Models({ scroll, ...props }) {
 
         {/* three arena model */}
         <group
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setToggle(!toggle);
             setTimeout(() => setLocation(toggle ? '/three-arena' : '/'), 500);
           }}
@@ -397,7 +400,8 @@ export default function Models({ scroll, ...props }) {
         </group>
         {/* electric model */}
         <group
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setToggle(!toggle);
             setTimeout(() => setLocation(toggle ? '/electric' : '/'), 500);
           }}
@@ -429,7 +433,8 @@ export default function Models({ scroll, ...props }) {
         />
         {/* nook inc model */}
         <group
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setToggle(!toggle);
             setTimeout(() => setLocation(toggle ? '/nook-inc' : '/'), 500);
           }}
@@ -604,7 +609,8 @@ export default function Models({ scroll, ...props }) {
             scale={[0.4, 0.4, 0.4]}
           >
             <ArcadeModel
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setToggle(!toggle);
                 setTimeout(() => setLocation(toggle ? '/fake-news' : '/'), 500);
               }}
