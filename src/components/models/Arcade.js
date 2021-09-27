@@ -11,7 +11,7 @@ import { useGLTF, useAnimations } from '@react-three/drei';
 
 export default function ArcadeModel(props) {
   const arcadeGroup = useRef();
-  const { nodes, materials, animations } = useGLTF('models/arcadetest.glb');
+  const { nodes, materials, animations } = useGLTF('models/arcadeMachine.glb');
   const { actions } = useAnimations(animations, arcadeGroup);
   // eslint-disable-next-line
   useEffect(() => void actions['Take 001'].play(), []);
@@ -119,4 +119,4 @@ export default function ArcadeModel(props) {
   );
 }
 
-useGLTF.preload('/arcadetest.glb');
+useGLTF.preload('/arcadeMachine.glb');
