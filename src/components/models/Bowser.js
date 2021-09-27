@@ -4,75 +4,20 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useLoader } from '@react-three/fiber';
-
-// const loader = new GLTFLoader(manager)
-// .setCrossOrigin('anonymous')
-// .setDRACOLoader(new DRACOLoader(manager).setDecoderPath('/draco-gltf/'))
-// .setKTX2Loader(
-//   new KTX2Loader( manager )
-//     .setTranscoderPath( 'assets/wasm/' )
-//     .detectSupport( this.renderer )
-// )
-// .setMeshoptDecoder(MeshoptDecoder);
-
-// function Model() {
-//   const result = useLoader(GLTFLoader, '/model.glb');
-//   // You don't need to check for the presence of the result, when we're here
-//   // the result is guaranteed to be present since useLoader suspends the component
-//   return <primitive object={result.scene} />;
-// }
-
-// function Extension() {
-//   useLoader(GLTFLoader, url, (loader) => {
-//     const dracoLoader = new DRACOLoader();
-//     dracoLoader.setDecoderPath('/draco-gltf/');
-//     loader.setDRACOLoader(dracoLoader);
-//   });
-// }
-
-// function Model() {
-//   const result = useLoader(GLTFLoader, '/model.glb', (loader) => {
-//     const dracoLoader = new DRACOLoader();
-//     dracoLoader.setDecoderPath('/draco-gltf/');
-//     loader.setDRACOLoader(dracoLoader);
-//   });
-// You don't need to check for the presence of the result, when we're here
-// the result is guaranteed to be present since useLoader suspends the component
-//   return <primitive object={result.scene} />;
-// }
-
-// const loader = useLoader(GLTFLoader, 'models/bowser.glb', (loader) => {
-//   const dracoLoader = new DRACOLoader();
-//   dracoLoader.setDecoderPath('/draco-gltf/');
-//   loader.setDRACOLoader(dracoLoader);
-// });
+import { useThree } from '@react-three/fiber';
 
 export default function BowserModel() {
-  const loaderlol = (loader) => {
-    const ktx2Loader = new KTX2Loader();
-    ktx2Loader.setTranscoderPath('/loaders/');
-    loader.setKTX2Loader(ktx2Loader);
-  };
-
-  // const loader = useLoader(GLTFLoader, 'models/bowser.glb', (loader) => {
-  //   const ktx2Loader = new KTX2Loader();
-  //   ktx2Loader.setTranscoderPath('/loaders/');
-  //   loader.setKTX2Loader(ktx2Loader);
-  // });
-  // console.log(loader);
-
-  const { nodes, materials } = useGLTF(
-    'models/bowser.glb',
-    false,
-    false,
-    () => loaderlol(GLTFLoader)
-    //  => {
-    //   const ktx2Loader = new KTX2Loader();
-    //   ktx2Loader.setTranscoderPath('/loaders/');
-    //   loader.setKTX2Loader(ktx2Loader);
-    // }
+  const { gl } = useThree();
+  const { nodes, materials } = useLoader(
+    GLTFLoader,
+    '/models/bowser-ktx2.glb',
+    (loader) => {
+      const ktxLoader = new KTX2Loader();
+      ktxLoader.setTranscoderPath('/loaders/');
+      ktxLoader.detectSupport(gl);
+      loader.setKTX2Loader(ktxLoader);
+    }
   );
-
   return (
     <group
       position={window.innerWidth < 800 ? [4.5, -13.5, 40] : [-1, -19, 47]}
