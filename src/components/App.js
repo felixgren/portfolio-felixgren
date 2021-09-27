@@ -10,8 +10,7 @@ import Text from './Text';
 import TextFocused from './TextFocused';
 import Fade from './Fade';
 import StartFade from './StartFade';
-// eslint-disable-next-line
-// import StatsFPS from './StatsFPS';
+import StatsFPS from './StatsFPS';
 
 function App() {
   const scrollRef = useRef();
@@ -58,7 +57,7 @@ function App() {
 
       <Fade />
 
-      {/* <StatsFPS /> */}
+      <StatsFPS />
     </div>
   );
 }
