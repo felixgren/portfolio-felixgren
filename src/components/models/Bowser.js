@@ -10,12 +10,15 @@ export default function BowserModel() {
   const { gl } = useThree();
   const { nodes, materials } = useLoader(
     GLTFLoader,
-    '/models/bowser-ktx2.glb',
+    '/models/bowser-eac1s-draco.glb',
     (loader) => {
       const ktxLoader = new KTX2Loader();
+      const dracoLoader = new DRACOLoader();
       ktxLoader.setTranscoderPath('/loaders/');
+      dracoLoader.setDecoderPath('/loaders/');
       ktxLoader.detectSupport(gl);
       loader.setKTX2Loader(ktxLoader);
+      loader.setDRACOLoader(dracoLoader);
     }
   );
   return (
@@ -105,4 +108,4 @@ export default function BowserModel() {
   );
 }
 
-useGLTF.preload('models/bowser.glb');
+// useGLTF.preload('/models/bowser-eac1s-draco.glb');
