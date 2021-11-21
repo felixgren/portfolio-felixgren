@@ -1,8 +1,26 @@
 import React from 'react';
 import { useGLTF } from '@react-three/drei';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { useLoader } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
 
 export default function BowserModel() {
-  const { nodes, materials } = useGLTF('models/bowser.glb');
+  const { gl } = useThree();
+  const { nodes, materials } = useLoader(
+    GLTFLoader,
+    '/models/bowser-eac1s-draco.glb',
+    (loader) => {
+      const ktxLoader = new KTX2Loader();
+      const dracoLoader = new DRACOLoader();
+      ktxLoader.setTranscoderPath('/loaders/');
+      dracoLoader.setDecoderPath('/loaders/');
+      ktxLoader.detectSupport(gl);
+      loader.setKTX2Loader(ktxLoader);
+      loader.setDRACOLoader(dracoLoader);
+    }
+  );
   return (
     <group
       position={window.innerWidth < 800 ? [4.5, -13.5, 40] : [-1, -19, 47]}
@@ -90,4 +108,4 @@ export default function BowserModel() {
   );
 }
 
-useGLTF.preload('models/bowser.glb');
+// useGLTF.preload('/models/bowser-eac1s-draco.glb');
