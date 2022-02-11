@@ -27,11 +27,11 @@ function App() {
         }}
         mode="concurrent"
       >
-        <ScrollContainer scroll={scroll}>
-          <Content scroll={scroll} />
-        </ScrollContainer>
-
         <Suspense fallback={null}>
+          <ScrollContainer scroll={scroll}>
+            <Content scroll={scroll} />
+          </ScrollContainer>
+
           <AnimatedCamera scroll={scroll} />
         </Suspense>
 
