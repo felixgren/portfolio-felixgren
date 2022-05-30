@@ -29,7 +29,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
 
       <div>
         <a
-          href="https://marioevent.live"
+          href="https://nintendo-event.vercel.app"
           rel="noreferrer"
           target="_blank"
           className="project-buttons"
@@ -74,9 +74,9 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
       <p>
         A game project utilizing three.js as the 3D game engine. It is a first
         person shooter which features a sweet arena in which to kill your
-        friends in. Multiplayer mode stresstested for the first time by my
+        friends in. Press T to chat. Multiplayer mode stresstested for the first time by my
         entire class at once. A collaboration between me and{' '}
-        <a href="https://pnpjss.com/" target="_blank" rel="noreferrer">
+        <a href="https://github.com/pnpjss" target="_blank" rel="noreferrer">
           Lucas
         </a>
         .
@@ -84,7 +84,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
 
       <div>
         <a
-          href="https://shootyourfriends.com"
+          href="https://three-arena.vercel.app"
           target="_blank"
           rel="noreferrer"
           className="project-buttons"
@@ -112,7 +112,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
 
       <div>
         <a
-          href="https://flightoftomorrow.com"
+          href="https://electric-phi.vercel.app"
           target="_blank"
           rel="noreferrer"
           className="project-buttons"
@@ -140,7 +140,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
 
       <div>
         <a
-          href="https://uselesscube.com"
+          href="https://useless-web.vercel.app"
           target="_blank"
           rel="noreferrer"
           className="project-buttons"
