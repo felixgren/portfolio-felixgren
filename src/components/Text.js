@@ -245,7 +245,7 @@ const Text = forwardRef(({ scroll }, scrollRef) => (
     <div style={{ height: `200vh` }} className="contact-wrapper">
       <div className="contact-text">
         <h2>Reach out, say hi.</h2>
-        <a href="mailto:hello@felixgren.com">hello@felixgren.com</a>
+        <a href="mailto:felixgren@protonmail.com">felixgren@protonmail.com</a>
       </div>
     </div>
 
